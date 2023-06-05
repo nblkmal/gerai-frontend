@@ -1,7 +1,9 @@
 <template>
     <div ref="el" :data-theme="theme">
         <Navbar :theme="theme" @toggleTheme="toggleTheme"/>
-            <NuxtPage />
+            <div class="p-4 space-y-4 min-h-screen">
+                <NuxtPage />
+            </div>
         <Footer />
     </div>
 </template>

@@ -1,9 +1,19 @@
 <template>
     <div class="navbar bg-base-100">
-        <div class="flex-1">
-            <a class="btn btn-ghost normal-case text-xl">daisyUI</a>
+        <div class="navbar-start">
+            <a class="btn btn-ghost normal-case text-xl">gerai.io</a>
+            <div class="badge badge-accent badge-outline">beta</div>
         </div>
-        <div class="flex-none gap-2">
+
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li><a>Be a contributor</a></li>
+                <li><a>Category</a></li>
+                <li><a>Billboard</a></li>
+            </ul>
+        </div>
+
+        <div class="navbar-end gap-2">
             <div class="form-control">
                 <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
             </div>
