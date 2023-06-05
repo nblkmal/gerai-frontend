@@ -5,8 +5,11 @@
         </div>
         <div class="flex-none gap-2">
             <div class="form-control">
-            <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
+                <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
             </div>
+
+            <input @click="toggleTheme" type="checkbox" class="toggle" :checked="theme === 'dark'" />
+
             <div class="dropdown dropdown-end">
             <label tabindex="0" class="btn btn-ghost btn-circle avatar">
                 <div class="w-10 rounded-full">
@@ -27,3 +30,17 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    props: {
+        theme: String
+    },
+
+    methods: {
+        toggleTheme() {
+            this.$emit('toggleTheme', true)
+        }
+    }
+}
+</script>
