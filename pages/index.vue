@@ -17,7 +17,10 @@
         </div>
     </div>
 
-    <div class="flex space-x-4 justify-center">
+    <div class="flex justify-center">
+        <h1 class="text-3xl font-bold">Whats the catch for joining us?</h1>
+    </div>
+    <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 justify-center">
         <div class="card w-96 glass">
             <div class="card-body">
                 <SparklesIcon class="h-6 w-6 text-yellow" />
