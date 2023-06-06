@@ -1,9 +1,4 @@
 <template>
-    <div class="alert">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-        <span>This is unreleased beta version of gerai.io</span>
-    </div>
-
     <div class="px-4">
         <div class="chat chat-start">
             <div class="chat-bubble">It's over Anakin, <br/>I have the high ground.</div>
@@ -12,7 +7,7 @@
             <div class="chat-bubble">You underestimate my power!</div>
         </div>
     </div>
-    <div class="hero py-14 bg-base-200">
+    <div class="hero py-14">
         <div class="hero-content text-center">
             <div class="max-w-md">
             <h1 class="text-5xl font-bold">{{ title }}</h1>
@@ -21,8 +16,41 @@
             </div>
         </div>
     </div>
+
+    <div class="flex space-x-4 justify-center">
+        <div class="card w-96 glass">
+            <div class="card-body">
+                <SparklesIcon class="h-6 w-6 text-yellow" />
+                <h2 class="card-title">Points for every review</h2>
+                <p>Food hunters! Get rewarded for sharing your restaurant reviews! Help others discover great eats and earn points towards your next meal.</p>
+            </div>
+        </div>
+        <div class="card w-96 glass">
+            <div class="card-body">
+                <CheckBadgeIcon class="h-6 w-6" />
+                <h2 class="card-title">Be recognize!</h2>
+                <p>Be recognized as a top reviewer in the community! Share your insights, build your reputation, and inspire others to discover new and exciting dining experiences.</p>
+            </div>
+        </div>
+        <div class="card w-96 glass">
+            <div class="card-body">
+                <UserGroupIcon class="h-6 w-6" />
+                <h2 class="card-title">Join the community</h2>
+                <p>Join our community of foodies! Discover new restaurants, share your favorite spots, and earn rewards along the way.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex bg-neutral rounded-xl justify-between py-8 px-6 items-center">
+        <div class="flex-col">
+            <p class="text-white font-bold">Discovered new hidden gem?</p>
+            <p class="text-white">Be the first to publish the new gerai to the community. Help others to discover more!</p>
+        </div>
+        <button class="btn bg-white text-neutral capitalize">Submit your suggestion</button>
+    </div>
 </template>
 
 <script setup>
+    import { CheckBadgeIcon, SparklesIcon, UserGroupIcon } from '@heroicons/vue/24/solid'
     const title = ref('Welcome to gerai.io')
 </script>

@@ -1,7 +1,13 @@
 <template>
     <div ref="el" :data-theme="theme">
         <Navbar :theme="theme" @toggleTheme="toggleTheme"/>
-            <div class="p-4 space-y-4 min-h-screen">
+            <div class="px-4">
+                <div class="alert">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span>This is unreleased beta version of gerai.io</span>
+                </div>
+            </div>
+            <div class="py-4 px-20 space-y-4 min-h-screen">
                 <NuxtPage />
             </div>
         <Footer />
