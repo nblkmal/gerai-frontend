@@ -25,15 +25,21 @@ export default {
 
     data() {
         return {
-            theme: ''
+            theme: '',
+            user: {}
         }
     },
 
-    mounted() {
+    async mounted() {
         if ('theme' in localStorage) {
             this.$refs.el.dataset.theme = localStorage.theme
             this.theme = localStorage.theme
         }
+
+        const api = useRuntimeConfig().public.apiBase
+
+        this.user = await $fetch(api + '/user')
+        console.log('this.users: ', this.user)
     }
 }
 </script>
