@@ -38,7 +38,7 @@ export default {
 
         const api = useRuntimeConfig().public.apiBase
 
-        this.user = await $fetch(api + '/user')
+        // this.user = await $fetch(api + '/user')
         console.log('this.users: ', this.user)
     }
 }
