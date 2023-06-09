@@ -20,48 +20,51 @@
 
             <input @click="toggleTheme" type="checkbox" class="toggle" :checked="theme === 'dark'" />
 
-            <!-- login -->
-            <!-- <div class="dropdown dropdown-end">
-                <label tabindex="0" class="btn m-1">Click</label>
-                <div tabindex="0" class="dropdown-content card card-compact w-64 p-2 shadow bg-white">
-                    <div class="card-body">
-                        <div class="form-control w-full max-w-xs space-y-4">
-                            <input type="text" placeholder="Username" class="input input-bordered input-sm w-full max-w-xs" />
-                            <input type="text" placeholder="Password" class="input input-bordered input-sm w-full max-w-xs" />
-                            <button class="btn btn-sm capitalize">Login</button>
-                        </div>
+            <!-- auth -->
+            <div class="dropdown dropdown-end" v-if="Object.keys(user).length === 0">
+                <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full">
+                        <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" />
                     </div>
-                </div>
-            </div> -->
-
-            <!-- register -->
-            <div class="dropdown dropdown-end">
-                <label tabindex="0" class="btn m-1">Register</label>
+                </label>
                 <div tabindex="0" class="dropdown-content card card-compact w-64 p-2 shadow bg-white">
-                    <div class="card-body">
-                        <p>Join us now!</p>
-                        <form action="POST" @submit.prevent="submitForm">
+                    <div class="card-body" v-if="auth === 'login'">
+                        <p>Food hunt with us or <a @click.prevent="toggleAuth" class="text-blue-500 cursor-pointer">register here</a></p>
+                        <form action="POST" @submit.prevent="loginSubmit">
+                            <div class="form-control w-full max-w-xs space-y-4">
+                                <input v-model="loginForm.email" type="text" placeholder="Email" class="input input-bordered input-sm w-full max-w-xs" />
+                                <input v-model="loginForm.password" type="password" placeholder="Password" class="input input-bordered input-sm w-full max-w-xs" />
+                                <button type="submit" class="btn btn-sm capitalize">
+                                    <span v-if="!loading">Login</span>
+                                    <i v-else class='bx bx-loader-alt bx-spin' ></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-body" v-if="auth === 'register'">
+                        <p>Join us now or <a @click.prevent="toggleAuth" class="text-blue-500 cursor-pointer">login here</a></p>
+                        <form action="POST" @submit.prevent="registerSubmit">
                             <div class="form-control w-full max-w-xs space-y-4">
                                 <div>
-                                    <input v-model="form.name" type="text" placeholder="Username" :class="`input input-bordered input-sm w-full max-w-xs ${errors.name ? 'input-error' : ''}`" />
+                                    <input v-model="registerForm.name" type="text" placeholder="Username" :class="`input input-bordered input-sm w-full max-w-xs ${errors.name ? 'input-error' : ''}`" />
                                     <label v-if="errors.name" class="label">
                                         <span class="label-text-alt text-red-700">{{ errors.name[0] }}</span>
                                     </label>
                                 </div>
                                 <div>
-                                    <input v-model="form.email" type="text" placeholder="Email" :class="`input input-bordered input-sm w-full max-w-xs ${errors.name ? 'input-error' : ''}`" />
+                                    <input v-model="registerForm.email" type="text" placeholder="Email" :class="`input input-bordered input-sm w-full max-w-xs ${errors.name ? 'input-error' : ''}`" />
                                     <label v-if="errors.email" class="label">
                                         <span class="label-text-alt text-red-700">{{ errors.email[0] }}</span>
                                     </label>
                                 </div>
                                 <div>
-                                    <input v-model="form.password" type="text" placeholder="Password" :class="`input input-bordered input-sm w-full max-w-xs ${errors.name ? 'input-error' : ''}`" />
+                                    <input v-model="registerForm.password" type="password" placeholder="Password" :class="`input input-bordered input-sm w-full max-w-xs ${errors.name ? 'input-error' : ''}`" />
                                     <label v-if="errors.password" class="label">
                                         <span class="label-text-alt text-red-700">{{ errors.password[0] }}</span>
                                     </label>
                                 </div>
                                 <div>
-                                    <input v-model="form.password_confirmation" type="text" placeholder="Confirm Password" :class="`input input-bordered input-sm w-full max-w-xs ${errors.name ? 'input-error' : ''}`" />
+                                    <input v-model="registerForm.password_confirmation" type="password" placeholder="Confirm Password" :class="`input input-bordered input-sm w-full max-w-xs ${errors.name ? 'input-error' : ''}`" />
                                     <label v-if="errors.password_confirmation" class="label">
                                         <span class="label-text-alt text-red-700">{{ errors.password_confirmation[0] }}</span>
                                     </label>
@@ -73,7 +76,7 @@
                 </div>
             </div>
             
-            <!-- <div class="dropdown dropdown-end">
+            <div class="dropdown dropdown-end" v-if="Object.keys(user).length !== 0">
                 <label tabindex="0" class="btn btn-ghost btn-circle avatar">
                     <div class="w-10 rounded-full">
                     <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" />
@@ -81,16 +84,19 @@
                 </label>
 
                 <ul tabindex="0" class="mt-3 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                    <!-- <p class="px-4 pt-2 font-bold">{{ user.name }}'s Account</p> -->
                     <li>
-                    <a class="justify-between">
-                        Profile
-                        <span class="badge">New</span>
-                    </a>
+                        <a class="justify-between font-bold">
+                            {{ user.name }}'s Account
+                            <!-- <span class="badge">New</span> -->
+                        </a>
                     </li>
                     <li><a>Settings</a></li>
-                    <li><a>Logout</a></li>
+                    <li>
+                        <a class="hover:bg-red-100 hover:text-red-700" @click.prevent="logout" :href="this.urlBase + '/auth/logout'">Logout</a>
+                    </li>
                 </ul>
-            </div> -->
+            </div>
         </div>
     </div>
 </template>
@@ -104,12 +110,20 @@ export default {
     data() {
         return {
             errors: [],
-            form: {
+            loginForm: {
+                email: '',
+                password: ''
+            },
+            registerForm: {
                 name: '',
                 email: '',
                 password: '',
                 password_confirmation: '',
-            }
+            },
+            user: {},
+            urlBase: useRuntimeConfig().public.apiBase,
+            auth: 'register',
+            loading: false
         }
     },
 
@@ -117,18 +131,48 @@ export default {
         toggleTheme() {
             this.$emit('toggleTheme', true)
         },
-        async submitForm() {
-            const url = useRuntimeConfig().public.apiBase + '/auth/register'
-            console.log('url: ', url)
+        toggleAuth() {
+            this.auth = this.auth === 'register' ? 'login' : 'register'
+        },
+        async logout() {
+            const url = this.urlBase + '/auth/register'
+            try {
+                const res = await $fetch(url, {
+                    method: 'POST'
+                })
+                this.user = {}
+                localStorage.removeItem('token')
+            } catch (error) {
+                this.errors = error.response._data.errors
+            }
+        },
+        async registerSubmit() {
+            const url = this.urlBase + '/auth/register'
             try {
                 const res = await $fetch(url, {
                     method: 'POST',
-                    body: this.form
+                    body: this.registerForm
                 })
-                console.log('res: ', res)
+                this.user = res.user
+                localStorage.setItem('token', res.token)
             } catch (error) {
                 this.errors = error.response._data.errors
-                console.log('this.errors: ', this.errors)
+            }
+        },
+        async loginSubmit() {
+            this.loading = true
+            const url = this.urlBase + '/auth/login'
+            try {
+                const res = await $fetch(url, {
+                    method: 'POST',
+                    body: this.loginForm
+                })
+                this.user = res.user
+                localStorage.setItem('token', res.token)
+                this.loading = false
+            } catch (error) {
+                this.loading = false
+                this.errors = error.response._data.errors
             }
         }
     }
