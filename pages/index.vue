@@ -10,9 +10,9 @@
     <div class="hero py-14">
         <div class="hero-content text-center">
             <div class="max-w-md">
-            <h1 class="text-5xl font-bold">{{ title }}</h1>
-            <p class="py-6">The fastest way to find the most suitable gerai for you and your family!</p>
-            <button class="btn btn-primary">Get Started</button>
+                <h1 class="text-5xl font-bold">{{ title }}</h1>
+                <p class="py-6">The fastest way to find the most suitable gerai for you and your family!</p>
+                <button class="btn btn-primary">Get Started</button>
             </div>
         </div>
     </div>
@@ -23,21 +23,22 @@
     <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 justify-center">
         <div class="card w-96 glass">
             <div class="card-body">
-                <SparklesIcon class="h-6 w-6 text-yellow" />
+                <i class='bx bxl-facebook-square'></i>
+                <!-- <SparklesIcon class="h-6 w-6 text-yellow" /> -->
                 <h2 class="card-title">Points for every review</h2>
                 <p>Food hunters! Get rewarded for sharing your restaurant reviews! Help others discover great eats and earn points towards your next meal.</p>
             </div>
         </div>
         <div class="card w-96 glass">
             <div class="card-body">
-                <CheckBadgeIcon class="h-6 w-6" />
+                <!-- <CheckBadgeIcon class="h-6 w-6" /> -->
                 <h2 class="card-title">Be recognize!</h2>
                 <p>Be recognized as a top reviewer in the community! Share your insights, build your reputation, and inspire others to discover new and exciting dining experiences.</p>
             </div>
         </div>
         <div class="card w-96 glass">
             <div class="card-body">
-                <UserGroupIcon class="h-6 w-6" />
+                <!-- <UserGroupIcon class="h-6 w-6" /> -->
                 <h2 class="card-title">Join the community</h2>
                 <p>Join our community of foodies! Discover new restaurants, share your favorite spots, and earn rewards along the way.</p>
             </div>
@@ -53,7 +54,12 @@
     </div>
 </template>
 
-<script setup>
-    import { CheckBadgeIcon, SparklesIcon, UserGroupIcon } from '@heroicons/vue/24/solid'
-    const title = ref('Welcome to gerai.io')
+<script>
+    export default {
+        data() {
+            return {
+                title: 'Welcome to gerai.io'
+            }
+        }
+    }
 </script>
