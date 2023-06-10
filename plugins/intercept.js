@@ -5,7 +5,6 @@ export default defineNuxtPlugin((_nuxtApp) => {
         onRequest({ request, options }) {
         if (typeof localStorage !== "undefined") {
             options.headers = { Authorization: `Bearer ${localStorage.getItem("token")}` };
-            console.log('localStorage.getItem("token"): ', localStorage.getItem("token"))
         }
         },
     });
