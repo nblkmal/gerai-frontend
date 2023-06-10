@@ -8,7 +8,7 @@
                 </div>
             </div>
             <div class="md:py-4 md:px-20 text-center md:text-left space-y-4 min-h-screen">
-                <NuxtPage />
+                <NuxtPage :user="user" />
             </div>
         <Footer />
     </div>
@@ -20,13 +20,26 @@ export default {
         toggleTheme() {
             this.$refs.el.dataset.theme = this.$refs.el.dataset.theme === 'light' ? 'dark' : 'light'
             localStorage.setItem('theme', this.$refs.el.dataset.theme)
+        },
+        async initialize() {
+            const url = this.urlBase + '/auth/initialize'
+            console.log('this.urlBase: ', this.urlBase)
+            if (localStorage.getItem("token") !== null) {
+                try {
+                    const res = await $fetch(url)
+                    this.user = res.user
+                } catch (error) {
+                    this.errors = error.response._data.errors
+                }
+            }
         }
     },
 
     data() {
         return {
             theme: '',
-            user: {}
+            user: {},
+            urlBase: useRuntimeConfig().public.apiBase
         }
     },
 
@@ -36,10 +49,7 @@ export default {
             this.theme = localStorage.theme
         }
 
-        const api = useRuntimeConfig().public.apiBase
-
-        // this.user = await $fetch(api + '/user')
-        console.log('this.users: ', this.user)
+        this.initialize()
     }
 }
 </script>
