@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     modules: ['@nuxtjs/tailwindcss'],
-    plugins: ['~/plugins/intercept.js', '~/plugins/toast.js'],
+    plugins: ['~/plugins/intercept.js', '~/plugins/toast.js', '~/plugins/api.js'],
     // @ts-ignore
     runtimeConfig: {
         public: {
