@@ -127,6 +127,10 @@ export default {
         }
     },
 
+    mounted() {
+        this.verify()
+    },
+
     methods: {
         toggleTheme() {
             this.$emit('toggleTheme', true)
@@ -134,12 +138,24 @@ export default {
         toggleAuth() {
             this.auth = this.auth === 'register' ? 'login' : 'register'
         },
+        async verify() {
+            const url = this.urlBase + '/auth/verify'
+            if (localStorage.getItem("token") !== null) {
+                try {
+                    const res = await $fetch(url)
+                    this.user = res.user
+                } catch (error) {
+                    this.errors = error.response._data.errors
+                }
+            }
+        },
         async logout() {
             const url = this.urlBase + '/auth/register'
             try {
                 const res = await $fetch(url, {
                     method: 'POST'
                 })
+                this.$toast.success('Logged out!')
                 this.user = {}
                 localStorage.removeItem('token')
             } catch (error) {
@@ -154,6 +170,8 @@ export default {
                     body: this.registerForm
                 })
                 this.user = res.user
+                this.$toast.info('Registered succesfully!')
+                this.$toast.success('Logged in as ' + this.user.name + '!')
                 localStorage.setItem('token', res.token)
             } catch (error) {
                 this.errors = error.response._data.errors
@@ -168,6 +186,7 @@ export default {
                     body: this.loginForm
                 })
                 this.user = res.user
+                this.$toast.success('Logged in as ' + this.user.name + '!')
                 localStorage.setItem('token', res.token)
                 this.loading = false
             } catch (error) {
