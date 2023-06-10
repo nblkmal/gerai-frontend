@@ -12,7 +12,15 @@ export default defineNuxtConfig({
         head: {
             link: [
                 { rel: 'stylesheet', href: 'https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' }
-            ]
-        }
-    }
+            ],
+            title: 'gerai',
+                meta: [
+                    {
+                        name: 'description',
+                        content: 'Search for your best gerai here!' 
+                    },
+                ],
+        },
+    },
+    css: ['~/assets/style/app.scss']
 })
