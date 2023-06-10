@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.Vue-Toastification__toast {
+    top: 50px;
+}
+
+.skeleton {
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        @apply bg-gray-100
+    }
+
+    50% {
+        @apply bg-gray-200
+    }
+
+    100% {
+        @apply bg-gray-300
+    }
+}
