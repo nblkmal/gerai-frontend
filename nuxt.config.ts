@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-    modules: ['@nuxtjs/tailwindcss'],
+    modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt'],
     plugins: ['~/plugins/intercept.js', '~/plugins/toast.js', '~/plugins/api.js'],
     // @ts-ignore
     runtimeConfig: {
