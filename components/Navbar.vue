@@ -137,7 +137,13 @@
 
 <script>
 import { useUserStore } from '~/store/user'
+import { mapState } from 'pinia'
+
 export default {
+    computed: {
+        ...mapState(useUserStore, ['user'])
+    },
+
     props: {
         theme: String
     },
@@ -186,7 +192,6 @@ export default {
                 try {
                     const res = await $fetch(url)
                     useUserStore().setUserData(res.user)
-                    this.user = res.user
                 } catch (error) {
                     this.errors = error.response._data.errors
                 }

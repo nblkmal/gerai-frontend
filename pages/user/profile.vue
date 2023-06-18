@@ -1,24 +1,26 @@
 <template>
-    <div v-if="Object.keys(user).length === 0" class="hero rounded-lg bg-base-200">
+    <!-- <div v-if="Object.keys(user).length === 0" class="hero rounded-lg bg-base-200">
         <div class="hero-content text-center">
             <div class="max-w-md">
                 <h1 class="text-5xl font-bold">Seems like you are lost</h1>
                 <p class="py-6">This page is out of your area</p>
             </div>
         </div>
-    </div>
-    <!-- <div v-if="Object.keys(user).length === 0" class="alert alert-error">
-        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-        <span>Error! Task failed successfully.</span>
     </div> -->
-    <div v-else class="grid grid-cols-3">
+    
+    <div class="grid grid-cols-3">
         <div class="flex items-center">
+            <span class="loading loading-spinner loading-lg"></span>
+
+            <div v-if="user !== null">
+                {{ user.name }}
+            </div>
             <div class="avatar">
                 <div class="w-24 rounded-full">
                     <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" />
                 </div>
             </div>
-            <p class="font-bold text-3xl ml-4">{{ user.name }}</p>
+            <!-- <p class="font-bold text-3xl ml-4">{{ user.name }}</p> -->
         </div>
         <div class="col-span-2 stats shadow">
             <div class="stat">
@@ -57,9 +59,12 @@
 </template>
 
 <script>
+import { useUserStore } from '~/store/user'
+import { mapState } from 'pinia'
+
 export default {
-    props: {
-        user: { type: Object }
+    computed: {
+        ...mapState(useUserStore, ['user'])
     }
 }
 </script>

@@ -35,8 +35,6 @@ export default {
             this.$refs.el.dataset.theme = localStorage.theme
             this.theme = localStorage.theme
         }
-
-        this.initialize()
     }
 }
 </script>
