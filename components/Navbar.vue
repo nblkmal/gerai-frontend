@@ -45,7 +45,7 @@
                                 <input v-model="loginForm.password" type="password" placeholder="Password" class="input input-bordered input-sm w-full max-w-xs" />
                                 <button type="submit" class="btn btn-sm capitalize">
                                     <span v-if="!loading">Login</span>
-                                    <i v-else class='bx bx-loader-alt bx-spin' ></i>
+                                    <span v-else class="loading loading-dots loading-md"></span>
                                 </button>
                             </div>
                         </form>
@@ -103,7 +103,7 @@
                     <div v-if="!loading" class="w-10 rounded-full">
                         <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" />
                     </div>
-                    <i v-else class='bx bx-loader-alt bx-spin bx-md' ></i>
+                    <span v-else class="loading loading-dots loading-md"></span>
                 </label>
 
                 <ul tabindex="0" class="mt-3 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
@@ -117,7 +117,7 @@
                     <li class="">
                         <a class="flex justify-between hover:bg-red-100 hover:text-red-700" @click.prevent="logout" :href="this.urlBase + '/auth/logout'">
                             <span v-if="!loading">Logout</span>
-                            <i v-else class='bx bx-loader-alt bx-spin' ></i>
+                            <span v-else class="loading loading-dots loading-md"></span>
                             <i class='hover:text-red-700 bx bx-log-out bx-flip-horizontal' ></i>
                         </a>
                     </li>
@@ -168,7 +168,6 @@ export default {
                 forth: '',
                 fifth: '',
             },
-            user: useUserStore().user,
             urlBase: useRuntimeConfig().public.apiBase,
             auth: 'login',
             loading: false
