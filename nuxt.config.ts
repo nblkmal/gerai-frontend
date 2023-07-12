@@ -5,7 +5,8 @@ export default defineNuxtConfig({
     // @ts-ignore
     runtimeConfig: {
         public: {
-            apiBase: 'http://localhost:8000/api'
+            // apiBase: 'http://localhost:8000/api'
+            apiBase: 'http://app-gerai.w22wrson37-58e60jjx4d7r.s.temp-site.link/api'
         }
     },
     app: {
