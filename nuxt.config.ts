@@ -22,5 +22,8 @@ export default defineNuxtConfig({
                 ],
         },
     },
-    css: ['~/assets/style/app.scss']
+    css: ['~/assets/style/app.scss'],
+    build:{
+        transpile: ['vue-toastification']
+    }
 })
