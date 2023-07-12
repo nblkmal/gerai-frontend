@@ -1,11 +1,14 @@
 <template>
-    <div class="px-4">
+    <!-- <div class="px-4">
         <div class="chat chat-start">
             <div class="chat-bubble">It's over Anakin, <br/>I have the high ground.</div>
         </div>
         <div class="chat chat-end">
             <div class="chat-bubble">You underestimate my power!</div>
         </div>
+    </div> -->
+    <div class="skeu p-7">
+        sjasc
     </div>
     <div class="hero py-14">
         <div class="hero-content text-center">
@@ -53,6 +56,15 @@
         <button class="btn bg-white text-neutral capitalize">Submit your suggestion</button>
     </div>
 </template>
+
+<style>
+    .skeu {
+        border-radius: 50px;
+background: #ffffff;
+box-shadow:  -40px 40px 80px #bebebe,
+             40px -40px 80px #ffffff;
+    }
+</style>
 
 <script>
     export default {

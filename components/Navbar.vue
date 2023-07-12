@@ -1,7 +1,9 @@
 <template>
     <div class="navbar bg-base-100">
         <div class="navbar-start">
-            <a class="btn btn-ghost normal-case text-xl">gerai.io</a>
+            <NuxtLink class="navbar-start" to="/">
+                <a class="btn btn-ghost normal-case text-xl">gerai.io</a>
+            </NuxtLink>
             <div class="badge badge-accent badge-outline">beta</div>
         </div>
 
@@ -18,7 +20,14 @@
                 <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
             </div> -->
 
-            <input @click="toggleTheme" type="checkbox" class="toggle" :checked="theme === 'dark'" />
+            <label class="swap swap-rotate border p-2 rounded-full">
+                <!-- this hidden checkbox controls the state -->
+                <input @click="toggleTheme" type="checkbox" :checked="theme === 'dark'"/>
+                <!-- moon icon -->
+                <i class='swap-on bx bxs-moon'></i>
+                <!-- sun icon -->
+                <i class='swap-off bx bx-sun' ></i>
+            </label>
 
 
             <template v-if="user !== null">
@@ -44,7 +53,9 @@
                                 <input v-model="loginForm.email" type="text" placeholder="Email" class="input input-bordered input-sm w-full max-w-xs" />
                                 <input v-model="loginForm.password" type="password" placeholder="Password" class="input input-bordered input-sm w-full max-w-xs" />
                                 <button type="submit" class="btn btn-sm capitalize">
-                                    <span v-if="!loading">Login</span>
+                                    <span v-if="!loading">
+                                        Login
+                                    </span>
                                     <span v-else class="loading loading-dots loading-md"></span>
                                 </button>
                             </div>

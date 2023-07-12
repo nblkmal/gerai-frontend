@@ -1,18 +1,18 @@
 <template>
-    <!-- <div v-if="Object.keys(user).length === 0" class="hero rounded-lg bg-base-200">
+    <div v-if="user === null" class="hero rounded-lg bg-base-200">
         <div class="hero-content text-center">
             <div class="max-w-md">
                 <h1 class="text-5xl font-bold">Seems like you are lost</h1>
                 <p class="py-6">This page is out of your area</p>
             </div>
         </div>
-    </div> -->
+    </div>
     
-    <div class="grid grid-cols-3">
+    <div v-else class="grid grid-cols-3">
         <div class="flex items-center">
             <span class="loading loading-spinner loading-lg"></span>
 
-            <div v-if="user !== null">
+            <div>
                 {{ user.name }}
             </div>
             <div class="avatar">
@@ -45,7 +45,7 @@
                 <div class="stat-figure text-secondary">
                 <div class="avatar online">
                     <div class="w-16 rounded-full">
-                    <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                        <!-- <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" /> -->
                     </div>
                 </div>
                 </div>
