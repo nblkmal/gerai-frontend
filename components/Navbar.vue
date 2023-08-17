@@ -11,7 +11,14 @@
             <ul class="menu menu-horizontal px-1">
                 <li><a>Be a contributor</a></li>
                 <li><a>Category</a></li>
-                <li><a>Billboard</a></li>
+                <li>
+                    <NuxtLink
+                        @click="withSubdomain('hanfix')"
+                        to="about"
+                        event="">
+                        <a>Products</a>
+                    </NuxtLink>
+                </li>
             </ul>
         </div>
 
@@ -187,10 +194,29 @@ export default {
 
     mounted() {
         this.initialize()
-        console.log(getSubdomain())
+        this.checkSubdomain()
     },
 
     methods: {
+        checkSubdomain() {
+            const subdomain = getSubdomain()
+            // check if subdomain is not null
+            if (subdomain !== null) {
+                // check if subdomain exists in list of gerai
+
+                // if not exist throw error 404
+                // throw createError({ statusCode: 404, statusMessage: "Page Not Found" })
+            }
+        },
+
+        withSubdomain(subdomain) {
+            // check if subdomain exists and same, dont proceed
+            const route = useRoute()
+            const domain = 'gerai.io'
+            const path = route.fullPath
+            if (process.client) window.location.href = 'https://' + subdomain + '.' + domain + path;
+        },
+
         toggleTheme() {
             this.$emit('toggleTheme', true)
         },

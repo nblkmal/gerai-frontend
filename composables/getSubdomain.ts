@@ -10,12 +10,5 @@ export const getSubdomain = () => {
 
     let subdomainArr = host.split(".")
     console.log('subdomainArr: ', subdomainArr)
-
-    // if ((subdomainArr.length == 3) || (subdomainArr.length == 2)) {
-    //     slug = subdomainArr[0]
-    // } 
-    // else {
-    //     throw createError({ statusCode: 404, statusMessage: "Page Not Found" })
-    // }
-    return slug
+    return subdomainArr.length == 3 ? subdomainArr[0] : null
 }
