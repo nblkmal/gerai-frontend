@@ -187,6 +187,7 @@ export default {
 
     mounted() {
         this.initialize()
+        console.log(getSubdomain())
     },
 
     methods: {
