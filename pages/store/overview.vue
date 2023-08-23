@@ -8,6 +8,7 @@
             <div class="bg-green-200 border border-green-500 rounded-full h-auto w-2"></div>
             <div class="flex flex-col">
                 <h4 class="font-bold">Warung Bawah Pokok</h4>
+                <p class="text-sm text-left">Nilai, Negeri Sembilan</p>
                 <div class="flex space-x-1">
                     <Icon name="basil:star-solid" color="orange" />
                     <Icon name="basil:star-solid" color="orange" />
@@ -15,7 +16,7 @@
                 </div>
             </div>
         </div>
-        <badge name="200m"></badge>
+        <Badge name="200m"></Badge>
     </div>
 
     <h6 class="text-justify text-sm text-gray-500">Warung warisan tok abah yang berada di tepi jalan besar simpang empat. Mempunyai banyak pilihan makanan terutama makanan untuk sarapan pagi.</h6>

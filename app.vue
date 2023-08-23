@@ -1,6 +1,16 @@
 <template>
     <div ref="el" data-theme="light">
         <Navbar :theme="theme"/>
+
+        <!-- breadcrumbs -->
+        <!-- <div class="text-xs breadcrumbs">
+            <ul>
+                <li><a>Home</a></li> 
+                <li><a>Documents</a></li> 
+                <li>Add Document</li>
+            </ul>
+        </div> -->
+
         <!-- <Navbar :theme="theme" @toggleTheme="toggleTheme"/> -->
             <div class="mx-4 mb-4">
                 <div class="bg-gray-100 rounded-md flex text-left py-3 px-2 space-x-2">
