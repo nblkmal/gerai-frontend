@@ -4,12 +4,15 @@
     </div>
 
     <div class="flex justify-between items-center">
-        <div class="flex flex-col">
-            <h4 class="font-bold">Warung Bawah Pokok</h4>
-            <div class="flex space-x-1">
-                <Icon name="basil:star-solid" color="orange" />
-                <Icon name="basil:star-solid" color="orange" />
-                <Icon name="basil:star-solid" color="orange" />
+        <div class="flex space-x-2">
+            <div class="bg-green-200 border border-green-500 rounded-full h-auto w-2"></div>
+            <div class="flex flex-col">
+                <h4 class="font-bold">Warung Bawah Pokok</h4>
+                <div class="flex space-x-1">
+                    <Icon name="basil:star-solid" color="orange" />
+                    <Icon name="basil:star-solid" color="orange" />
+                    <Icon name="basil:star-solid" color="orange" />
+                </div>
             </div>
         </div>
         <badge name="200m"></badge>
@@ -17,7 +20,7 @@
 
     <h6 class="text-justify text-sm text-gray-500">Warung warisan tok abah yang berada di tepi jalan besar simpang empat. Mempunyai banyak pilihan makanan terutama makanan untuk sarapan pagi.</h6>
 
-    <div class="flex flex-col">
+    <div class="flex flex-col space-y-2">
         <iconed-label icon="basil:calendar-outline" label="Isnin - Ahad"></iconed-label>
         <iconed-label icon="basil:clock-outline" label="06:00 - 19:00"></iconed-label>
     </div>
