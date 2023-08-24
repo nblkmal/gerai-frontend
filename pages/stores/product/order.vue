@@ -17,7 +17,7 @@
         </div>
 
         <div class="collapse collapse-arrow border text-left rounded-md">
-            <input type="checkbox" name="my-accordion-2" checked="checked" /> 
+            <input type="checkbox" name="my-accordion-2" /> 
             <div class="collapse-title font-medium">
                 Customer Details
             </div>

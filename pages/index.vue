@@ -7,9 +7,9 @@
             <div class="chat-bubble">You underestimate my power!</div>
         </div>
     </div> -->
-    <div class="skeu p-7">
+    <!-- <div class="skeu p-7">
         sjasc
-    </div>
+    </div> -->
     <div class="hero py-14">
         <div class="hero-content text-center">
             <div class="max-w-md">
@@ -28,7 +28,7 @@
             <div class="card-body">
                 <i class='bx bxl-facebook-square'></i>
                 <!-- <SparklesIcon class="h-6 w-6 text-yellow" /> -->
-                <h2 class="card-title">Points for every review</h2>
+                <h2 class="card-title text-center">Points for every review</h2>
                 <p>Food hunters! Get rewarded for sharing your restaurant reviews! Help others discover great eats and earn points towards your next meal.</p>
             </div>
         </div>
