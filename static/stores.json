@@ -1,0 +1,21 @@
+{
+    "data": {
+        "stores": [
+            {
+                "id": 1,
+                "name": "Hanfix Studio",
+                "description": "skcjnsdkcjs"
+            },
+            {
+                "id": 2,
+                "name": "ninja code",
+                "description": "skcjnsdkcjs"
+            },
+            {
+                "id": 3,
+                "name": "Saloon Studio",
+                "description": "skcjnsdkcjs"
+            }
+        ]
+    }
+}
