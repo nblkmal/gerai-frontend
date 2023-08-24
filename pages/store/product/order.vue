@@ -16,13 +16,19 @@
             </div>
         </div>
 
-        <div class="collapse collapse-arrow bg-base-200 text-left rounded-md">
+        <div class="collapse collapse-arrow border text-left rounded-md">
             <input type="checkbox" name="my-accordion-2" checked="checked" /> 
             <div class="collapse-title font-medium">
                 Customer Details
             </div>
             <div class="collapse-content"> 
                 <FormInput label="Name"></FormInput>
+                <FormGroup placeholder="12 - 345 6789" left-append="+60" label="Phone Number"></FormGroup>
+                <div class="flex space-x-4">
+                    <FormInput label="Country"></FormInput>
+                    <FormInput label="City"></FormInput>
+                </div>
+                <FormInput label="Postcode"></FormInput>
             </div>
         </div>
 
@@ -40,7 +46,7 @@
                 <Icon name="basil:image-outline" color="black" height="70%" width="70%"/>
             </div>
             <div class="grow flex flex-row justify-between">
-                <div class="flex flex-col text-left">
+                <div class="flex flex-col text-left justify-between py-2">
                     <h4 class="font-semibold">Tukar Bateri</h4>
                     <span class="text-sm text-gray-500">RM 30.00</span>
                 </div>
