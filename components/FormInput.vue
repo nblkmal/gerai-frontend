@@ -5,7 +5,7 @@
             <span class="label-text-alt" v-if="topRightLabel !== ''">{{ topRightLabel }}</span>
         </label>
         <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
-        <label class="label">
+        <label class="label" v-if="bottomLeftLabel !== '' || topLeftLabel !== ''">
             <span class="label-text-alt" v-if="bottomLeftLabel !== ''">{{ bottomLeftLabel }}</span>
             <span class="label-text-alt" v-if="topLeftLabel !== ''">{{ topLeftLabel }}</span>
         </label>
