@@ -9,7 +9,7 @@
         </div>
 
         <div v-if="stores.length === 0" class="flex flex-col items-center space-y-2">
-            <Icon name="basil:document-outline" @click="clearSearch" color="gray" height="10%" width="10%"/>
+            <Icon name="basil:document-outline" color="gray" height="10%" width="10%"/>
             <span class="text-gray-500">Opps, no search found</span>
         </div>
         <NuxtLink :to="`/stores/${store.id}`" class="h-24 flex" v-for="store in stores" :key="store.id">
@@ -26,34 +26,34 @@
 </template>
 
 <script>
-import storesJson from '~/static/stores.json'
-export default {
-    data() {
-        return {
-            stores: storesJson.data.stores,
-            categories: [
-                'repair', 'clean', 'screen', 'coat'
-            ],
-            category: {}
-        }
-    },
+    import storesJson from '~/static/stores.json'
+    export default {
+        data() {
+            return {
+                stores: storesJson.data.stores,
+                categories: [
+                    'repair', 'clean', 'screen', 'coat'
+                ],
+                category: {}
+            }
+        },
 
-    mounted() {
-        this.categories.forEach(category => {
-            this.category[category] = false
-        })
-    },
+        mounted() {
+            this.categories.forEach(category => {
+                this.category[category] = false
+            })
+        },
 
-    computed: {
-        storesModel() {
-            return storesJson.data.stores
-        }
-    },
+        computed: {
+            storesModel() {
+                return storesJson.data.stores
+            }
+        },
 
-    methods: {
-        searchResult(data) {
-            this.stores = data
+        methods: {
+            searchResult(data) {
+                this.stores = data
+            }
         }
     }
-}
 </script>

@@ -9,41 +9,56 @@
 <script>
 export default {
     props: {
-        model: { type: Object, required: true }
+        model: { type: Object, required: true },
+        clearable: { type: Boolean, required: false, default: false}
     },
 
     data() {
         return {
             search: '',
             indexed: null,
-            working: false
+            working: false,
+            emission: {
+                model: [],
+                noResult: false
+            } 
         }
     },
 
     watch: {
         search(data) {
             if (data === '') {
-                this.$emit('indexed', this.model)
+                this.emission.model = this.clearable ? [] : this.model
+                this.emission.noResult = false
+                this.$emit('indexed', this.emission)
+            } else {
+                this.runSearch(data)
             }
-            this.runSearch(data)
         }
     },
 
     methods: {
         clearSearch() {
             this.search = ''
+            this.emission.noResult = false
+            this.$emit('indexed', this.emission)
         },
 
         async runSearch(data) {
             this.working = true
-            let newIndex = []
+            this.emission.model = []
             await this.model.filter(item => {
                 if (item.name.toLowerCase().includes(data.toLowerCase())) {
-                    newIndex.push(item)
+                    this.emission.model.push(item)
                 }
             })
             this.working = false
-            this.$emit('indexed', newIndex)
+            this.emission.noResult = false
+            this.$emit('indexed', this.emission)
+            if (this.emission.model.length === 0 && this.search !== '') {
+                this.emission.noResult = true
+                this.$emit('indexed', this.emission)
+            }
         }
     }
 }

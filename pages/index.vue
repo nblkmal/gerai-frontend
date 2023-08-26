@@ -15,7 +15,15 @@
             <div class="max-w-md">
                 <h1 class="text-5xl font-bold">{{ title }}</h1>
                 <p class="py-6">The fastest way to find the most suitable gerai for you and your family!</p>
-                <button class="btn btn-primary">Get Started</button>
+                <FormSearch :model="storesModel" @indexed="searchResult" clearable></FormSearch>
+                <div class="mt-4 space-y-4">
+                    <div v-if="results !== 0" class="chat chat-end">
+                        <div class="chat-bubble">We found {{ results }} results!</div>
+                    </div>
+                    <div v-if="notFound" class="chat chat-end">
+                        <div class="chat-bubble">No results found</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -67,10 +75,26 @@ box-shadow:  -40px 40px 80px #bebebe,
 </style>
 
 <script>
+    import storesJson from '~/static/stores.json'
     export default {
         data() {
             return {
-                title: 'Welcome to gerai.io'
+                title: 'Welcome to gerai.io',
+                results: 0,
+                notFound: false
+            }
+        },
+
+        computed: {
+            storesModel() {
+                return storesJson.data.stores
+            }
+        },
+
+        methods: {
+            searchResult(emission) {
+                this.results = emission.model.length
+                this.notFound = emission.noResult 
             }
         }
     }
