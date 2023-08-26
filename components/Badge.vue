@@ -1,14 +1,17 @@
 <template>
-    <div class="border rounded-full px-4 h-full whitespace-nowrap">
-        <span :class='className'>{{ name }}</span>
-    </div>
+    <label :class="`border ${model[input] ? 'border-blue-700 bg-blue-100' : ''} rounded-full px-4 py-1 h-full whitespace-nowrap items-center`" :for="input">
+        <p :class='className'>{{ name }}</p>
+        <input type="checkbox" v-model="model[input]" :name="input" :id="input" class="hidden"/>
+    </label>
 </template>
 
 <script>
 export default {
     props: {
         bold: { type: Boolean, default: false },
-        name: String
+        name: String,
+        model: Object,
+        input: String
     },
 
     computed: {
