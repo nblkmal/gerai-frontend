@@ -1,6 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-    modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt', 'nuxt-icon'],
+    modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt', 'nuxt-icon', 'nuxt-mapbox'],
+    mapbox: {
+        accessToken: 'pk.eyJ1IjoibmJsa21hbCIsImEiOiJjbGxyZ293aHkwcm1zM2R0aGR3YzU1cGtrIn0.vwZx-2Sq_JKYUcdX5-5qIQ'
+    },
     plugins: ['~/plugins/intercept.js', '~/plugins/toast.js', '~/plugins/api.js'],
     // @ts-ignore
     runtimeConfig: {

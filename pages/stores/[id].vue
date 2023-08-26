@@ -30,6 +30,16 @@
             <iconed-label icon="basil:clock-outline" label="06:00 - 19:00"></iconed-label>
         </div>
 
+        <MapboxMap
+            map-id="map"
+            class="h-20 rounded-md"
+            :options="{
+                style: 'mapbox://styles/nblkmal/ckwyd1xnc06ii15mtmekziiwl', // style URL
+                center: [-68.137343, 45.137451], // starting position
+                zoom: 5 // starting zoom
+            }"
+        />
+
         <reviews></reviews>
 
         <div class="px-4 fixed bottom-5 left-0 w-full">
@@ -37,6 +47,16 @@
         </div>
     </div>
 </template>
+
+<style lang="scss">
+    // to override maps styling
+    .mapboxgl-default-map-size {
+        position: sticky !important;
+        top: auto !important;
+        bottom: auto !important;
+        width: 100% !important;
+    }
+</style>
 
 <script>
 import storesJson from '~/static/stores.json'
