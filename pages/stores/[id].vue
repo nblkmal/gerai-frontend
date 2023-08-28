@@ -13,6 +13,7 @@
                 <div class="flex flex-col">
                     <h4 class="font-bold">{{ store.name }}</h4>
                     <p class="text-sm text-left">Nilai, Negeri Sembilan</p>
+                    <p class="text-xs text-left">Tags:</p>
                     <div class="flex space-x-1">
                         <Icon name="basil:star-solid" color="orange" />
                         <Icon name="basil:star-solid" color="orange" />

@@ -9,8 +9,8 @@
         </div>
 
         <div v-if="stores.length === 0" class="flex flex-col items-center space-y-2">
-            <Icon name="basil:document-outline" color="gray" height="10%" width="10%"/>
-            <span class="text-gray-500">Opps, no search found</span>
+            <Icon name="basil:location-question-outline" color="gray" height="10%" width="10%"/>
+            <span class="text-gray-500">Opps, no search found. Try to search with another keyword.</span>
         </div>
         <NuxtLink :to="`/stores/${store.id}`" class="h-24 flex" v-for="store in stores" :key="store.id">
             <img class="rounded-l-md w-1/4 h-full object-cover" src="https://assets.bharian.com.my/images/articles/19gerai_1582081248.jpg" alt="">
@@ -20,6 +20,9 @@
                     <small>200m</small>
                 </div>
                 <small class="truncate">{{ store.description }}</small>
+                <p class="text-xs text-left">Tags:
+                    <span class="font-semibold" v-for="(key, index) in store.keywords" :key="key">{{ key }}{{ store.keywords.length - index === 1 ? '' : ', ' }}</span>
+                </p>
             </div>
         </NuxtLink>
     </div>
