@@ -40,6 +40,7 @@ export default {
     methods: {
         clearSearch() {
             this.search = ''
+            this.emission.model = []
             this.emission.noResult = false
             this.$emit('indexed', this.emission)
         },

@@ -16,12 +16,12 @@
                 <h1 class="text-5xl font-bold">{{ title }}</h1>
                 <p class="py-6">The fastest way to find the most suitable gerai for you and your family!</p>
                 <FormSearch :model="storesModel" @indexed="searchResult" clearable></FormSearch>
-                <div class="mt-4 space-y-4">
-                    <div v-if="results !== 0" class="chat chat-end">
-                        <div class="chat-bubble">We found {{ results }} results!</div>
-                    </div>
-                    <div v-if="notFound" class="chat chat-end">
-                        <div class="chat-bubble">No results found</div>
+                <div class="mt-4 space-y-4 h-30 overflow-auto">
+                    <div v-for="(chat, index) in chats" :key="chat">
+                        <div v-if="chats.length - index <= 2" :class="`chat ${chatBubble === 'left' ? 'chat-start' : 'chat-end'} w-2/3 flex`">
+                            <div class="chat-bubble">{{ chat.message }}</div>
+                            <small>{{ chat.time }}</small>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -32,31 +32,27 @@
         <h1 class="text-3xl font-bold">Whats the catch for joining us?</h1>
     </div>
     <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 justify-center">
-        <div class="card w-96 glass">
+        <div class="card w-auto glass">
             <div class="card-body">
-                <i class='bx bxl-facebook-square'></i>
-                <!-- <SparklesIcon class="h-6 w-6 text-yellow" /> -->
-                <h2 class="card-title text-center">Points for every review</h2>
+                <h2 class="font-bold text-lg text-center">Points for every review</h2>
                 <p>Food hunters! Get rewarded for sharing your restaurant reviews! Help others discover great eats and earn points towards your next meal.</p>
             </div>
         </div>
-        <div class="card w-96 glass">
+        <div class="card w-auto glass">
             <div class="card-body">
-                <!-- <CheckBadgeIcon class="h-6 w-6" /> -->
-                <h2 class="card-title">Be recognize!</h2>
+                <h2 class="font-bold text-lg text-center">Be recognize!</h2>
                 <p>Be recognized as a top reviewer in the community! Share your insights, build your reputation, and inspire others to discover new and exciting dining experiences.</p>
             </div>
         </div>
-        <div class="card w-96 glass">
+        <div class="card w-auto glass">
             <div class="card-body">
-                <!-- <UserGroupIcon class="h-6 w-6" /> -->
-                <h2 class="card-title">Join the community</h2>
+                <h2 class="font-bold text-lg text-center">Join the community</h2>
                 <p>Join our community of foodies! Discover new restaurants, share your favorite spots, and earn rewards along the way.</p>
             </div>
         </div>
     </div>
 
-    <div class="flex bg-neutral rounded-xl justify-between py-8 px-6 items-center">
+    <div class="flex flex-col md:flex-row bg-neutral rounded-xl justify-between py-8 px-6 items-center space-y-4 md:space-y-0">
         <div class="flex-col">
             <p class="text-white font-bold">Discovered new hidden gem?</p>
             <p class="text-white">Be the first to publish the new gerai to the community. Help others to discover more!</p>
@@ -81,7 +77,9 @@ box-shadow:  -40px 40px 80px #bebebe,
             return {
                 title: 'Welcome to gerai.io',
                 results: 0,
-                notFound: false
+                notFound: false,
+                chatBubble: 'right',
+                chats: []
             }
         },
 
@@ -93,8 +91,28 @@ box-shadow:  -40px 40px 80px #bebebe,
 
         methods: {
             searchResult(emission) {
+                if (emission.model.length !== this.results) {
+                    this.toggleBubble()
+                }
                 this.results = emission.model.length
-                this.notFound = emission.noResult 
+                this.notFound = emission.noResult
+
+                const time = new Date()
+                const now = `${ time.getHours() }:${ time.getMinutes() }`
+
+                // if (!this.notFound && this.results.length === 0) {
+                //     this.chats = []
+                // } else {
+                    let list = {
+                        message: this.notFound ? 'No result found' : `We found ${ this.results } results`,
+                        time: now
+                    }
+                    this.chats.push(list)
+                // }
+            },
+
+            toggleBubble() {
+                this.chatBubble = this.chatBubble === 'right' ? 'left' : 'right'
             }
         }
     }

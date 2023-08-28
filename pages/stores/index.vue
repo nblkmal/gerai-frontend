@@ -5,7 +5,7 @@
         </div>
 
         <div class="flex overflow-auto space-x-2 no-scrollbar">
-            <Badge v-for="cat in categories" :key="cat" :name="cat" :model="category" :input="cat"></Badge>
+            <Badge v-for="cat in keywords" :key="cat" :name="cat" :model="filters" :input="cat"></Badge>
         </div>
 
         <div v-if="stores.length === 0" class="flex flex-col items-center space-y-2">
@@ -27,32 +27,48 @@
 
 <script>
     import storesJson from '~/static/stores.json'
+    import keywordsJson from '~/static/keywords.json'
     export default {
         data() {
             return {
                 stores: storesJson.data.stores,
-                categories: [
-                    'repair', 'clean', 'screen', 'coat'
-                ],
-                category: {}
+                filters: {}
             }
         },
 
         mounted() {
-            this.categories.forEach(category => {
-                this.category[category] = false
+            this.keywords.forEach(category => {
+                this.filters[category] = false
             })
+        },
+
+        watch: {
+            filters: {
+                handler(data) {
+                    // for (const item in data) {
+                    //     this.stores.filter(store => {
+                    //         if (store.keywords.indexOf(item) !== -1) {
+                    //             console.log('item: ', item)
+                    //         }
+                    //     })
+                    // }
+                },
+                deep: true
+            }
         },
 
         computed: {
             storesModel() {
                 return storesJson.data.stores
+            },
+            keywords() {
+                return keywordsJson.data.keywords
             }
         },
 
         methods: {
             searchResult(data) {
-                this.stores = data
+                this.stores = data.model
             }
         }
     }

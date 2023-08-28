@@ -48,7 +48,7 @@
                     </div>
                     <i v-else class='bx bx-loader-alt bx-spin bx-md' ></i>
                 </label>
-                <div tabindex="0" class="dropdown-content card card-compact w-64 p-2 shadow bg-white border border-neutral-200">
+                <div tabindex="0" class="dropdown-content card card-compact w-64 p-2 shadow bg-white border border-neutral-200 z-10">
                     <div class="card-body" v-if="auth === 'login'">
                         <p class="text-md font-bold">Let's food hunt with us</p>
                         <!-- <p>Food hunt with us or <a @click.prevent="toggleAuth" class="text-blue-500 cursor-pointer">register here</a></p> -->
