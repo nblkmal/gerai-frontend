@@ -1,35 +1,39 @@
 <template>
     <div class="navbar bg-base-100">
-        <div class="navbar-start">
-            
-            <!-- <div class="dropdown">
+        <div class="md:hidden collapse">
+            <input type="checkbox" name="my-accordion-1" /> 
+            <div class="collapse-title flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+                <NuxtLink class="navbar-start flex items-center" to="/">
+                    <a class="btn btn-ghost normal-case text-xl">gerai.io</a>
+                    <div class="hidden md:block badge badge-accent badge-outline">beta</div>
+                </NuxtLink>
+            </div>
+            <div class="collapse-content"> 
+                <NavbarMenus class-name="dropdown-content space-y-2 text-gray-500"></NavbarMenus>
+            </div>
+
+        </div>
+
+        <div class="hidden md:flex navbar-start">
+            <div class="dropdown">
                 <label tabindex="0" class="btn btn-ghost lg:hidden">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                 </label>
 
                 <NavbarMenus class-name="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 space-y-4"></NavbarMenus>
-            </div> -->
+            </div>
             <NuxtLink class="navbar-start flex items-center" to="/">
                 <a class="btn btn-ghost normal-case text-xl">gerai.io</a>
                 <div class="hidden md:block badge badge-accent badge-outline">beta</div>
             </NuxtLink>
         </div>
 
-        <div class="collapse">
-                <input type="checkbox" name="my-accordion-1" /> 
-                <div class="collapse-title">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-                </div>
-                <div class="collapse-content"> 
-                    <NavbarMenus class-name="dropdown-content"></NavbarMenus>
-                </div>
-            </div>
-
         <div class="navbar-center hidden lg:flex">
             <NavbarMenus class-name="menu menu-horizontal px-1"></NavbarMenus>
         </div>
 
-        <div class="navbar-end gap-2">
+        <div class="navbar-end gap-2 self-start mt-2 mr-2">
             <!-- <div class="form-control">
                 <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
             </div> -->
@@ -157,6 +161,15 @@
         padding-left: 10px;
         padding-bottom: 3px;
         caret-color: transparent;
+    }
+
+    .collaps {
+        @apply border-none;
+    }
+
+    .collapse-title {
+        @apply ml-4;
+        padding: 0 !important;
     }
 </style>
 
