@@ -18,8 +18,9 @@
                     <span>This is unreleased beta version of gerai.io</span>
                 </div>
             </div>
-            <div class="md:py-4 px-4 md:px-20 text-center md:text-left space-y-4 min-h-screen">
+            <div class="md:py-4 px-4 md:px-20 text-center md:text-left space-y-4 min-h-screen relative">
                 <NuxtPage />
+                <Help/>
             </div>
         <Footer />
     </div>
