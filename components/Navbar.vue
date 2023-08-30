@@ -6,7 +6,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                 <NuxtLink class="navbar-start flex items-center w-full" to="/">
                     <div v-if="subdomain !== ''" class="font-bold normal-case text-xl pl-4">
-                        hanfix 
+                        {{ subdomain }}
                         <span class="font-semibold text-sm self-end text-gray-500 pl-2">by gerai</span>
                     </div>
                     <div v-else class="font-bold normal-case text-xl pl-4">gerai</div>
