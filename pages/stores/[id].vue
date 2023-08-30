@@ -1,7 +1,13 @@
 <template>
     <Head v-if="store !== null">
-        <Title>{{ store.name }} | gerai</Title>
+        <Title>{{ store.name }} by gerai</Title>
         <Meta name="description" :content="store.description" />
+        <Meta property="og:title" content="The Intuitive Web Framework" />
+        <Meta property="og:description" content="The Intuitive Web Framework" />
+        <Meta property="og:type" content="website" />
+        <Meta property="og:url" content="https://gerai.store" />
+        <Meta property="og:locale" content="en_US" />
+        <Meta property="og:image" content="https://nuxt.com/social.jpg" />
     </Head>
     <div v-if="store === null">
         Loading gerai
