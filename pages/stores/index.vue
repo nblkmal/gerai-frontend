@@ -1,4 +1,8 @@
 <template>
+    <Head>
+        <Title>Find your gerai | gerai</Title>
+        <Meta name="description" content="Find your gerai" />
+    </Head>
     <div class="space-y-4">
         <div class="flex">
             <FormSearch :model="storesModel" @indexed="searchResult"></FormSearch>

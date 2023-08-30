@@ -9,6 +9,5 @@ export const getSubdomain = () => {
     }
 
     let subdomainArr = host.split(".")
-    console.log('subdomainArr: ', subdomainArr)
     return subdomainArr.length == 3 ? subdomainArr[0] : null
 }

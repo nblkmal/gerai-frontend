@@ -4,8 +4,12 @@
             <input type="checkbox" name="my-accordion-1" /> 
             <div class="collapse-title flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-                <NuxtLink class="navbar-start flex items-center" to="/">
-                    <a class="btn btn-ghost normal-case text-xl">gerai.io</a>
+                <NuxtLink class="navbar-start flex items-center w-full" to="/">
+                    <div v-if="subdomain !== ''" class="font-bold normal-case text-xl pl-4">
+                        hanfix 
+                        <span class="font-semibold text-sm self-end text-gray-500 pl-2">by gerai</span>
+                    </div>
+                    <div v-else class="font-bold normal-case text-xl pl-4">gerai</div>
                     <div class="hidden md:block badge badge-accent badge-outline">beta</div>
                 </NuxtLink>
             </div>
@@ -208,7 +212,8 @@ export default {
             },
             urlBase: useRuntimeConfig().public.apiBase,
             auth: 'login',
-            loading: false
+            loading: false,
+            subdomain: ''
         }
     },
 
@@ -220,8 +225,10 @@ export default {
     methods: {
         checkSubdomain() {
             const subdomain = getSubdomain()
+            console.log('subdomain: ', subdomain)
             // check if subdomain is not null
             if (subdomain !== null) {
+                this.subdomain = subdomain
                 // check if subdomain exists in list of gerai
 
                 // if not exist throw error 404
