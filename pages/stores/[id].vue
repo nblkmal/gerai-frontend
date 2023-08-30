@@ -1,4 +1,8 @@
 <template>
+    <Head v-if="store !== null">
+        <Title>{{ store.name }} | gerai</Title>
+        <Meta name="description" :content="store.description" />
+    </Head>
     <div v-if="store === null">
         Loading gerai
     </div>
@@ -32,7 +36,8 @@
         </div>
 
         <MapboxMap
-            map-id="map"
+            v-if="store !== null"
+            :map-id="`map-${ store.id }`"
             class="h-20 rounded-md"
             :options="{
                 style: 'mapbox://styles/nblkmal/ckwyd1xnc06ii15mtmekziiwl', // style URL
@@ -59,7 +64,7 @@
     }
 </style>
 
-<script>
+<script lang="js">
 import storesJson from '~/static/stores.json'
 export default {
     mounted() {
