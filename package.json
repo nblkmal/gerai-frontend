@@ -18,6 +18,7 @@
     "nuxt-mapbox": "^1.4.3"
   },
   "dependencies": {
+    "@nuxtjs/robots": "^3.0.0",
     "@pinia/nuxt": "^0.4.11",
     "pinia": "^2.1.4",
     "sass": "^1.63.3",
