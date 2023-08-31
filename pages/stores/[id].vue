@@ -77,7 +77,7 @@ import stores from '~/content/stores.json'
     const id = route.params.id
     console.log('id: ', id)
     const { data: currentStore } = await useAsyncData(id, () => {
-        return ref(stores.find(store => store.id == id))
+        return stores.find(store => store.id == id)
     })
     console.log('currentStore: ', currentStore.value)
     // const { data } = await useAsyncData('stores', () => queryContent('/stores').findOne())
