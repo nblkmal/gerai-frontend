@@ -1,13 +1,13 @@
 <template>
     <Head v-if="store !== null">
-        <Title>{{ store.name }} by gerai</Title>
-        <Meta name="description" :content="store.description" />
-        <Meta property="og:title" content="The Intuitive Web Framework" />
+        <!-- <Title>{{ store.name }} by gerai</Title>
+        <Meta name="description" :content="store.description" /> -->
+        <!-- <Meta property="og:title" content="The Intuitive Web Framework" />
         <Meta property="og:description" content="The Intuitive Web Framework" />
         <Meta property="og:type" content="website" />
         <Meta property="og:url" content="https://gerai.store" />
         <Meta property="og:locale" content="en_US" />
-        <Meta property="og:image" content="https://nuxt.com/social.jpg" />
+        <Meta property="og:image" content="https://nuxt.com/social.jpg" /> -->
     </Head>
     <div v-if="store === null">
         Loading gerai
@@ -69,6 +69,37 @@
         width: 100% !important;
     }
 </style>
+
+<script setup lang="js">
+import stores from '~/content/stores.json'
+
+    const route = useRoute()
+    const id = route.params.id
+    console.log('id: ', id)
+    const { data: currentStore } = await useAsyncData(id, () => {
+        return ref(stores.find(store => store.id == id))
+    })
+    console.log('currentStore: ', currentStore.value)
+    // const { data } = await useAsyncData('stores', () => queryContent('/stores').findOne())
+    // const content = await this.$content('stores').fetch()
+    // console.log('content: ', content)
+
+    // const { data: product } = await useAsyncData(id, () => 
+    // apiStore.GET_PRODUCT(id),
+    // );
+
+    useSeoMeta({
+        // title: 'My Amazing Site',
+        title: () => currentStore.value?.name,
+        ogTitle: () => currentStore.value?.name,
+        description: () => currentStore.value?.description,
+        // ogTitle: 'My Amazing Site',
+        description: 'This is my amazing site, let me tell you all about it.',
+        ogDescription: 'This is my amazing site, let me tell you all about it.',
+        ogImage: 'https://example.com/image.png',
+        twitterCard: 'summary_large_image',
+    })
+</script>
 
 <script lang="js">
 import storesJson from '~/static/stores.json'

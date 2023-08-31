@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "name": "Hanfix Studio",
+        "description": "Ini description untuk hanfix",
+        "keywords": ["repair", "screen"]
+    },
+    {
+        "id": 2,
+        "name": "ninja code",
+        "description": "Ini description untuk ninja",
+        "keywords": ["mobile app", "web"]
+    },
+    {
+        "id": 3,
+        "name": "Saloon Studio",
+        "description": "Ini description untuk saloon",
+        "keywords": ["pedicure", "nails"]
+    }
+]
