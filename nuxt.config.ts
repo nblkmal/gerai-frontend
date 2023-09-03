@@ -13,7 +13,7 @@ export default defineNuxtConfig({
     runtimeConfig: {
         public: {
             // apiBase: 'http://localhost:8000/api'
-            apiBase: 'http://app-gerai.w22wrson37-58e60jjx4d7r.s.temp-site.link/api'
+            apiBase: 'https://manage.api.gerai.store/api/ping'
         }
     },
     app: {
