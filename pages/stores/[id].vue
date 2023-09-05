@@ -3,6 +3,11 @@
         Loading gerai
     </div>
     <div v-else class="space-y-4">
+        <div class="flex justify-end">
+            <NuxtLink :to="`/stores/product/${store?.id}`">
+                <Badge name="See products" icon="basil:shopping-bag-solid"></Badge>
+            </NuxtLink>
+        </div>
         <div class="">
             <img class="rounded-md" src="https://assets.bharian.com.my/images/articles/19gerai_1582081248.jpg" alt="">
         </div>
@@ -61,7 +66,7 @@
 </style>
 
 <script setup lang="js">
-import stores from '~/content/stores.json'
+    import stores from '~/content/stores.json'
 
     const route = useRoute()
     const id = route.params.id

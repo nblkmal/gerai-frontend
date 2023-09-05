@@ -33,12 +33,12 @@
 </template>
 
 <script>
-    import storesJson from '~/static/stores.json'
+    import storesJson from '~/content/stores.json'
     import keywordsJson from '~/static/keywords.json'
     export default {
         data() {
             return {
-                stores: storesJson.data.stores,
+                stores: storesJson,
                 filters: {}
             }
         },
@@ -66,7 +66,7 @@
 
         computed: {
             storesModel() {
-                return storesJson.data.stores
+                return storesJson
             },
             keywords() {
                 return keywordsJson.data.keywords

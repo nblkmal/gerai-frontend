@@ -1,6 +1,6 @@
 <template>
     <div class="navbar bg-base-100">
-        <div class="md:hidden collapse" id="navbar-collapse">
+        <div class="md:hidden collapse" id="navbar-collapse" @click="openCollapse">
             <input type="checkbox" name="my-accordion-1" /> 
             <div class="collapse-title flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
@@ -14,7 +14,7 @@
                 </NuxtLink>
             </div>
             <div class="collapse-content"> 
-                <NavbarMenus @click="toggleCollapse" class-name="dropdown-content space-y-2 text-gray-500"></NavbarMenus>
+                <NavbarMenus @click="closeCollapse" class-name="dropdown-content space-y-2 text-gray-500"></NavbarMenus>
             </div>
 
         </div>
@@ -223,9 +223,30 @@ export default {
     },
 
     methods: {
-        toggleCollapse() {
-            let element = document.getElementById('navbar-collapse');
-            element.classList.add('collapse-close');
+        closeCollapse() {
+            let element = document.getElementById('navbar-collapse')
+            element.classList.add('collapse-close')
+        },
+
+        openCollapse() {
+            console.log('hit')
+            let element = document.getElementById('navbar-collapse')
+            element.classList.forEach(data => {
+                if (data === 'collapse-close') {
+                    element.classList.remove('collapse-close')
+                }
+            })
+            // element.classList.find(data => {
+            //     if (data === 'collapse-close') {
+            //         return true
+            //     } else {
+            //         return false
+            //     }
+            // })
+            // element.classList.add('collapse-close')
+            // setTimeout(() => {
+            //     element.classList.remove('collapse-close')
+            // }, 300)
         },
 
         checkSubdomain() {
