@@ -1,6 +1,16 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-    modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt', 'nuxt-icon', 'nuxt-mapbox', '@nuxtjs/robots'],
+    modules: [
+        '@nuxtjs/tailwindcss',
+        '@pinia/nuxt',
+        'nuxt-icon',
+        'nuxt-mapbox',
+        '@nuxtjs/robots',
+        'nuxt-vue3-google-signin'
+    ],
+    googleSignIn: {
+        clientId: process.env.GOOGLE_CLIENT_ID,
+    },
     robots: {
         UserAgent: '*',
         Disallow: '/user',
@@ -12,9 +22,12 @@ export default defineNuxtConfig({
     // @ts-ignore
     runtimeConfig: {
         public: {
-            // apiBase: 'http://localhost:8000/api'
-            apiBase: 'https://manage.api.gerai.store/api/ping'
-        }
+            mode: process.env.APP_ENV,
+            devApi: 'http://localhost:8001/api/',
+            stagingApi: 'https://manage.api.gerai.store/api/',
+            prodApi: 'https://manage.api.gerai.store/api/'
+        },
+        googleClientId: process.env.GOOGLE_CLIENT_ID,
     },
     app: {
         head: {
