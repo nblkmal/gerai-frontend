@@ -38,7 +38,7 @@ export default {
     data() {
         return {
             theme: '',
-            urlBase: useRuntimeConfig().public.apiBase
+            urlBase: useRuntimeConfig().public.mode === 'development' ? useRuntimeConfig().public.devApi : useRuntimeConfig().public.stagingApi
         }
     },
 
