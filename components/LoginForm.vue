@@ -1,5 +1,4 @@
 <template>
-    {{ user }}
     <div class="space-y-4 w-full text-center">
         <p class="text-md font-bold">Let's food hunt with us</p>
         <!-- <p>Food hunt with us or <a @click.prevent="toggleAuth" class="text-blue-500 cursor-pointer">register here</a></p> -->

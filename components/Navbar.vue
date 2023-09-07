@@ -53,7 +53,7 @@
             </label>
 
             <template v-if="user !== null">
-                <span v-if="!loading">{{ user.name }}</span>
+                <span v-if="!loading" class="hidden md:block">{{ user.name }}</span>
                 <i v-else class='bx bx-loader-alt bx-spin' ></i>
                 <!-- <div v-else class="skeleton h-2 w-2"></div> -->
             </template>
@@ -110,7 +110,7 @@
                 </div>
             </div>
             
-            <div class="dropdown dropdown-end" v-if="user !== null">
+            <div class="hidden md:block dropdown dropdown-end" v-if="user !== null">
                 <label tabindex="0" class="btn btn-ghost btn-circle avatar">
                     <div v-if="!loading" class="w-10 rounded-full">
                         <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" />

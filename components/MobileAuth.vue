@@ -7,11 +7,46 @@
     </label>
     <dialog id="mobile_auth" class="modal">
         <form method="dialog" class="modal-box flex flex-col justify-center items-center">
-            <LoginForm></LoginForm>
-            <GoogleSSO class="mt-4"></GoogleSSO>
+            <template v-if="user === null">
+                <LoginForm></LoginForm>
+                <GoogleSSO class="mt-4" @loading="emitLoading" @errors="emitErrors"></GoogleSSO>
+            </template>
+            <template v-else>
+                <div class="bg-green-100 p-4 w-full rounded text-center flex items-center justify-center space-x-2">
+                    <Icon name="solar:verified-check-bold-duotone" color="green" height="30" width="30"/>
+                    <span class="font-semibold">Logged in as {{ user?.name }}</span>
+                </div>
+                <small class="text-gray-500 mt-4">Click outside to close or <button class="bg-red-100 px-2 py-1 rounded text-red-700">Log me out</button></small>
+            </template>
+
+            <!-- <div class="border border-red-400 bg-red-400 rounded mt-4 w-full text-white px-2 py-1">
+                {{ errors?.name[0] }}
+            </div> -->
         </form>
         <form method="dialog" class="modal-backdrop">
             <button>close</button>
         </form>
     </dialog>
 </template>
+
+<script setup>
+    import { ref } from 'vue'
+    import { mapState } from 'pinia'
+    import { useUserStore } from '~/store/user'
+
+    const errors = ref({})
+    const loading = ref(false)
+
+    const user = computed(() => {
+        return useUserStore().user
+    })
+
+    function emitLoading(data) {
+        loading.value = data
+    }
+
+    function emitErrors(data) {
+        console.log('erros: ', data)
+        errors.value = data
+    }
+</script>

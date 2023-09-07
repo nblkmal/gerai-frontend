@@ -4,8 +4,8 @@ import {
     type CredentialResponse,
 } from "vue3-google-signin";
 import { useUserStore } from '~/store/user'
-// import { provide, inject } from 'vue'
-// import type { InjectionKey } from 'vue'
+
+const emit = defineEmits(['errors', 'loading'])
 
 interface RegisterForm {
     email: string,
@@ -40,10 +40,12 @@ const handleLoginSuccess = async (response: CredentialResponse) => {
     }
 };
 
+const { $toast } = useNuxtApp()
+const config = useRuntimeConfig().public
+const url = config.mode === 'development' ? config.devApi : config.stagingApi
+
 const registerSubmit = async (user: RegisterForm) => {
-    const config = useRuntimeConfig().public
-    const url = config.mode === 'development' ? config.devApi : config.stagingApi
-    // const toast = inject('toast') as InjectionKey<string>
+    emit('loading', true)
     try {
         const res: User = await $fetch(url + 'auth/register', {
             method: 'POST',
@@ -54,13 +56,41 @@ const registerSubmit = async (user: RegisterForm) => {
                 password_confirmation: 'password',
             }
         })
-        console.log('res: ', res)
         useUserStore().setUserData(res.user)
-        // toast.info('Registered succesfully!')
-        // this.$toast.success('Logged in as ' + useUserStore().user.name + '!')
         localStorage.setItem('token', res.token)
+        emit('loading', false)
     } catch (error) {
-        // this.errors = error.response._data.errors
+        let errors = error.response._data.errors
+        emit('errors', errors)
+        if ('email' in errors) {
+            loginSubmit(user)
+        }
+    }
+}
+
+const loginSubmit = async (user: RegisterForm) => {
+    emit('loading', true)
+    try {
+        const res: User = await $fetch(url + 'auth/login', {
+            method: 'POST',
+            body: {
+                email: user.email,
+                password: 'password',
+            }
+        })
+        useUserStore().setUserData(res.user)
+        localStorage.setItem('token', res.token)
+        // reset form
+        // this.form = {
+        //     email: '',
+        //     password: ''
+        // }
+        emit('loading', false)
+    } catch (error) {
+        console.error('error: ', error)
+        // let errors = error.response._data.errors
+        // console.log('error.response: ', error.response)
+        // emit('errors', errors)
     }
 }
 
