@@ -1,5 +1,5 @@
 <template>
-    <div class="navbar bg-base-100">
+    <div class="navbar backdrop-blur-sm bg-white/30 fixed z-10">
         <div class="md:hidden collapse" id="navbar-collapse" @click="openCollapse">
             <input type="checkbox" name="my-accordion-1" /> 
             <div class="collapse-title flex items-center">

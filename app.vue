@@ -12,16 +12,15 @@
         </div> -->
 
         <!-- <Navbar :theme="theme" @toggleTheme="toggleTheme"/> -->
-            <div class="mx-4 mb-4">
-                <div class="bg-gray-100 rounded-md flex text-left py-3 px-2 space-x-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    <span>This is unreleased beta version of gerai.io</span>
-                </div>
+        
+        <div class="pt-20 md:py-4 px-4 md:px-20 text-center md:text-left space-y-4 min-h-screen relative">
+            <div class="bg-gray-100 rounded-md flex text-left py-3 px-2 space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span>This is unreleased beta version of gerai.io</span>
             </div>
-            <div class="md:py-4 px-4 md:px-20 text-center md:text-left space-y-4 min-h-screen relative">
-                <NuxtPage />
-                <Help v-if="!hideHelp"/>
-            </div>
+            <NuxtPage />
+            <Help v-if="!hideHelp"/>
+        </div>
         <Footer />
     </div>
 </template>
