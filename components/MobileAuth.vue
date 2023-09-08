@@ -16,7 +16,7 @@
                     <Icon name="solar:verified-check-bold-duotone" color="green" height="30" width="30"/>
                     <span class="font-semibold">Logged in as {{ user?.name }}</span>
                 </div>
-                <small class="text-gray-500 mt-4">Click outside to close or <button class="bg-red-100 px-2 py-1 rounded text-red-700">Log me out</button></small>
+                <small class="text-gray-500 mt-4">Click outside to close or <button @click="logout" class="bg-red-100 px-2 py-1 rounded text-red-700">Log me out</button></small>
             </template>
 
             <!-- <div class="border border-red-400 bg-red-400 rounded mt-4 w-full text-white px-2 py-1">
@@ -48,5 +48,19 @@
     function emitErrors(data) {
         console.log('erros: ', data)
         errors.value = data
+    }
+
+    async function logout() {
+        loading.value = true
+        try {
+            // $toast.success('Logged out!')
+            useUserStore().setUserData(null)
+            localStorage.removeItem('token')
+            loading.value = false
+        } catch (error) {
+            console.log('error.response: ', error.response)
+            // this.errors = error.response._data.errors
+            loading.value = false
+        }
     }
 </script>
