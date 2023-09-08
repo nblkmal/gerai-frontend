@@ -20,7 +20,7 @@
             </div>
             <div class="md:py-4 px-4 md:px-20 text-center md:text-left space-y-4 min-h-screen relative">
                 <NuxtPage />
-                <Help/>
+                <Help v-if="!hideHelp"/>
             </div>
         <Footer />
     </div>
@@ -39,6 +39,17 @@ export default {
         return {
             theme: '',
             urlBase: useRuntimeConfig().public.mode === 'development' ? useRuntimeConfig().public.devApi : useRuntimeConfig().public.stagingApi
+        }
+    },
+
+    computed: {
+        hideHelp() {
+            let current = useRoute().name
+            let hide = [
+                'stores-product-order',
+                'stores-id'
+            ]
+            return hide.includes(current)
         }
     },
 
