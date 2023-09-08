@@ -14,7 +14,7 @@
                 </NuxtLink>
             </div>
             <div class="collapse-content"> 
-                <NavbarMenus @click="closeCollapse" class-name="dropdown-content space-y-2 text-gray-500"></NavbarMenus>
+                <NavbarMenus @click="closeCollapse" class-name="dropdown-content space-y-2 font-semibold"></NavbarMenus>
             </div>
 
         </div>
