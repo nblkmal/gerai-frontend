@@ -251,7 +251,7 @@ export default {
             this.auth = this.auth === 'register' ? 'login' : 'register'
         },
         async initialize() {
-            const url = this.urlBase + '/auth/initialize'
+            const url = this.urlBase + 'auth/initialize'
             if (localStorage.getItem("token") !== null) {
                 try {
                     const res = await $fetch(url)
