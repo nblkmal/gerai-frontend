@@ -63,9 +63,10 @@
         </div>
 
         <div class="px-4 fixed bottom-5 left-0 w-full">
-            <button class="bg-blue-600 hover:bg-blue-700 flex items-center rounded-md justify-center w-full text-white py-3 px-4 drop-shadow-md font-bold">
-                Checkout
-                <Icon name="basil:caret-right-outline" color="white" height="10%" width="10%"/>
+            <button class="bg-blue-600 hover:bg-blue-700 flex items-center rounded-md justify-center w-full text-white py-2 px-4 drop-shadow-md font-bold space-x-2">
+                <Icon name="iconamoon:shopping-card-duotone" color="white"/>
+                <span>Checkout</span>
+                <!-- <Icon name="basil:caret-right-outline" color="white" height="10%" width="10%"/> -->
                 <!-- basil:caret-right-outline -->
             </button>
         </div>
