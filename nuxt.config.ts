@@ -40,6 +40,10 @@ export default defineNuxtConfig({
                         name: 'description',
                         content: 'Search for your best gerai here!' 
                     },
+                    {
+                        name: 'theme-color',
+                        content: '#ffffff' 
+                    },
                 ],
         },
     },
