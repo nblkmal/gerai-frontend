@@ -1,7 +1,7 @@
 <template>
     <ul :class="className">
-        <li><a>Be a contributor</a></li>
-        <li><a>Category</a></li>
+        <li><NuxtLink to="/">Home</NuxtLink></li>
+        <li><NuxtLink to="/contributor">Be a contributor</NuxtLink></li>
         <!-- <li>
             <NuxtLink
                 @click="withSubdomain('hanfix')"

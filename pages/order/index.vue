@@ -1,12 +1,12 @@
 <template>
     <div class="tabs tabs-boxed flex justify-items-stretch">
-        <label :class="`tab flex-auto ${ selection === 'qr' ? 'tab-active' : '' }`">
-            <input type="radio" name="selection" v-model="selection" value="qr" class="hidden"  />
-            Scan QR Code
-        </label>
         <label :class="`tab flex-auto ${ selection === 'gerai' ? 'tab-active' : '' }`">
             <input type="radio" name="selection" v-model="selection" value="gerai" class="hidden"  />
             Quick Order
+        </label>
+        <label :class="`tab flex-auto ${ selection === 'qr' ? 'tab-active' : '' }`">
+            <input type="radio" name="selection" v-model="selection" value="qr" class="hidden"  />
+            Scan QR Code
         </label>
     </div>
 
@@ -21,18 +21,25 @@
     </template>
     <template v-if="selection === 'qr'">
         <div class="qr-container">
-            <qrcode-stream id="qr-code-stream" @detect="onDetect"></qrcode-stream>
-            <span id="loader" class="loading loading-dots loading-lg"></span>
+            <qrcode-stream
+                id="qr-code-stream"
+                @detect="onDetect"
+                @camera-on="loadingCamera">
+            </qrcode-stream>
+            <span v-if="loadCamera" id="loader" class="loading loading-dots loading-lg"></span>
+            <Icon v-if="!loadCamera" id="qr-frame" name="streamline:interface-edit-select-frame-cursor-frame-select" color="white"/>
+
+            <div id="qr-status">
+                <span>ahscascavcjacvjascvvashjcascjascahcjvaahscascavcjacvjascvvashjcascjascahcjvaahscascavcjacvjascvvashjcascjascahcjvaahscascavcjacvjascvvashjcascjascahcjvaahscascavcjacvjascvvashjcascjascahcjvaahscascavcjacvjascvvashjcascjascahcjvaahscascavcjacvjascvvashjcascjascahcjvaahscascavcjacvjascvvashjcascjascahcjva</span>
+                <!-- <span v-if="scanResult === ''">Hang on. We are scanning your qr code</span>
+                <span v-else>{{ scanResult }}</span> -->
+            </div>
         </div>
 
         <small class="text-gray-500">Place QR code inside the frame to scan.</small>
         <br>
         <small class="text-gray-500">Please avoid shaking to get results quickly.</small>
 
-        <div class="bg-gray-100 p-4 rounded-md">
-            <span v-if="scanResult === ''">Hang on. We are scanning your qr code</span>
-            <span v-else>{{ scanResult }}</span>
-        </div>
     </template>
 
 </template>
@@ -49,6 +56,16 @@
         >#loader {
             @apply absolute bottom-0 top-0 right-0 left-0 m-auto;
             z-index: 1;
+        }
+
+        >#qr-frame {
+            @apply absolute bottom-0 top-0 right-0 left-0 m-auto h-40 w-40;
+            z-index: 3;
+        }
+
+        >#qr-status {
+            @apply absolute bottom-10 right-0 left-0 text-sm text-white truncate px-8;
+            z-index: 3;
         }
     }
 
@@ -71,19 +88,30 @@
         data() {
             return {
                 selection: 'gerai',
-                scanResult: ''
+                scanResult: '',
+                loadCamera: true
+            }
+        },
+
+        watch: {
+            selection() {
+                this.loadCamera = true
             }
         },
 
         methods: {
             onDetect (detectedCodes) {
-                console.log('detectedCodes: ', detectedCodes)
                 if (detectedCodes) {
                     let url = detectedCodes[0].rawValue
                     // this.checkUrl(url)
                     this.scanResult = url
                 }
                 // ...
+            },
+
+            loadingCamera() {
+                console.log('hit')
+                this.loadCamera = false
             }
 
             // checkUrl(url) {

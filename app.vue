@@ -1,5 +1,5 @@
 <template>
-    <div ref="el" data-theme="light">
+    <div ref="el" data-theme="light" class="min-h-screen">
         <Navbar :theme="theme"/>
 
         <!-- breadcrumbs -->
@@ -21,7 +21,7 @@
             <NuxtPage />
             <Help v-if="!hideHelp"/>
         </div>
-        <Footer />
+        <!-- <Footer /> -->
     </div>
 </template>
 
