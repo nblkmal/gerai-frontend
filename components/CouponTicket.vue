@@ -1,6 +1,11 @@
 <template>
     <div class="border rounded-md w-full flex indicator">
-        <span class="indicator-item badge badge-primary mr-4">new</span> 
+        <span class="indicator-item flex justify-end">
+            <span class="badge badge-primary hidden"></span>
+            <span class="badge badge-error hidden"></span>
+            <span class="badge badge-neutral hidden"></span>
+            <span :class="`badge badge-${ badgeColor[status] }`">{{ status }}</span>
+        </span> 
         <div class="border-r-2 border-dashed h-auto w-1/3 p-4 flex items-center justify-center">
             <span class="font-bold text-xl">50%</span>
         </div>
@@ -10,7 +15,25 @@
                 <small class="text-gray-500">Expires</small>
                 <small>20 Aug 2023</small>
             </div>
-            <button>Redeem</button>
+            <!-- <button>Redeem</button> -->
         </div>
     </div>
 </template>
+
+<style lang="scss" scoped>
+    .indicator :where(.indicator-item) {
+        @apply w-20 mr-8;
+    }
+</style>
+
+<script setup>
+    const props = defineProps({
+        status: String
+    })
+
+    const badgeColor = {
+        'redeemed': 'neutral',
+        'new': 'primary',
+        'expired': 'error'
+    }
+</script>

@@ -11,7 +11,7 @@
             </NuxtLink>
         </li> -->
         <li><NuxtLink to="/stores">Stores</NuxtLink></li>
-        <li><NuxtLink to="/stores/product/order">Order</NuxtLink></li>
+        <li><NuxtLink to="/order">Order</NuxtLink></li>
         <li><NuxtLink to="/coupon">Coupon</NuxtLink></li>
         <li><NuxtLink to="/pasar">Pasarhub</NuxtLink></li>
         <!-- <li><NuxtLink to="/stores/overview">Store</NuxtLink></li> -->

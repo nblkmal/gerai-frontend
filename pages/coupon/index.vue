@@ -3,9 +3,9 @@
 
     <FormSearch model="" @indexed="searchResult" clearable></FormSearch>
 
-    <CouponTicket></CouponTicket>
-    <CouponTicket></CouponTicket>
-    <CouponTicket></CouponTicket>
+    <CouponTicket status="redeemed"></CouponTicket>
+    <CouponTicket status="new"></CouponTicket>
+    <CouponTicket status="expired"></CouponTicket>
 
     <!-- <Icon name="mingcute:coupon-line" color="orange" /> -->
     <Blank icon="mingcute:coupon-line" text="No coupon available yet"></Blank>
