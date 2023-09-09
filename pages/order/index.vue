@@ -6,10 +6,19 @@
         </label>
         <label :class="`tab flex-auto ${ selection === 'gerai' ? 'tab-active' : '' }`">
             <input type="radio" name="selection" v-model="selection" value="gerai" class="hidden"  />
-            Choose gerai
+            Quick Order
         </label>
     </div>
 
+    <template v-if="selection === 'gerai'">
+        <div class="py-2 rounded-md flex space-x-5 overflow-auto	">
+            <OrderItem></OrderItem>
+            <OrderItem></OrderItem>
+            <OrderItem></OrderItem>
+            <OrderItem></OrderItem>
+            <OrderItem></OrderItem>
+        </div>
+    </template>
     <template v-if="selection === 'qr'">
         <div class="qr-container">
             <qrcode-stream id="qr-code-stream" @detect="onDetect"></qrcode-stream>
@@ -21,7 +30,7 @@
         <small class="text-gray-500">Please avoid shaking to get results quickly.</small>
 
         <div class="bg-gray-100 p-4 rounded-md">
-            <span v-if="scanResult === ''">Hang on. We are screening your qr code</span>
+            <span v-if="scanResult === ''">Hang on. We are scanning your qr code</span>
             <span v-else>{{ scanResult }}</span>
         </div>
     </template>
@@ -70,10 +79,16 @@
             onDetect (detectedCodes) {
                 console.log('detectedCodes: ', detectedCodes)
                 if (detectedCodes) {
-                    this.scanResult = detectedCodes[0].rawValue
+                    let url = detectedCodes[0].rawValue
+                    // this.checkUrl(url)
+                    this.scanResult = url
                 }
                 // ...
             }
+
+            // checkUrl(url) {
+
+            // }
         }
     }
 </script>
