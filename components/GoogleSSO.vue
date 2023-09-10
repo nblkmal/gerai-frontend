@@ -4,6 +4,7 @@ import {
     type CredentialResponse,
 } from "vue3-google-signin";
 import { useUserStore } from '~/store/user'
+import { useGlobalLoader } from '~/store/loader'
 
 const emit = defineEmits(['errors', 'loading'])
 
@@ -22,6 +23,7 @@ interface User {
 
 // handle success event
 const handleLoginSuccess = async (response: CredentialResponse) => {
+    useGlobalLoader().setLoader(true)
     const { credential } = response;
     // let user: RegisterForm = 
     let user = {} as RegisterForm
@@ -58,6 +60,7 @@ const registerSubmit = async (user: RegisterForm) => {
         })
         useUserStore().setUserData(res.user)
         localStorage.setItem('token', res.token)
+        useGlobalLoader().setLoader(true)
         emit('loading', false)
     } catch (error) {
         let errors = error.response._data.errors
