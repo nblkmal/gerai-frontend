@@ -30,9 +30,8 @@
             <Icon v-if="!loadCamera" id="qr-frame" name="streamline:interface-edit-select-frame-cursor-frame-select" color="white"/>
 
             <div id="qr-status">
-                <span>ahscascavcjacvjascvvashjcascjascahcjvaahscascavcjacvjascvvashjcascjascahcjvaahscascavcjacvjascvvashjcascjascahcjvaahscascavcjacvjascvvashjcascjascahcjvaahscascavcjacvjascvvashjcascjascahcjvaahscascavcjacvjascvvashjcascjascahcjvaahscascavcjacvjascvvashjcascjascahcjvaahscascavcjacvjascvvashjcascjascahcjva</span>
-                <!-- <span v-if="scanResult === ''">Hang on. We are scanning your qr code</span>
-                <span v-else>{{ scanResult }}</span> -->
+                <span v-if="scanResult === ''">Hang on. We are scanning your qr code</span>
+                <span v-else>{{ scanResult }}</span>
             </div>
         </div>
 
