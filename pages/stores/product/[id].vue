@@ -22,13 +22,13 @@
                 Customer Details
             </div>
             <div class="collapse-content"> 
-                <FormInput label="Name"></FormInput>
+                <FormInput label="Name" v-model="form.name" :value="user?.name"></FormInput>
                 <FormGroup placeholder="12 - 345 6789" left-append="+60" label="Phone Number"></FormGroup>
-                <div class="flex space-x-4">
+                <!-- <div class="flex space-x-4">
                     <FormInput label="Country"></FormInput>
                     <FormInput label="City"></FormInput>
                 </div>
-                <FormInput label="Postcode"></FormInput>
+                <FormInput label="Postcode"></FormInput> -->
             </div>
         </div>
 
@@ -74,11 +74,19 @@
 
 <script setup lang="js">
     import stores from '~/content/stores.json'
+    import { useUserStore } from '~/store/user'
+
+    const user = computed(() => {
+        return useUserStore().user
+    })
 
     const route = useRoute()
     const id = route.params.id
 
     const store = ref()
+    const form = ref({
+        name: ''
+    })
 
     function findStore(id) {
         return stores.find(store => store.id == id)
