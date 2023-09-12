@@ -6,8 +6,13 @@ export default defineNuxtConfig({
         'nuxt-icon',
         'nuxt-mapbox',
         '@nuxtjs/robots',
-        'nuxt-vue3-google-signin'
+        'nuxt-vue3-google-signin',
+        '@sidebase/nuxt-auth'
     ],
+    auth: {
+        origin: 'http://localhost:3000',
+        basePath: '/api/auth'
+    },
     googleSignIn: {
         clientId: process.env.GOOGLE_CLIENT_ID,
     },
@@ -26,6 +31,11 @@ export default defineNuxtConfig({
             devApi: 'http://localhost:8001/api/',
             stagingApi: 'https://manage.api.gerai.store/api/',
             prodApi: 'https://manage.api.gerai.store/api/'
+        },
+        passport: {
+            mastanahBaseUrl: process.env.MASTANAH_PASSPORT_BASE_URL,
+            mastanahClientId: process.env.MASTANAH_PASSPORT_CLIENT_ID,
+            mastanahclientSecret: process.env.MASTANAH_PASSPORT_CLIENT_SECRET
         },
         googleClientId: process.env.GOOGLE_CLIENT_ID,
     },

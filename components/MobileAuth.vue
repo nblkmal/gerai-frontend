@@ -10,6 +10,17 @@
             <template v-if="user === null">
                 <LoginForm></LoginForm>
                 <GoogleSSO class="mt-4" @loading="emitLoading" @errors="emitErrors"></GoogleSSO>
+                
+                <button @click="signIn('mastanah')" class="btn btn-sm capitalize">
+                    <span v-if="!loading">
+                        Login with Mastanah
+                    </span>
+                    <span v-else class="loading loading-dots loading-md"></span>
+                </button>
+
+                    <!-- NOTE: Here we hard-coded username and password, on your own page this should probably be connected to two inputs for username + password -->
+                    <button @click="signIn('credentials', { username: 'test', password: 'hunter2' })">Username and Password</button>
+                
             </template>
             <template v-else>
                 <div class="bg-green-100 p-4 w-full rounded text-center flex items-center justify-center space-x-2">
@@ -33,6 +44,8 @@
     import { ref } from 'vue'
     import { mapState } from 'pinia'
     import { useUserStore } from '~/store/user'
+
+    const { signIn } = useAuth()
 
     const errors = ref({})
     const loading = ref(false)

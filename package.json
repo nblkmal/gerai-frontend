@@ -21,9 +21,11 @@
   "dependencies": {
     "@nuxtjs/robots": "^3.0.0",
     "@pinia/nuxt": "^0.4.11",
+    "@sidebase/nuxt-auth": "^0.6.0-beta.5",
     "axios": "^1.5.0",
     "fs": "^0.0.1-security",
     "google-auth-library": "^9.0.0",
+    "next-auth": "4.21.1",
     "nuxt-vue3-google-signin": "^0.0.9",
     "pinia": "^2.1.4",
     "sass": "^1.63.3",
