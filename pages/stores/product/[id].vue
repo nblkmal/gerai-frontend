@@ -41,23 +41,23 @@
             <Badge name="Phone Repair"></Badge>
         </div>
 
-        <div class="border rounded-md p-4 flex space-x-2">
+        <div class="border rounded-md p-4 flex space-x-2" v-for="item in items" :key="item.id">
             <div class="border rounded-md h-20 w-20 flex items-center justify-center">
                 <Icon name="basil:image-outline" color="black" height="70%" width="70%"/>
             </div>
             <div class="grow flex flex-row justify-between">
                 <div class="flex flex-col text-left justify-between py-2">
-                    <h4 class="font-semibold">Tukar Bateri</h4>
+                    <h4 class="font-semibold">{{ item.name }}</h4>
                     <span class="text-sm text-gray-500">RM 30.00</span>
                 </div>
 
                 <div class="flex items-end space-x-2">
-                    <div class="rounded-full border border-gray-900 h-7 w-7 flex items-center justify-center">
+                    <button @click="removeFromCart(item)" class="rounded-full border border-gray-900 h-7 w-7 flex items-center justify-center">
                         <Icon name="lucide:minus" color="black"/>
-                    </div>
-                    <div class="rounded-full bg-gray-900 h-7 w-7 flex items-center justify-center">
+                    </button>
+                    <button @click="addToCart(item)" class="rounded-full bg-gray-900 h-7 w-7 flex items-center justify-center">
                         <Icon name="basil:plus-outline" color="white"/>
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>
@@ -75,6 +75,45 @@
 <script setup lang="js">
     import stores from '~/content/stores.json'
     import { useUserStore } from '~/store/user'
+    import { useCartStore } from "~/store/cart"
+
+    const items = ref([
+        {
+            id: 1,
+            name: 'Tukar LCD'
+        },
+        {
+            id: 2,
+            name: 'Tukar Bateri'
+        }
+    ])
+
+    const cartStore = useCartStore();
+
+    const alreadyInCart = (item) => {
+        const x = cartStore.cart?.find(el => el.id === item.id)
+        if (x?.id) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    const removeFromCart = (item) => {
+        if(alreadyInCart(item)) {
+            cartStore.remove(item);
+        }
+    }
+
+    const addToCart = (item) => {
+        if(!alreadyInCart(item)) {
+            cartStore.add(item);
+        } else {
+            // alert(`${item.title} already in cart`)
+            console.log('item already in cart')
+        }
+    }
+
 
     const user = computed(() => {
         return useUserStore().user
