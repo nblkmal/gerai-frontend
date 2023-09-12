@@ -2,6 +2,7 @@ import { NuxtAuthHandler } from '#auth'
 const { passport } = useRuntimeConfig(); //get the values from the runtimeConfig
 
 export default NuxtAuthHandler({
+    secret: process.env.SECRET,
     pages: {
         // Change the default behavior to use `/login` as the path for the sign-in page
         // signIn: '/mastanah/login'

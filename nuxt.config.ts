@@ -35,7 +35,7 @@ export default defineNuxtConfig({
         passport: {
             mastanahBaseUrl: process.env.MASTANAH_PASSPORT_BASE_URL,
             mastanahClientId: process.env.MASTANAH_PASSPORT_CLIENT_ID,
-            mastanahclientSecret: process.env.MASTANAH_PASSPORT_CLIENT_SECRET
+            mastanahClientSecret: process.env.MASTANAH_PASSPORT_CLIENT_SECRET
         },
         googleClientId: process.env.GOOGLE_CLIENT_ID,
     },
