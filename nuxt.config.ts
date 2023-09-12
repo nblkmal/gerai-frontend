@@ -10,7 +10,7 @@ export default defineNuxtConfig({
         '@sidebase/nuxt-auth'
     ],
     auth: {
-        origin: 'http://localhost:3000',
+        origin: process.env.AUTH_ORIGIN,
         basePath: '/api/auth'
     },
     googleSignIn: {
