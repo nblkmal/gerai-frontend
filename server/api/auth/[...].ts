@@ -4,8 +4,7 @@ const { passport } = useRuntimeConfig(); //get the values from the runtimeConfig
 export default NuxtAuthHandler({
     secret: process.env.SECRET,
     // pages: {
-        // Change the default behavior to use `/login` as the path for the sign-in page
-        // signIn: '/mastanah/login'
+    //     signIn: '/mastanah/login'
     // },
     providers: [
         {
@@ -16,14 +15,14 @@ export default NuxtAuthHandler({
             authorization: {
                 url: `${ passport.mastanahBaseUrl }/oauth/authorize`, // this is the route created by passport by default to get the autorization code
                 params: {
-                    scope: "*", // this is the wildcard for all scopes in laravel passport, you can specify scopes separated by a space
+                    scope: '*'
                 }
             },
             token: {
-                url: `${ passport.mastanahBaseUrl }/api/v1/personal-access-tokens`, // this is the default route created by passport to get and renew the tokens
+                url: `${ passport.mastanahBaseUrl }/oauth/token`, // this is the default route created by passport to get and renew the tokens
             },
             clientId: passport.mastanahClientId, // the client Id
-            clientSecret: passport.mastanahclientSecret,// the client secret
+            clientSecret: passport.mastanahClientSecret,// the client secret
             userinfo: {
                 url: `${ passport.mastanahBaseUrl }/api/v1/profile`,// this is a custom route that must return the current user that must be created in laravel
             },
@@ -32,13 +31,13 @@ export default NuxtAuthHandler({
                 // profile is the user coming from the laravel app
                 // update the return with your own fields names
                 return {
-                    id: profile.id,
-                    name: profile.username,
-                    email: profile.email,
-                    image: profile.image,
+                    id: profile.data.id,
+                    name: profile.data.name,
+                    email: profile.data.email,
+                    image: profile.data.avatar_url,
                 };
             },
-            idToken: true,
+            idToken: false,
         }
-    ],
+    ]
 });

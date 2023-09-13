@@ -15,7 +15,16 @@
             </div>
         </form>
 
-        <div class="divider my-1">Or</div>
+        <button @click="signIn('mastanah')" class="btn btn-primary text-white btn-sm capitalize w-full">
+            <span v-if="!loading">
+                Login with Mastanah
+            </span>
+            <span v-else class="loading loading-dots loading-md"></span>
+        </button>
+
+        <GoogleSSO class="mt-4" @loading="emitLoading"></GoogleSSO>
+
+        <div class="divider my-1 text-sm">Or</div>
         <a @click.prevent="toggleAuth" class="btn btn-ghost btn-sm capitalize">Create account</a>
         <!-- for digit verification -->
         <!-- <div class="flex justify-center space-x-2">
@@ -27,6 +36,10 @@
         </div> -->
     </div>
 </template>
+
+<script setup>
+    const { signIn } = useAuth()
+</script>
 
 <script>
 import { useUserStore } from '~/store/user'
@@ -54,6 +67,14 @@ export default {
             this.$emit('login-form-emit', {
                 toggleAuth: true
             })
+        },
+
+        emitLoading(data) {
+            this.loading = data
+        },
+
+        emitErrors() {
+
         },
 
         async loginSubmit() {
