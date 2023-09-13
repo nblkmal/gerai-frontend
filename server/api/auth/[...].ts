@@ -9,7 +9,7 @@ export default NuxtAuthHandler({
     // },
     providers: [
         {
-            id: "mastanah-callback", //ID is only used for the callback URL
+            id: passport.mastanahCallbackUrl, //ID is only used for the callback URL
             name: "Mastanah App", // name is used for the login button
             type: "oauth", // connexion type
             version: "2.0",// oauth version

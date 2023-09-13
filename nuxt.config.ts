@@ -34,6 +34,7 @@ export default defineNuxtConfig({
         },
         passport: {
             mastanahBaseUrl: process.env.MASTANAH_PASSPORT_BASE_URL,
+            mastanahCallbackUrl: process.env.MASTANAH_CALLBACK_URL,
             mastanahClientId: process.env.MASTANAH_PASSPORT_CLIENT_ID,
             mastanahClientSecret: process.env.MASTANAH_PASSPORT_CLIENT_SECRET
         },
