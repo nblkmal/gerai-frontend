@@ -3,7 +3,9 @@ import * as vt from 'vue-toastification'
 import "vue-toastification/dist/index.css"
 
 export default defineNuxtPlugin((nuxtApp) => {
-    nuxtApp.vueApp.use(vt.default)
+    nuxtApp.vueApp.use(vt.default, {
+        transition: "Vue-Toastification__slideBlurred"
+    })
     return {
         provide: {
             toast: vt.useToast()

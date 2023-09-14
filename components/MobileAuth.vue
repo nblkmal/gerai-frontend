@@ -42,6 +42,7 @@
     import { ref } from 'vue'
     import { mapState } from 'pinia'
     import { useUserStore } from '~/store/user'
+    const { $toast } = useNuxtApp()
 
     const mastanahStatus = useAuth().status.value
     const mastanahUser = useAuth().data.value ? useAuth().data.value.user : null
@@ -68,7 +69,9 @@
             useAuth().signOut()
         } else {
             try {
-                // $toast.success('Logged out!')
+                $toast.success('Logged out!', {
+                    position: "bottom-center"
+                })
                 useUserStore().setUserData(null)
                 localStorage.removeItem('token')
                 loading.value = false
