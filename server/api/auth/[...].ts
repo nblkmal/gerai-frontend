@@ -27,9 +27,6 @@ export default NuxtAuthHandler({
                 url: `${ passport.mastanahBaseUrl }/api/v1/profile`,// this is a custom route that must return the current user that must be created in laravel
             },
             profile: (profile) => {
-                // map the session fields with you laravel fields
-                // profile is the user coming from the laravel app
-                // update the return with your own fields names
                 return {
                     id: profile.data.id,
                     name: profile.data.name,
@@ -39,5 +36,41 @@ export default NuxtAuthHandler({
             },
             idToken: false,
         }
-    ]
+    ],
+    callbacks: {
+        async jwt({ token, user, account }) {
+            if (account && user) {
+                return {
+                    access_token: account.access_token,
+                    refresh_token: account.refresh_token,
+                    accessTokenExpires: account.expires_at,
+                    user
+                }
+            }
+            // @ts-ignore
+            if (Date.now() < token.accessTokenExpires * 1000) {
+                return token
+            }
+
+            // return await refreshAccessToken(token);
+            // reference : https://stackoverflow.com/questions/75386754/sidebase-nuxt-auth-refresh-token-issue-with-laravel-passport
+        },
+        async session({session, token}) {
+            // @ts-ignore
+            session.user = token.user
+            session.login_at = Date.now()
+            // @ts-ignore
+            session.access_token = token.access_token
+            // @ts-ignore
+            session.error = token.error
+            return session
+        }
+    }
 });
+
+interface AuthResponse {
+    access_token: string,
+    refresh_token: string,
+    token_type: string,
+    expires_at: number,
+}
