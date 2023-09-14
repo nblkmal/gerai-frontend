@@ -21,6 +21,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 <span>This is unreleased beta version of gerai.io</span>
             </div>
+
             <NuxtPage />
             <Help v-if="!hideHelp"/>
         </div>
@@ -73,6 +74,14 @@ export default {
     },
 
     async mounted() {
+        const login = useAuth().data.value.login_at
+        const now = Date.now()
+
+        if (now - login < 3000) {
+            this.$toast.success('Success Login!', {
+                position: "bottom-center"
+            })
+        }
         if ('theme' in localStorage) {
             this.$refs.el.dataset.theme = localStorage.theme
             this.theme = localStorage.theme
