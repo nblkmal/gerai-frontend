@@ -17,7 +17,7 @@
         text="Opps, no search found. Try to search with another keyword."></Blank>
 
         <NuxtLink :to="`/stores/${store.id}`" class="h-24 flex" v-for="store in stores" :key="store.id">
-            <img class="rounded-l-md w-1/4 h-full object-cover" src="https://assets.bharian.com.my/images/articles/19gerai_1582081248.jpg" alt="">
+            <img v-if="store.media && store.media.length !== 0" class="border-l border-y rounded-l-md w-1/4 h-full object-cover" :src="store.media[0].original_url" alt="">
             <div class="border w-full rounded-r-md p-3 text-left truncate">
                 <div class="flex justify-between items-center">
                     <h4 class="font-semibold">{{ store.name }}</h4>
@@ -47,6 +47,7 @@
             this.keywords.forEach(category => {
                 this.filters[category] = false
             })
+            this.fetchMastanahVendors()
         },
 
         watch: {
@@ -76,6 +77,11 @@
         methods: {
             searchResult(data) {
                 this.stores = data.model
+            },
+
+            async fetchMastanahVendors() {
+                const result = await $fetch(`https://mastanah.app/api/v1/vendors`)
+                this.stores = result.data.data
             }
         }
     }
