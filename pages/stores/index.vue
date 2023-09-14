@@ -47,7 +47,9 @@
             this.keywords.forEach(category => {
                 this.filters[category] = false
             })
-            this.fetchMastanahVendors()
+            if (useAuth().status.value === 'authenticated') {
+                this.fetchMastanahVendors()
+            }
         },
 
         watch: {
