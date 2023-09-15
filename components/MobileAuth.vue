@@ -65,6 +65,9 @@
 
     async function logout() {
         loading.value = true
+        $toast.info('Logging out!', {
+            position: "bottom-center"
+        })
         if (mastanahStatus === 'authenticated') {
             useAuth().signOut()
         } else {

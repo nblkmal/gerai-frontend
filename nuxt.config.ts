@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import storesJson from './content/stores.json'
+
 export default defineNuxtConfig({
     modules: [
         '@nuxtjs/tailwindcss',
@@ -7,8 +9,31 @@ export default defineNuxtConfig({
         'nuxt-mapbox',
         '@nuxtjs/robots',
         'nuxt-vue3-google-signin',
-        '@sidebase/nuxt-auth'
+        '@sidebase/nuxt-auth',
+        'nuxt-simple-sitemap',
     ],
+    sitemap: {
+        urls: async () => {
+            const blogPages = await storesJson
+            console.log('blogPages: ', blogPages)
+            return blogPages.map(page => ({
+                loc: `/stores/${page.id}`,
+                // update the lastmod
+                lastmod: Date.now(),
+                changefreq: 'daily',
+                priority: 0.8,
+            }))
+        },
+    },
+    site: {
+        url: 'https://localhost'
+    },
+    nitro: {
+        prerender: {
+            crawlLinks: true,
+            routes: ['/', '/sitemap.xml']
+        }
+    },
     auth: {
         origin: process.env.AUTH_ORIGIN,
         basePath: '/api/auth'

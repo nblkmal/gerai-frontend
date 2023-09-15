@@ -83,7 +83,7 @@
 
             async fetchMastanahVendors() {
                 const result = await $fetch(`https://mastanah.app/api/v1/vendors`)
-                this.stores = result.data.data
+                this.stores = [...this.stores, ...result.data.data]
             }
         }
     }

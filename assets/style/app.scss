@@ -2,9 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-.Vue-Toastification__toast {
-    top: 50px;
-}
+// .Vue-Toastification__toast {
+//     // top: 50px;
+//     min-width: 150px !important;
+//     max-width: 400px !important;
+// }
 
 .skeleton {
     animation: skeleton-loading 1s linear infinite alternate;
