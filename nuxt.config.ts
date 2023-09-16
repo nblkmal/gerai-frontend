@@ -10,7 +10,7 @@ export default defineNuxtConfig({
         '@nuxtjs/robots',
         'nuxt-vue3-google-signin',
         '@sidebase/nuxt-auth',
-        'nuxt-simple-sitemap',
+        'nuxt-simple-sitemap'
     ],
     sitemap: {
         urls: async () => {
@@ -69,7 +69,7 @@ export default defineNuxtConfig({
             link: [
                 { rel: 'stylesheet', href: 'https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' }
             ],
-            title: 'gerai',
+            title: 'Gerai | We suggest you place to eat!',
                 meta: [
                     {
                         name: 'description',
