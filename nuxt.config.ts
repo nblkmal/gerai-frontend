@@ -26,7 +26,7 @@ export default defineNuxtConfig({
         },
     },
     site: {
-        url: 'https://localhost'
+        url: process.env.APP_ENV === 'development' ? process.env.AUTH_ORIGIN : process.env.PROD_URL
     },
     nitro: {
         prerender: {
