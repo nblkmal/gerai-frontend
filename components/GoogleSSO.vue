@@ -107,6 +107,6 @@ const handleLoginError = () => {
     <GoogleSignInButton
         @success="handleLoginSuccess"
         @error="handleLoginError"
-        :width="300"
+        class="w-auto"
     ></GoogleSignInButton>
 </template>

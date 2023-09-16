@@ -8,7 +8,7 @@
                 <input v-model="form.password" type="password" placeholder="Password" class="input input-bordered input-sm w-full md:max-w-xs" />
                 <button type="submit" class="btn btn-sm capitalize">
                     <span v-if="!loading">
-                        Login
+                        Sign in
                     </span>
                     <span v-else class="loading loading-dots loading-md"></span>
                 </button>
@@ -16,8 +16,9 @@
         </form>
 
         <button @click="signIn('mastanah')" class="btn btn-primary text-white btn-sm capitalize w-full">
-            <span v-if="!loading">
-                Login with Mastanah
+            <span v-if="!loading" class="flex">
+                <span>Sign in with Mastanah</span>
+                <!-- <img src="/mastanah-logo.svg" alt="" height="40" width="40" class="border border-black"> -->
             </span>
             <span v-else class="loading loading-dots loading-md"></span>
         </button>
@@ -25,7 +26,7 @@
         <GoogleSSO class="mt-4" @loading="emitLoading"></GoogleSSO>
 
         <div class="divider my-1 text-sm">Or</div>
-        <a @click.prevent="toggleAuth" class="btn btn-ghost btn-sm capitalize">Create account</a>
+        <a @click.prevent="toggleAuth" class="btn btn-ghost btn-sm capitalize btn-block">Create account</a>
         <!-- for digit verification -->
         <!-- <div class="flex justify-center space-x-2">
             <input id="firstDigit" v-model="verifyForm.first" type="text" maxlength="1" class="border rounded-md h-8 w-8 digit-custom"/>
@@ -63,8 +64,8 @@ export default {
     },
 
     methods: {
-        emit() {
-            this.$emit('login-form-emit', {
+        toggleAuth() {
+            this.$emit('toggleAuth', {
                 toggleAuth: true
             })
         },
