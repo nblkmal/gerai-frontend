@@ -25,6 +25,11 @@
             <NuxtPage />
             <Help v-if="!hideHelp"/>
         </div>
+
+        <iframe
+            src="/sitemap.xml"
+            style="width: 100%; border: none; height: 600px"
+        ></iframe>
         <!-- <Footer /> -->
     </div>
 </template>
