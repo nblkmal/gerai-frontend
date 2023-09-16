@@ -85,6 +85,11 @@ export default defineNuxtConfig({
     },
     css: ['~/assets/style/app.scss'],
     build:{
-        transpile: ['vue-toastification']
+        transpile: ['vue-toastification'],
+        postcss: {
+            plugins: {
+                "postcss-custom-properties": false
+            }
+        }
     }
 })
