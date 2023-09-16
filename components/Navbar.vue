@@ -59,10 +59,7 @@
             </template>
 
             <!-- add to cart -->
-            <div :class="`border ${ cart.length !== 0 ? 'border-primary' : ''} rounded-full p-2 flex justify-center items-center indicator mr-2`">
-                <span v-if="cart.length !== 0" class="indicator-item badge badge-primary">{{ cart.length }}</span> 
-                <Icon name="solar:cart-large-2-bold-duotone" class="h-6 w-6" color="gray"/>
-            </div>
+            <Cart></Cart>
 
             <!-- auth mobile -->
             <MobileAuth class="block md:hidden"></MobileAuth>
