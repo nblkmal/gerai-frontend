@@ -26,11 +26,12 @@
     "fs": "^0.0.1-security",
     "google-auth-library": "^9.0.0",
     "next-auth": "4.21.1",
+    "nuxt-simple-sitemap": "^3.3.2",
     "nuxt-vue3-google-signin": "^0.0.9",
     "pinia": "^2.1.4",
+    "postcss-custom-properties": "^13.3.0",
     "sass": "^1.63.3",
     "vue-qrcode-reader": "^5.3.4",
-    "vue-toastification": "^2.0.0-rc.5",
-    "nuxt-simple-sitemap": "^3.3.2"
+    "vue-toastification": "^2.0.0-rc.5"
   }
 }

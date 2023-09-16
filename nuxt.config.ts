@@ -15,7 +15,6 @@ export default defineNuxtConfig({
     sitemap: {
         urls: async () => {
             const blogPages = await storesJson
-            console.log('blogPages: ', blogPages)
             return blogPages.map(page => ({
                 loc: `/stores/${page.id}`,
                 // update the lastmod
