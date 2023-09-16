@@ -1,9 +1,9 @@
 {
-  "name": "nuxt-app",
+  "name": "gerai",
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build && node ./_integration/fetchStores.js",
+    "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
