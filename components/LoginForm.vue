@@ -1,8 +1,9 @@
 <template>
     <div class="space-y-4 w-full text-center">
         <p class="text-md font-bold">Let's food hunt with us</p>
-        <!-- <p>Food hunt with us or <a @click.prevent="toggleAuth" class="text-blue-500 cursor-pointer">register here</a></p> -->
-        <form action="POST" @submit.prevent="loginSubmit">
+
+        <!-- hide login by form -->
+        <!-- <form action="POST" @submit.prevent="loginSubmit">
             <div class="form-control w-full md:max-w-xs space-y-4">
                 <input v-model="form.email" type="text" placeholder="Email" class="input input-bordered input-sm w-full md:max-w-xs" />
                 <input v-model="form.password" type="password" placeholder="Password" class="input input-bordered input-sm w-full md:max-w-xs" />
@@ -13,7 +14,9 @@
                     <span v-else class="loading loading-dots loading-md"></span>
                 </button>
             </div>
-        </form>
+        </form> -->
+
+        <GoogleSSO class="mt-4" @loading="emitLoading"></GoogleSSO>
 
         <button @click="signIn('mastanah')" class="btn btn-primary text-white btn-sm capitalize w-full">
             <span v-if="!loading" class="flex">
@@ -23,10 +26,10 @@
             <span v-else class="loading loading-dots loading-md"></span>
         </button>
 
-        <GoogleSSO class="mt-4" @loading="emitLoading"></GoogleSSO>
+        <!-- hide sign up option -->
+        <!-- <div class="divider my-1 text-sm">Or</div>
+        <a @click.prevent="toggleAuth" class="btn btn-ghost btn-sm capitalize btn-block">Create account</a> -->
 
-        <div class="divider my-1 text-sm">Or</div>
-        <a @click.prevent="toggleAuth" class="btn btn-ghost btn-sm capitalize btn-block">Create account</a>
         <!-- for digit verification -->
         <!-- <div class="flex justify-center space-x-2">
             <input id="firstDigit" v-model="verifyForm.first" type="text" maxlength="1" class="border rounded-md h-8 w-8 digit-custom"/>

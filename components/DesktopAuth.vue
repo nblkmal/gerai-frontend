@@ -96,7 +96,6 @@
 
 <script>
 import { useUserStore } from '~/store/user'
-import { mapState } from 'pinia'
 import Avatar from "vue-boring-avatars"
 
 export default {

@@ -4,7 +4,12 @@
     </span>
     <label tabindex="0" class="block md:hidden btn btn-ghost btn-circle avatar" onclick="mobile_auth.showModal()">
         <div v-if="!loading" class="w-10 rounded-full">
-            <img src="" />
+            <Avatar 
+                :size="80" 
+                variant="bauhaus"
+                name="Mujahid Anuar" 
+                :colors="colors" 
+            />
         </div>
         <i v-else class='bx bx-loader-alt bx-spin bx-md' ></i>
     </label>
@@ -39,6 +44,7 @@
 </style>
 
 <script setup>
+    import Avatar from "vue-boring-avatars"
     import { ref } from 'vue'
     import { useUserStore } from '~/store/user'
     const { $toast } = useNuxtApp()

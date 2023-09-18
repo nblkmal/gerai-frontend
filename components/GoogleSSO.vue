@@ -103,10 +103,16 @@ const handleLoginError = () => {
 };
 </script>
 
+<style lang="scss">
+    #container {
+        width: 300px !important;
+    }
+</style>
+
 <template>
     <GoogleSignInButton
         @success="handleLoginSuccess"
         @error="handleLoginError"
-        class="w-auto"
+        class="w-90 md:w-auto"
     ></GoogleSignInButton>
 </template>
