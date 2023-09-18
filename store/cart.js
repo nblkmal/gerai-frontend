@@ -1,4 +1,7 @@
 import { defineStore } from 'pinia'
+// import Vue from "vue"
+// import Toast from "vue-toastification"
+import * as vt from 'vue-toastification'
 
 export const useCartStore = defineStore('cart', {
     state: () => ({
@@ -7,6 +10,12 @@ export const useCartStore = defineStore('cart', {
     actions: {
         add(item) {
             this.cart.push({ ...item, quantity: 1 })
+            // vt.default({
+            //     transition: "Vue-Toastification__slideBlurred"
+            // })
+            vt.useToast().success('Added to cart', {
+                position: "bottom-center"
+            })
         },
         async remove(item) {
             let temp = []

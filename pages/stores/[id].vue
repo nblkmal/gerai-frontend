@@ -36,21 +36,19 @@
             <iconed-label icon="basil:clock-outline" label="06:00 - 19:00"></iconed-label>
         </div>
 
-        <MapboxMap
-            v-if="store !== null"
-            :map-id="`map-${ store?.id }`"
-            class="h-20 rounded-md"
-            :options="{
-                style: 'mapbox://styles/nblkmal/ckwyd1xnc06ii15mtmekziiwl', // style URL
-                center: [-68.137343, 45.137451], // starting position
-                zoom: 5 // starting zoom
-            }"
-        />
 
         <reviews></reviews>
 
-        <div class="px-4 fixed bottom-5 left-0 w-full">
-            <button class="bg-blue-600 hover:bg-blue-700 flex rounded-md justify-center w-full text-white py-3 px-4 drop-shadow-md">Navigate</button>
+        <div class="px-4 fixed bottom-5 left-0 w-full flex space-x-2">
+            <button class="flex-1 rounded-md bg-blue-600 text-white">
+                Navigate
+            </button>
+            <div class="w-16">
+                <button class="bg-white border-2 border-blue-600 p-2 rounded-full w-full">
+                    <Icon name="icon-park-solid:share-one" color="blue"/>
+                </button>
+            </div>
+            <!-- <button class="bg-blue-600 hover:bg-blue-700 flex rounded-md justify-center w-full text-white py-3 px-4 drop-shadow-md">Navigate</button> -->
         </div>
     </div>
 </template>
