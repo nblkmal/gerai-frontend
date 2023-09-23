@@ -3,13 +3,16 @@
         Loading gerai
     </div>
     <div v-else class="space-y-4">
-        <div class="flex justify-end">
+        <div class="flex justify-between">
             <NuxtLink :to="`/stores/product/${store?.id}`">
-                <Badge name="See products" icon="basil:shopping-bag-solid"></Badge>
+                <Badge :type="shopOpen ? 'success' : 'error'" :name="shopOpen ? 'Open' : 'Currently Closed'" text="text-red-700" bold></Badge>
+            </NuxtLink>
+            <NuxtLink :to="`/stores/product/${store?.id}`">
+                <Badge redirect name="See products" icon="basil:shopping-bag-solid"></Badge>
             </NuxtLink>
         </div>
         <div class="">
-            <img class="rounded-md" src="https://assets.bharian.com.my/images/articles/19gerai_1582081248.jpg" alt="">
+            <img class="rounded-md h-40 w-full object-cover" :src="store?.media[0].original_url ?? store?.media[0]" alt="">
         </div>
 
         <div class="flex justify-between items-center text-left">
@@ -17,36 +20,58 @@
                 <div class="bg-green-200 border border-green-500 rounded-full h-auto w-2"></div>
                 <div class="flex flex-col">
                     <h4 class="font-bold">{{ store?.name }}</h4>
-                    <p class="text-sm text-left">Nilai, Negeri Sembilan</p>
-                    <p class="text-xs text-left">Tags:</p>
+                    <p class="text-sm text-left">{{ store?.description }}</p>
+                    <!-- <p class="text-xs text-left">Tags:</p>
                     <div class="flex space-x-1">
                         <Icon name="basil:star-solid" color="orange" />
                         <Icon name="basil:star-solid" color="orange" />
                         <Icon name="basil:star-solid" color="orange" />
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <Badge name="200m"></Badge>
         </div>
 
-        <h6 class="text-justify text-sm text-gray-500">Warung warisan tok abah yang berada di tepi jalan besar simpang empat. Mempunyai banyak pilihan makanan terutama makanan untuk sarapan pagi.</h6>
+        <h6 class="text-justify text-sm text-gray-500">
+            {{ store?.description }}
+        </h6>
 
         <div class="flex flex-col space-y-2">
-            <iconed-label icon="basil:calendar-outline" label="Isnin - Ahad"></iconed-label>
-            <iconed-label icon="basil:clock-outline" label="06:00 - 19:00"></iconed-label>
+            <iconed-label icon="basil:calendar-outline" :label="`Except ${ store?.dayClose.toString() }`"></iconed-label>
+            <iconed-label icon="basil:clock-outline" :label="`${ $time(store?.timeOpen, 'HH.mm') } - ${ $time(store?.timeClose, 'HH.mm') }`"></iconed-label>
         </div>
 
 
         <reviews></reviews>
 
         <div class="px-4 fixed bottom-5 left-0 w-full flex space-x-2">
-            <button class="flex-1 rounded-md bg-blue-600 text-white">
-                Navigate
-            </button>
-            <div class="w-16">
-                <button class="bg-white border-2 border-blue-600 p-2 rounded-full w-full">
+            <a :href="store?.mapsUrl" target="__blank" class="flex-1 rounded-md bg-blue-600 text-white font-semibold flex items-center justify-center py-2">
+                View in Google Maps
+                <!-- <Icon name="logos:google-maps"/> -->
+            </a>
+            <div class="w-16 h-auto">
+                <button onclick="share.showModal()" class="bg-white border border-blue-600 p-2 rounded-full w-full flex items-center justify-center h-auto">
                     <Icon name="icon-park-solid:share-one" color="blue"/>
                 </button>
+                <!-- <button class="btn" onclick="my_modal_2.showModal()">open modal</button> -->
+                <dialog id="share" class="modal">
+                    <div class="modal-box space-y-4">
+                        <h3 class="font-bold text-lg">Share with friends!</h3>
+                        <p class="py-4">Tell your friends about this hidden gems that you want to recommend!</p>
+                        <div class="border rounded-md p-2 font-semibold">
+                            Facebook
+                        </div>
+                        <div class="border rounded-md p-2 font-semibold">
+                            Twitter
+                        </div>
+                        <div class="border rounded-md p-2 font-semibold">
+                            WhatsApp
+                        </div>
+                    </div>
+                    <form method="dialog" class="modal-backdrop">
+                        <button>close</button>
+                    </form>
+                </dialog>
             </div>
             <!-- <button class="bg-blue-600 hover:bg-blue-700 flex rounded-md justify-center w-full text-white py-3 px-4 drop-shadow-md">Navigate</button> -->
         </div>
@@ -74,6 +99,11 @@
     function findStore(id) {
         return stores.find(store => store.id == id)
     }
+
+    const { $now } = useNuxtApp()
+    const shopOpen = computed(() => {
+        return $now > store?.timeOpen && $now < store?.timeClose
+    })
 
     onMounted(() => {
         store.value = findStore(id)

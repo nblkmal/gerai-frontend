@@ -1,20 +1,27 @@
 [
     {
         "id": 1,
-        "name": "Hanfix Studio",
-        "description": "Ini description untuk hanfix",
+        "name": "The Coffee Dock",
+        "description": "Grab a cup before you set sail",
+        "timeOpen": "1700",
+        "timeClose": "2300",
+        "dayClose": ["Wednesday", "Thursday"],
+        "geolocation": "",
+        "mapsUrl": "https://maps.app.goo.gl/HZ88XV51GCm1JnG19?g_st=ic",
+        "media": ["https://lh3.googleusercontent.com/p/AF1QipNhUQJepNPEtZQLJPGRKw9xlGuOBq9-oz1Mhu1u=s1360-w1360-h1020"],
         "keywords": ["repair", "screen"]
     },
     {
         "id": 2,
-        "name": "ninja code",
-        "description": "Ini description untuk ninja",
-        "keywords": ["mobile app", "web"]
-    },
-    {
-        "id": 3,
-        "name": "Saloon Studio",
-        "description": "Ini description untuk saloon",
-        "keywords": ["pedicure", "nails"]
+        "name": "Sipping Corner Cafe",
+        "rate": "",
+        "description": "Grab a cup before you set sail",
+        "timeOpen": "1700",
+        "timeClose": "2300",
+        "dayClose": ["Wednesday", "Thursday"],
+        "geolocation": "",
+        "mapsUrl": "https://www.google.com/maps/place/Sipping+Corner+Cafe,+Puchong/data=!4m7!3m6!1s0x31cdb59888de64c5:0x336e09740ae34758!8m2!3d3.016124!4d101.6168642!16s%2Fg%2F11h75tqp8b!19sChIJxWTeiJi1zTERWEfjCnQJbjM?authuser=0&hl=en&rclk=1",
+        "media": ["https://lh5.googleusercontent.com/p/AF1QipORBr0t0RUEAJg2HxLUbzvgYwzPGrORHQmWLbpV=w122-h92-k-no"],
+        "keywords": ["repair", "screen"]
     }
 ]

@@ -17,7 +17,7 @@
         text="Opps, no search found. Try to search with another keyword."></Blank>
 
         <NuxtLink :to="`/stores/${store.id}`" class="h-24 flex" v-for="store in stores" :key="store.id">
-            <img v-if="store.media && store.media.length !== 0" class="border-l border-y rounded-l-md w-1/4 h-full object-cover" :src="store.media[0].original_url" alt="">
+            <img v-if="store.media && store.media.length !== 0" class="border-l border-y rounded-l-md w-20 h-full object-cover" :src="store.media[0].original_url ?? store.media[0]" alt="">
             <div class="border w-full rounded-r-md p-3 text-left truncate">
                 <div class="flex justify-between items-center">
                     <h4 class="font-semibold">{{ store.name }}</h4>

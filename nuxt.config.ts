@@ -2,11 +2,13 @@
 import storesJson from './content/stores.json'
 
 export default defineNuxtConfig({
+    vite: { // @ts-ignore
+        ssr: { noExternal: ["moment"] }
+    },
     modules: [
         '@nuxtjs/tailwindcss',
         '@pinia/nuxt',
         'nuxt-icon',
-        'nuxt-mapbox',
         '@nuxtjs/robots',
         'nuxt-vue3-google-signin',
         '@sidebase/nuxt-auth',
