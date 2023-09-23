@@ -97,7 +97,7 @@
             },
 
             async fetchVendors() {
-                const result = await $fetch(`${ this.urlBase }vendors/`)
+                const result = await $fetch(`${ this.urlBase }vendors`)
                 this.stores = result.data
                 this.storesModel = result.data
                 this.loading = false
