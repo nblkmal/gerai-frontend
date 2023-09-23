@@ -17,6 +17,7 @@
         <form method="dialog" class="modal-box flex flex-col justify-center items-center">
             <template v-if="user === null">
                 <LoginForm></LoginForm>
+                <button @click="ping" class="border rounded-md py-1 px-2 mt-4">Ping</button>
             </template>
             <template v-else>
                 <div class="bg-green-100 p-4 w-full rounded text-center flex items-center justify-center space-x-2">
@@ -67,6 +68,14 @@
     //     console.log('erros: ', data)
     //     errors.value = data
     // }
+
+    const urlBase = inject('urlBase')
+    async function ping() {
+        const result = await $fetch(`${ urlBase }ping`)
+        $toast.info(result.message, {
+            position: "bottom-center"
+        })
+    }
 
     async function logout() {
         loading.value = true
