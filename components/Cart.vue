@@ -22,6 +22,9 @@
 <script setup>
     import { useCartStore } from '~/store/cart'
 
+    onMounted(() => {
+        useCartStore().checkCart()
+    })
     const cart = computed(() => {
         return useCartStore().cart
     })

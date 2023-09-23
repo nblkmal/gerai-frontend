@@ -8,11 +8,15 @@ export const useCartStore = defineStore('cart', {
         cart: []
     }),
     actions: {
+        checkCart() {
+            this.cart = JSON.parse(localStorage.getItem('cart'))
+        },
         add(item) {
             this.cart.push({ ...item, quantity: 1 })
             // vt.default({
             //     transition: "Vue-Toastification__slideBlurred"
             // })
+            localStorage.setItem('cart', JSON.stringify(this.cart))
             vt.useToast().success('Added to cart', {
                 position: "bottom-center"
             })
@@ -26,6 +30,7 @@ export const useCartStore = defineStore('cart', {
                 }
             })
             this.cart = temp
+            localStorage.setItem('cart', JSON.stringify(this.cart))
         },
     }
 })
