@@ -47,6 +47,12 @@
 import { useGlobalLoader } from '~/store/loader'
 
 export default {
+    provide() {
+        return {
+            urlBase: useRuntimeConfig().public.mode === 'development' ? useRuntimeConfig().public.devApi : useRuntimeConfig().public.stagingApi
+        }
+    },
+
     methods: {
         toggleTheme() {
             this.$refs.el.dataset.theme = this.$refs.el.dataset.theme === 'light' ? 'dark' : 'light'
