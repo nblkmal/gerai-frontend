@@ -12,7 +12,15 @@
             <Badge v-for="cat in keywords" :key="cat" :name="cat" :model="filters" :input="cat"></Badge>
         </div>
 
-        <Blank v-if="stores.length === 0"
+        <div v-if="stores.length === 0 && loading" class="animate-pulse border w-full p-4 rounded-md flex flex-row space-x-2">
+            <div class="flex-1 bg-gray-100 rounded-md"></div>
+            <div class="w-2/3 flex flex-col space-y-2">
+                <div class="bg-gray-100 rounded-md w-2/4 p-3"></div>
+                <div class="bg-gray-100 rounded-md w-full p-3"></div>
+            </div>
+        </div>
+
+        <Blank v-if="stores.length === 0 && !loading"
         icon="basil:location-question-outline"
         text="Opps, no search found. Try to search with another keyword."></Blank>
 
@@ -36,10 +44,14 @@
     import storesJson from '~/content/stores.json'
     import keywordsJson from '~/static/keywords.json'
     export default {
+        inject: ['urlBase'],
+
         data() {
             return {
-                stores: storesJson,
-                filters: {}
+                stores: [],
+                filters: {},
+                loading: true,
+                storesModel: []
             }
         },
 
@@ -47,6 +59,9 @@
             this.keywords.forEach(category => {
                 this.filters[category] = false
             })
+
+            this.fetchVendors()
+
             if (useAuth().status.value === 'authenticated') {
                 this.fetchMastanahVendors()
             }
@@ -68,9 +83,9 @@
         },
 
         computed: {
-            storesModel() {
-                return storesJson
-            },
+            // storesModel() {
+            //     return this.stores
+            // },
             keywords() {
                 return keywordsJson.data.keywords
             }
@@ -81,9 +96,17 @@
                 this.stores = data.model
             },
 
+            async fetchVendors() {
+                const result = await $fetch(`${ this.urlBase }vendors/`)
+                this.stores = result.data
+                this.storesModel = result.data
+                this.loading = false
+            },
+
             async fetchMastanahVendors() {
                 const result = await $fetch(`https://mastanah.app/api/v1/vendors`)
                 this.stores = [...this.stores, ...result.data.data]
+                this.loading = false
             }
         }
     }
