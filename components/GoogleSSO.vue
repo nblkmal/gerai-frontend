@@ -25,7 +25,6 @@ interface User {
 const handleLoginSuccess = async (response: CredentialResponse) => {
     useGlobalLoader().setLoader(true)
     const { credential } = response;
-    // let user: RegisterForm = 
     let user = {} as RegisterForm
 
     if (credential) {
@@ -114,5 +113,6 @@ const handleLoginError = () => {
         @success="handleLoginSuccess"
         @error="handleLoginError"
         class="w-90 md:w-auto"
+        allowed-parent-origin
     ></GoogleSignInButton>
 </template>

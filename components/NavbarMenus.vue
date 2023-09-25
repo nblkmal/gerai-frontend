@@ -1,5 +1,5 @@
 <template>
-    <ul :class="className">
+    <ul tabindex="0" :class="className">
         <li><NuxtLink to="/">Home</NuxtLink></li>
         <li><NuxtLink to="/contributor">Be a contributor</NuxtLink></li>
         <!-- <li>

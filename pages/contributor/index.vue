@@ -58,7 +58,7 @@
 <script>
 import IconedLabel from '~/components/IconedLabel.vue'
     export default {
-  components: { IconedLabel },
+        components: { IconedLabel },
         data() {
             return {
                 selection: 'visitor'
