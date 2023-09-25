@@ -11,6 +11,11 @@ export const useCartStore = defineStore('cart', {
         checkCart() {
             this.cart = JSON.parse(localStorage.getItem('cart'))
         },
+
+        // itemAlreadyInCArt() {
+
+        // },
+
         add(item) {
             this.cart.push({ ...item, quantity: 1 })
             // vt.default({
