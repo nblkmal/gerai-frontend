@@ -3,8 +3,6 @@
 import axios from 'axios'
 import fs from 'fs'
 
-// AIzaSyBEZlVVz7FqWgLdHu6FrpfU-3otaEXK3l4
-
 axios
 .get('https://maps.app.goo.gl/HZ88XV51GCm1JnG19?g_st=ic')
 // .get('https://maps.app.goo.gl/GMpKhSo3JyYKvZso8')
