@@ -17,6 +17,7 @@ export const useCartStore = defineStore('cart', {
         // },
 
         add(item) {
+            this.cart = this.cart === null ? [] : this.cart
             this.cart.push({ ...item, quantity: 1 })
             // vt.default({
             //     transition: "Vue-Toastification__slideBlurred"
@@ -26,6 +27,7 @@ export const useCartStore = defineStore('cart', {
                 position: "bottom-center"
             })
         },
+
         async remove(item) {
             let temp = []
             await this.cart.forEach(data => {
@@ -36,6 +38,43 @@ export const useCartStore = defineStore('cart', {
             })
             this.cart = temp
             localStorage.setItem('cart', JSON.stringify(this.cart))
+            vt.useToast().success('Item removed', {
+                position: "bottom-center"
+            })
         },
+
+        async removeOne(index) {
+            let temp = []
+            await this.cart.forEach((data, cartIndex) => {
+                if (index !== cartIndex) {
+                    // need to retain quantity later
+                    temp.push({ ...data, quantity: 1 })
+                }
+            })
+            this.cart = temp
+            localStorage.setItem('cart', JSON.stringify(this.cart))
+        },
+
+        totalPrice() {
+            let total = 0
+            this.cart.forEach(data => {
+                total = total + parseFloat(data.price)
+            })
+            return total.toFixed(2)
+        },
+
+        encodedOrder() {
+            let message = 'Order for user%0D%0A%0D%0A'
+            this.cart.forEach((data, index) => {
+                let itemTitle = `*${ index + 1 }. ${ data.name } (1)*%0D%0A`
+                let itemSub = '** ' + (data.note ? data.note : '') + '%0D%0A%0D%0A'
+                message = message.concat(itemTitle + itemSub)
+            })
+            let total = `*Total Amount: RM ${ this.totalPrice() }*%0D%0A%0D%0A`
+            let footer = '_Auto generated from Gerai platform._%0D%0A%0D%0A'
+            let visit = '_Visit https://gerai.store for more info._'
+            message = message.concat(total + footer + visit)
+            return message
+        }
     }
 })

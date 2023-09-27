@@ -10,7 +10,8 @@
 <script setup>
     import { useCartStore } from '~/store/cart'
 
-    const cart = computed(() => {
-        return useCartStore().cart
+    let cart = ref([])
+    cart = computed(() => {
+        return useCartStore().cart ? useCartStore().cart : []
     })
 </script>

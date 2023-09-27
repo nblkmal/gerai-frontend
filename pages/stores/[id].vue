@@ -5,7 +5,7 @@
     <div v-else class="space-y-4">
         <div class="flex justify-between">
             <NuxtLink :to="`/stores/product/${store?.id}`">
-                <Badge :type="shopOpen ? 'success' : 'error'" :name="shopOpen ? 'Open' : 'Currently Closed'" text="text-red-700" bold></Badge>
+                <Badge :type="shopOpen ? 'success' : 'error'" :name="shopOpen ? 'Open' : 'Currently Closed'" :text="shopOpen ? 'text-green-700' : 'text-red-700'" bold></Badge>
             </NuxtLink>
             <NuxtLink :to="`/stores/product/${store?.id}`">
                 <Badge redirect name="See products" icon="basil:shopping-bag-solid"></Badge>
@@ -96,17 +96,17 @@
 
     const store = ref()
 
+    onMounted(() => {
+        store.value = findStore(id)
+    })
+
     function findStore(id) {
         return stores.find(store => store.id == id)
     }
 
     const { $now } = useNuxtApp()
     const shopOpen = computed(() => {
-        return $now > store?.timeOpen && $now < store?.timeClose
-    })
-
-    onMounted(() => {
-        store.value = findStore(id)
+        return $now > store?.value?.timeOpen && $now < store?.value?.timeClose
     })
 
     const { data: currentStore } = await useAsyncData(id, () => {

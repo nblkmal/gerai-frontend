@@ -56,7 +56,8 @@
                             RM {{ item.price }}
                         </div>
                     </div>
-                    
+
+                    <!-- item modal -->
                     <dialog :id="`card${ item.id }`" class="modal">
                         <div class="modal-box space-y-4">
                             <h4 class="font-semibold text-left">{{ item.name }}</h4>
@@ -67,13 +68,13 @@
                             </div>
 
                             <div class="form-control">
-                                <textarea class="textarea textarea-bordered h-24" placeholder="Add some notes here ..."></textarea>
+                                <textarea class="textarea textarea-bordered h-24" v-model="notes[item.id]" placeholder="Add some notes here ..."></textarea>
                             </div>
 
-                            <div class="flex space-x-2">
+                            <form method="dialog" class="flex space-x-2">
                                 <button @click="removeFromCart(item)" class="btn">-</button>
                                 <button @click="addToCart(item)" class="btn flex-1">Add to cart</button>
-                            </div>
+                            </form>
                         </div>
                         <form method="dialog" class="modal-backdrop">
                             <button>close</button>
@@ -97,18 +98,8 @@
     import { useUserStore } from '~/store/user'
     import { useCartStore } from "~/store/cart"
 
-    const items = ref([
-        {
-            id: 1,
-            name: 'Tukar LCD'
-        },
-        {
-            id: 2,
-            name: 'Tukar Bateri'
-        }
-    ])
-
     const cartStore = useCartStore();
+    const notes = ref({})
 
     const alreadyInCart = (item) => {
         const x = cartStore.cart?.find(el => el.id === item.id)
@@ -121,17 +112,22 @@
 
     const removeFromCart = (item) => {
         if(alreadyInCart(item)) {
-            cartStore.remove(item);
+            cartStore.remove(item)
         }
     }
 
     const addToCart = (item) => {
-        if(!alreadyInCart(item)) {
-            cartStore.add(item);
-        } else {
-            // alert(`${item.title} already in cart`)
-            console.log('item already in cart')
+        let payload = {
+            name: item.name,
+            quantity: 1,
+            price: item.price,
+            category: item.product_category.name,
+            note: notes.value[item.id]
         }
+
+        // clear back notes
+        notes.value = {}
+        cartStore.add(payload)
     }
 
 
