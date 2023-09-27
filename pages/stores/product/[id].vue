@@ -53,14 +53,20 @@
                         <h4 class="font-semibold text-sm">{{ item.name }}</h4>
                         <!-- <p class="text-sm text-gray-500">{{ item.description }}</p> -->
                         <div class="border rounded-full w-fit px-4">
-                            RM {{ item.price }}
+                            {{ price(item.price) }}
                         </div>
                     </div>
 
                     <!-- item modal -->
                     <dialog :id="`card${ item.id }`" class="modal">
                         <div class="modal-box space-y-4">
-                            <h4 class="font-semibold text-left">{{ item.name }}</h4>
+                            <div class="border rounded-lg text-center bg-yellow-50 border-yellow-500 px-4 py-1">
+                                <span class="text-yellow-700 font-semibold">Recommended!</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <h4 class="font-semibold text-left">{{ item.name }}</h4>
+                                <Badge :name="`${ price(item.price) }`"></Badge>
+                            </div>
                             <p class="text-sm text-gray-500">{{ item.description }}</p>
 
                             <div class="border p-4 rounded-md">
@@ -72,7 +78,7 @@
                             </div>
 
                             <form method="dialog" class="flex space-x-2">
-                                <button @click="removeFromCart(item)" class="btn">-</button>
+                                <!-- <button @click="removeFromCart(item)" class="btn">-</button> -->
                                 <button @click="addToCart(item)" class="btn flex-1">Add to cart</button>
                             </form>
                         </div>
@@ -100,6 +106,10 @@
 
     const cartStore = useCartStore();
     const notes = ref({})
+
+    const price = (amount) => {
+        return 'RM ' + parseFloat(amount).toFixed(2)
+    }
 
     const alreadyInCart = (item) => {
         const x = cartStore.cart?.find(el => el.id === item.id)

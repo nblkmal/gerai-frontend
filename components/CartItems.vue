@@ -5,20 +5,26 @@
     </div>
     <template v-else>
         <h1 class="font-semibold text-xl">Items to checkout ..</h1>
-        <ul class="menu rounded-box -mx-6">
-            <li v-for="(item, index) in cart" :key="item.name + item.note">
-                <a class="flex justify-between">
-                    <Icon @click="removeOne(index)" class="mr-4 text-red-500" name="bi:dash-circle-dotted"/>
-                    <div class="flex-1 flex flex-col">
-                        <span class="font-semibold">{{ item.name }}</span>
-                        <span class="text-gray-500">{{ item.note }}</span>
-                    </div>
-                    <span>1</span>
-                </a>
-            </li>
-        </ul>
+        <div class="max-h-80 overflow-y-auto overflow-x-hidden -mr-6 pr-12">
+            <ul class="menu rounded-box -mx-6">
+                <li v-for="(item, index) in cart" :key="item.name + item.note">
+                    <a class="flex justify-between">
+                        <Icon @click="removeOne(index)" class="mr-4 text-red-500" name="bi:dash-circle-dotted"/>
+                        <div class="flex-1 flex flex-col">
+                            <span class="font-semibold">{{ item.name }}</span>
+                            <span class="text-gray-500">{{ item.note }}</span>
+                        </div>
+                        <span>1</span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
         <div class="flex justify-between items-center px-6 pt-4 border-t -mx-5">
-            <div class="flex flex-col">
+            <!-- <div class="tooltip" data-tip="We will submit your order through WhatsApp application.">
+                <Icon name="ph:info-fill" class="text-gray-500"/>
+            </div> -->
+            <div class="flex-1 flex flex-col">
                 <span class="text-sm">Subtotal ({{ cart.length }} item{{ cart.length > 1 ? 's' : ''}})</span>
                 <span class="text-primary font-semibold">RM {{ cartStore.totalPrice() }}</span>
             </div>
