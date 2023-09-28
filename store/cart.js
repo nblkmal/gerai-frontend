@@ -5,16 +5,19 @@ import * as vt from 'vue-toastification'
 
 export const useCartStore = defineStore('cart', {
     state: () => ({
-        cart: []
+        cart: [],
+        vendor_id: null
     }),
     actions: {
         checkCart() {
             this.cart = JSON.parse(localStorage.getItem('cart'))
+            this.vendor_id = localStorage.getItem('vendor_id')
         },
 
-        // itemAlreadyInCArt() {
-
-        // },
+        setVendor(id) {
+            this.vendor_id = id
+            localStorage.setItem('vendor_id', this.vendor_id)
+        },
 
         add(item) {
             this.cart = this.cart === null ? [] : this.cart

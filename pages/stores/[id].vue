@@ -1,6 +1,10 @@
 <template>
-    <div v-if="store === null">
-        Loading gerai
+    <div v-if="loading" class="animate-pulse w-full space-y-4">
+        <div class="flex justify-between">
+            <div class="w-2/4 bg-gray-100 rounded-full p-4"></div>
+            <div class="w-1/4 bg-gray-100 rounded-full p-4"></div>
+        </div>
+        <div class="bg-gray-100 h-60 rounded-md"></div>
     </div>
     <div v-else class="space-y-4">
         <div class="flex justify-between">
@@ -11,8 +15,17 @@
                 <Badge redirect name="See products" icon="basil:shopping-bag-solid"></Badge>
             </NuxtLink>
         </div>
-        <div class="">
-            <img class="rounded-md h-40 w-full object-cover" :src="store?.media[0].original_url ?? store?.media[0]" alt="">
+        <!-- <div> -->
+            <!-- <img class="rounded-md h-40 w-full object-cover" :src="store?.media[0].original_url ?? store?.media[0]" alt=""> -->
+        <!-- </div> -->
+        <div class="carousel w-full h-80 rounded-lg">
+            <div v-for="(img, index) in store?.media" :key="index" :id="`slide${ index }`" class="carousel-item relative w-full">
+                <img :src="img.original_url ?? img" class="w-full object-cover" />
+                <!-- <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                    <a :href="`#slide${ index == 0 ? index.length - 1 : index - 1 }`" class="btn btn-circle bg-gray-50 opacity-30">❮</a> 
+                    <a :href="`#slide${ index + 1 }`" class="btn btn-circle bg-gray-50 opacity-30">❯</a>
+                </div> -->
+            </div>
         </div>
 
         <div class="flex justify-between items-center text-left">
@@ -42,7 +55,7 @@
         </div>
 
 
-        <reviews></reviews>
+        <reviews :reviews="store?.reviews"></reviews>
 
         <div class="px-4 fixed bottom-5 left-0 w-full flex space-x-2">
             <a :href="store?.mapsUrl" target="__blank" class="flex-1 rounded-md bg-blue-600 text-white font-semibold flex items-center justify-center py-2">
@@ -89,19 +102,25 @@
 </style>
 
 <script setup lang="js">
-    import stores from '~/content/stores.json'
-
     const route = useRoute()
     const id = route.params.id
 
     const store = ref()
+    const urlBase = inject('urlBase')
+    const loading = ref(true)
 
     onMounted(() => {
-        store.value = findStore(id)
+        fetchVendor()
     })
 
-    function findStore(id) {
-        return stores.find(store => store.id == id)
+    async function fetchVendor() {
+        try {
+            const result = await $fetch(`${ urlBase }vendors/${ id }/show`)
+            store.value = result.data
+            loading.value = false
+        } catch (error) {
+            console.error('error: ', error)
+        }
     }
 
     const { $now } = useNuxtApp()
@@ -109,16 +128,17 @@
         return $now > store?.value?.timeOpen && $now < store?.value?.timeClose
     })
 
-    const { data: currentStore } = await useAsyncData(id, () => {
-        return findStore(id)
-    })
+    // this is for seo
+    // const { data: currentStore } = await useAsyncData(id, () => {
+    //     return findStore(id)
+    // })
 
-    useSeoMeta({
-        title: () => currentStore.value?.name,
-        ogTitle: () => currentStore.value?.name,
-        description: () => currentStore.value?.description,
-        ogDescription: () => currentStore.value?.description,
-        ogImage: 'https://example.com/image.png',
-        twitterCard: 'summary_large_image',
-    })
+    // useSeoMeta({
+    //     title: () => currentStore.value?.name,
+    //     ogTitle: () => currentStore.value?.name,
+    //     description: () => currentStore.value?.description,
+    //     ogDescription: () => currentStore.value?.description,
+    //     ogImage: 'https://example.com/image.png',
+    //     twitterCard: 'summary_large_image',
+    // })
 </script>

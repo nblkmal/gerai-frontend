@@ -46,13 +46,13 @@
             <h1 class="text-lg font-semibold">{{ index }}</h1>
             <div class="grid grid-cols-2 gap-4">
                 <div :onclick="`card${ item.id }.showModal()`" class="border rounded-md p-4" v-for="item in product" :key="item.id">
-                    <div class="h-20">
+                    <div class="h-20 text-center">
                         <Icon name="basil:image-outline" class="text-gray-200" height="70%" width="70%"/>
                     </div>
                     <div class="text-left space-y-2">
-                        <h4 class="font-semibold text-sm">{{ item.name }}</h4>
+                        <h4 class="font-semibold text-sm truncate">{{ item.name }}</h4>
                         <!-- <p class="text-sm text-gray-500">{{ item.description }}</p> -->
-                        <div class="border rounded-full w-fit px-4">
+                        <div class="border rounded-full w-fit px-4 text-sm">
                             {{ price(item.price) }}
                         </div>
                     </div>
@@ -63,15 +63,16 @@
                             <div class="border rounded-lg text-center bg-yellow-50 border-yellow-500 px-4 py-1">
                                 <span class="text-yellow-700 font-semibold">Recommended!</span>
                             </div>
+
+                            <div class="border p-4 rounded-md text-center">
+                                <Icon name="basil:image-outline" class="text-gray-200" height="30%" width="30%"/>
+                            </div>
+
                             <div class="flex justify-between items-center">
                                 <h4 class="font-semibold text-left">{{ item.name }}</h4>
                                 <Badge :name="`${ price(item.price) }`"></Badge>
                             </div>
                             <p class="text-sm text-gray-500">{{ item.description }}</p>
-
-                            <div class="border p-4 rounded-md">
-                                <Icon name="basil:image-outline" class="text-gray-200" height="30%" width="30%"/>
-                            </div>
 
                             <div class="form-control">
                                 <textarea class="textarea textarea-bordered h-24" v-model="notes[item.id]" placeholder="Add some notes here ..."></textarea>
@@ -126,6 +127,10 @@
         }
     }
 
+    const route = useRoute()
+    const id = route.params.id
+    const vendor_id = id
+
     const addToCart = (item) => {
         let payload = {
             name: item.name,
@@ -135,8 +140,9 @@
             note: notes.value[item.id]
         }
 
-        // clear back notes
+        // reset notes
         notes.value = {}
+        cartStore.setVendor(vendor_id)
         cartStore.add(payload)
     }
 
@@ -144,9 +150,6 @@
     const user = computed(() => {
         return useUserStore().user
     })
-
-    const route = useRoute()
-    const id = route.params.id
 
     const store = ref()
     const form = ref({
