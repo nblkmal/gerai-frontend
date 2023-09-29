@@ -14,7 +14,7 @@
                             <span class="font-semibold">{{ item.name }}</span>
                             <span class="text-gray-500">{{ item.note }}</span>
                         </div>
-                        <span>1</span>
+                        <span class="bg-gray-50 h-8 w-8 rounded-md flex items-center justify-center font-semibold">1</span>
                     </a>
                 </li>
             </ul>
@@ -26,14 +26,24 @@
             </div> -->
             <div class="flex-1 flex flex-col">
                 <span class="text-sm">Subtotal ({{ cart.length }} item{{ cart.length > 1 ? 's' : ''}})</span>
-                <span class="text-primary font-semibold">RM {{ cartStore.totalPrice() }}</span>
+                <span class="text-primary font-semibold">{{ cartStore.totalPrice() }}</span>
             </div>
-            <a
-                target="__blank"
-                :href="`https://wa.me/60124441998?text=${ encodedOrder }`"
-                class="btn btn-primary capitalize text-white py-4 flex items-center justify-center align-baseline">
-                Checkout
-            </a>
+            <div class="modal-action">
+                <form method="dialog">
+                    <!-- <NuxtLink :to="`/stores/product/checkout/${ vendor_id }`"> -->
+                    <button @click="navigateCheckout" class="btn btn-primary capitalize text-white py-4 flex items-center justify-center align-baseline">
+                        Checkout
+                    </button>
+                    <!-- </NuxtLink> -->
+                    <!-- <a
+                        target="__blank"
+                        :href="`https://wa.me/60124441998?text=${ encodedOrder }`"
+                        @click="checkout"
+                        class="btn btn-primary capitalize text-white py-4 flex items-center justify-center align-baseline">
+                        Checkout
+                    </a> -->
+                </form>
+            </div>
         </div>
     </template>
 </template>
@@ -47,6 +57,18 @@
         return useCartStore().cart ? useCartStore().cart : []
     })
 
+    let vendor_id = ref('')
+    vendor_id = computed(() => {
+        return useCartStore().vendor_id ? useCartStore().vendor_id : ''
+    })
+
+    async function navigateCheckout() {
+        await navigateTo(`/stores/product/checkout/${ vendor_id.value }`)
+    }
+
+    // const vendor_id = ref(useCartStore().vendor_id)
+    // const vendor_id = ref('useCartStore().vendor_id')
+
     const removeOne = (index) => {
         cartStore.removeOne(index)
     }
@@ -54,4 +76,9 @@
     const encodedOrder = computed(() => {
         return cartStore.encodedOrder()
     })
+
+    function checkout() {
+        console.log('clicked')
+        // send to mastanah api
+    }
 </script>

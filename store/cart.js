@@ -63,7 +63,11 @@ export const useCartStore = defineStore('cart', {
             this.cart.forEach(data => {
                 total = total + parseFloat(data.price)
             })
-            return total.toFixed(2)
+            return 'RM ' + total.toFixed(2)
+        },
+
+        price(amount) {
+            return 'RM ' + parseFloat(amount).toFixed(2)
         },
 
         encodedOrder() {

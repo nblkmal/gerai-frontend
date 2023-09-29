@@ -53,7 +53,7 @@
                         <h4 class="font-semibold text-sm truncate">{{ item.name }}</h4>
                         <!-- <p class="text-sm text-gray-500">{{ item.description }}</p> -->
                         <div class="border rounded-full w-fit px-4 text-sm">
-                            {{ price(item.price) }}
+                            {{ useCartStore().price(item.price) }}
                         </div>
                     </div>
 
@@ -70,7 +70,7 @@
 
                             <div class="flex justify-between items-center">
                                 <h4 class="font-semibold text-left">{{ item.name }}</h4>
-                                <Badge :name="`${ price(item.price) }`"></Badge>
+                                <Badge :name="`${ useCartStore().price(item.price) }`"></Badge>
                             </div>
                             <p class="text-sm text-gray-500">{{ item.description }}</p>
 
@@ -107,10 +107,6 @@
 
     const cartStore = useCartStore();
     const notes = ref({})
-
-    const price = (amount) => {
-        return 'RM ' + parseFloat(amount).toFixed(2)
-    }
 
     const alreadyInCart = (item) => {
         const x = cartStore.cart?.find(el => el.id === item.id)
