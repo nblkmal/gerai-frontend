@@ -28,7 +28,7 @@
                 <span class="text-sm">Subtotal ({{ cart.length }} item{{ cart.length > 1 ? 's' : ''}})</span>
                 <span class="text-primary font-semibold">{{ cartStore.totalPrice() }}</span>
             </div>
-            <div class="modal-action">
+            <div class="modal-action mt-0">
                 <form method="dialog">
                     <!-- <NuxtLink :to="`/stores/product/checkout/${ vendor_id }`"> -->
                     <button @click="navigateCheckout" class="btn btn-primary capitalize text-white py-4 flex items-center justify-center align-baseline">

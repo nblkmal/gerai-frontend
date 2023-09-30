@@ -1,5 +1,6 @@
 <template>
-    <div class="space-y-4 text-left">
+    <span v-if="loading" id="loader" class="loading loading-dots loading-lg"></span>
+    <div v-else class="space-y-4 text-left">
         <div class="flex items-center space-x-4">
             <!-- <div class="rounded-full border h-16 w-16 flex items-center justify-center">
                 <Icon name="basil:image-outline" color="black" height="40%" width="40%"/>
@@ -101,7 +102,6 @@
 </template>
 
 <script setup lang="js">
-    import stores from '~/content/stores.json'
     import { useUserStore } from '~/store/user'
     import { useCartStore } from "~/store/cart"
 
@@ -148,28 +148,33 @@
     })
 
     const store = ref()
+    const loading = ref(true)
     const form = ref({
         name: ''
     })
 
-    function findStore(id) {
-        return stores.find(store => store.id == id)
-    }
-
     onMounted(() => {
-        store.value = findStore(id)
+        fetchVendor()
         fetchProducts()
     })
 
     const urlBase = inject('urlBase')
     const products = ref({})
 
+    async function fetchVendor() {
+        try {
+            const result = await $fetch(`${ urlBase }vendors/${ vendor_id }/show`)
+            store.value = result.data
+        } catch (error) {
+            console.error('error: ', error)
+        }
+    }
+
     async function fetchProducts() {
         try {
             const result = await $fetch(`${ urlBase }vendors/${ id }/products`)
             products.value = result.data
-            console.log('products: ', products)
-            
+            loading.value = false
         } catch (error) {
             console.log('error: ', error)
         }

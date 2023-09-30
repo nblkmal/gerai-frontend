@@ -6,7 +6,9 @@ import * as vt from 'vue-toastification'
 export const useCartStore = defineStore('cart', {
     state: () => ({
         cart: [],
-        vendor_id: null
+        vendor_id: null,
+        payment_method: null,
+        table: null
     }),
     actions: {
         checkCart() {
@@ -17,6 +19,14 @@ export const useCartStore = defineStore('cart', {
         setVendor(id) {
             this.vendor_id = id
             localStorage.setItem('vendor_id', this.vendor_id)
+        },
+
+        setPaymentMethod(method) {
+            this.payment_method = method
+        },
+
+        setTable(table) {
+            this.table = table
         },
 
         add(item) {
@@ -78,9 +88,10 @@ export const useCartStore = defineStore('cart', {
                 message = message.concat(itemTitle + itemSub)
             })
             let total = `*Total Amount: RM ${ this.totalPrice() }*%0D%0A%0D%0A`
+            let paymentMethod = `*Payment: ${ this.payment_method === 'counter' ? 'At the counter' : 'By DuitNow QR' }*%0D%0A%0D%0A`
             let footer = '_Auto generated from Gerai platform._%0D%0A%0D%0A'
             let visit = '_Visit https://gerai.store for more info._'
-            message = message.concat(total + footer + visit)
+            message = message.concat(total + paymentMethod + footer + visit)
             return message
         }
     }

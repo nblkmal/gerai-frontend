@@ -1,5 +1,6 @@
 <template>
-    <div class="space-y-4 text-left">
+    <span v-if="loading" id="loader" class="loading loading-dots loading-lg"></span>
+    <div v-else class="space-y-4 text-left">
         <!-- <div class="flex animate-pulse">
             <Icon class=" text-amber-800 h-8 w-8" name="tabler:coffee"/>
             <h1 class="font-semibold text-lg pt-1 ml-2 text-amber-800">Barista is preparing your order</h1>
@@ -18,16 +19,18 @@
                 <iconed-label label-class="font-semibold" icon-class="text-gray-500" icon="iconoir:shop" :label="`${ store?.name }`"></iconed-label>
                 <span class="text-sm font-semibold text-gray-500">{{ orderNumber() }}</span>
             </div>
-            <!-- <div class="grid grid-cols-2 text-sm"> -->
-                <div class="flex justify-between">
-                    <span>Table</span>
-                    <span>1</span>
-                </div>
 
-                <span>Date</span>
-                <span>30 September 2023</span>
-            <!-- </div> -->
-            <!-- <Badge class="w-fit ml-6" name="Table 1"></Badge> -->
+            <iconed-label
+                label-class="font-semibold"
+                icon-class="text-gray-500"
+                icon="material-symbols:table-restaurant-rounded"
+                :label="table ? `Table ${ table }` : 'No table'"></iconed-label>
+
+            <iconed-label
+                label-class="font-semibold"
+                icon-class="text-gray-500"
+                icon="solar:calendar-date-line-duotone"
+                :label="`${ $todayDate }`"></iconed-label>
         </div>
 
         <div class="bg-gray-100 rounded-md p-4 space-y-2">
@@ -56,19 +59,24 @@
             </span>
         </div>
 
-        <h1 class="font-semibold text-lg">Payment Method</h1>
+        <hr>
+        <h1 class="font-semibold text-md">How do you want to pay?</h1>
         <div class="flex space-x-4">
-            <div onclick="qr.showModal()" class="bg-gray-100 rounded-md p-4 flex-1 font-semibold text-sm text-center">
-                DuitNow QR
-            </div>
-            <div class="bg-gray-100 rounded-md p-4 flex-1 font-semibold text-sm text-center">
+            <label :class="`${ paymentMethod === 'counter' ? 'bg-gray-700 text-white' : 'bg-gray-100' } rounded-md p-4 flex-1 font-semibold text-sm text-center`">
                 Pay at the counter
-            </div>
+                <input type="radio" name="paymentMethod" v-model="paymentMethod" value="counter" class="radio checked:bg-red-500 hidden" checked />
+            </label>
+            <label onclick="qr.showModal()" :class="`${ paymentMethod === 'duitnow' ? 'bg-gray-700 text-white' : 'bg-gray-100' } rounded-md p-4 flex-1 font-semibold text-sm text-center`">
+                DuitNow QR
+                <input type="radio" name="paymentMethod" v-model="paymentMethod" value="duitnow" class="radio checked:bg-red-500 hidden" checked />
+            </label>
         </div>
+        <div v-if="paymentMethod === 'counter'" class="text-sm text-gray-500">*Please pay at the counter during order pickup</div>
 
         <!-- duitnow qr -->
         <dialog id="qr" class="modal">
             <div class="modal-box">
+                <span class="text-sm text-gray-500">*Please share the receipt in WhatsApp</span>
                 <button class="btn btn-block">Save image</button>
             </div>
             <form method="dialog" class="modal-backdrop">
@@ -93,9 +101,17 @@
 <script setup>
     import { useCartStore } from '~/store/cart'
     const store = ref()
+    const loading = ref(true)
     const route = useRoute()
     const urlBase = inject('urlBase')
     const vendor_id = route.params.id
+    const table = route.query.table ?? null
+    const { $todayDate } = useNuxtApp()
+
+    const paymentMethod = ref('counter')
+    watch(paymentMethod, (data) => {
+        useCartStore().setPaymentMethod(data)
+    })
 
     onMounted(() => {
         fetchVendor()

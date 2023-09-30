@@ -27,8 +27,9 @@ export default {
 
         labelClass() {
             let types = {
-                'success': 'border-green-500 bg-green-50',
-                'error': 'border-red-500 bg-red-50',
+                'success': 'border-green-500 bg-green-50 text-green-700',
+                'warning': 'border-yellow-500 bg-yellow-50 text-yellow-700',
+                'error': 'border-red-500 bg-red-50 text-red-700',
             }
 
             return this.type ? types[this.type] : ''
