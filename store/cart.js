@@ -7,14 +7,39 @@ export const useCartStore = defineStore('cart', {
     state: () => ({
         cart: [],
         vendor_id: null,
-        payment_method: null,
-        table: null
+        payment_method: 'counter',
+        table: null,
+        order_number: null
     }),
     actions: {
         checkCart() {
             this.cart = JSON.parse(localStorage.getItem('cart'))
             this.vendor_id = localStorage.getItem('vendor_id')
             this.table = localStorage.getItem('table')
+        },
+
+        getPayload() {
+            return {
+                'cart': this.cart,
+                'vendor_id': this.vendor_id,
+                'payment_method': this.payment_method,
+                'table': this.table,
+                'order_number': this.order_number
+            }
+        },
+
+        setOrderNumber() {
+            let minm = 100000
+            let maxm = 999999
+            let number = Math.floor(Math.random() * (maxm - minm + 1)) + minm
+            this.order_number = 'GR' + number + '-' + this.vendor_id
+        },
+
+        clearCart() {
+            this.cart = []
+            this.vendor_id = null
+            this.payment_method = null
+            this.table = null
         },
 
         setVendor(id) {

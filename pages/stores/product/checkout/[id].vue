@@ -17,7 +17,7 @@
         <div class="px-1 space-y-4">
             <div class="flex justify-between">
                 <iconed-label label-class="font-semibold" icon-class="text-gray-500" icon="iconoir:shop" :label="`${ store?.name }`"></iconed-label>
-                <span class="text-sm font-semibold text-gray-500">{{ orderNumber() }}</span>
+                <span class="text-sm font-semibold text-gray-500"># {{ orderNumber }}</span>
             </div>
 
             <iconed-label
@@ -116,6 +116,7 @@
 
     onMounted(() => {
         useCartStore().checkCart()
+        useCartStore().setOrderNumber()
         fetchVendor()
     })
 
@@ -129,6 +130,11 @@
         return useCartStore().table ? useCartStore().table : null
     })
 
+    let orderNumber = ref(null)
+    orderNumber = computed(() => {
+        return useCartStore().order_number ? useCartStore().order_number : null
+    })
+
     async function fetchVendor() {
         try {
             const result = await $fetch(`${ urlBase }vendors/${ vendor_id }/show`)
@@ -139,10 +145,17 @@
         }
     }
 
-    function orderNumber() {
-        let minm = 100000
-        let maxm = 999999
-        let number = Math.floor(Math.random() * (maxm - minm + 1)) + minm
-        return '# GR' + number + '-' + vendor_id
+    async function checkout() {
+        // useCartStore().clearCart()
+
+        try {
+            const result = await $fetch(`${ urlBase }vendors/${ vendor_id }/order`, {
+                method: 'POST',
+                body: useCartStore().getPayload()
+            })
+            console.log('result: ', result)
+        } catch (error) {
+            console.error(error)
+        }
     }
 </script>
