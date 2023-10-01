@@ -9,13 +9,15 @@ export const useCartStore = defineStore('cart', {
         vendor_id: null,
         payment_method: 'counter',
         table: null,
-        order_number: null
+        order_number: null,
+        orderHistory: []
     }),
     actions: {
         checkCart() {
-            this.cart = JSON.parse(localStorage.getItem('cart'))
+            this.cart = JSON.parse(localStorage.getItem('cart')) ?? []
             this.vendor_id = localStorage.getItem('vendor_id')
             this.table = localStorage.getItem('table')
+            this.orderHistory = JSON.parse(localStorage.getItem('orderHistory')) ?? []
         },
 
         getPayload() {
@@ -40,6 +42,9 @@ export const useCartStore = defineStore('cart', {
             this.vendor_id = null
             this.payment_method = null
             this.table = null
+            this.order_number = null
+
+            localStorage.removeItem('cart')
         },
 
         setVendor(id) {
@@ -54,6 +59,11 @@ export const useCartStore = defineStore('cart', {
         setTable(table) {
             this.table = table
             localStorage.setItem('table', this.table)
+        },
+
+        setPastOrder(order) {
+            this.orderHistory.push(order)
+            localStorage.setItem('orderHistory', JSON.stringify(this.orderHistory))
         },
 
         add(item) {
@@ -97,24 +107,26 @@ export const useCartStore = defineStore('cart', {
 
         totalPrice() {
             let total = 0
-            this.cart.forEach(data => {
-                total = total + parseFloat(data.price)
-            })
-            return 'RM ' + total.toFixed(2)
+            if (this.cart.length !== 0) {
+                this.cart.forEach(data => {
+                    total = total + parseFloat(data.price)
+                })
+                return 'RM ' + total.toFixed(2)
+            }
         },
 
         price(amount) {
             return 'RM ' + parseFloat(amount).toFixed(2)
         },
 
-        encodedOrder() {
-            let message = 'Order for user%0D%0A%0D%0A'
+        encodedOrder(user) {
+            let message = `Order for ${ user ? user.name : '' } (${ this.order_number })%0D%0A%0D%0A`
             this.cart.forEach((data, index) => {
                 let itemTitle = `*${ index + 1 }. ${ data.name } (1)*%0D%0A`
                 let itemSub = '** ' + (data.note ? data.note : '') + '%0D%0A%0D%0A'
                 message = message.concat(itemTitle + itemSub)
             })
-            let total = `*Total Amount: RM ${ this.totalPrice() }*%0D%0A%0D%0A`
+            let total = `*Total Amount: ${ this.totalPrice() }*%0D%0A%0D%0A`
             let paymentMethod = `*Payment: ${ this.payment_method === 'counter' ? 'At the counter' : 'By DuitNow QR' }*%0D%0A%0D%0A`
             let footer = '_Auto generated from Gerai platform._%0D%0A%0D%0A'
             let visit = '_Visit https://gerai.store for more info._'

@@ -6,72 +6,99 @@
             <h1 class="font-semibold text-lg pt-1 ml-2 text-amber-800">Barista is preparing your order</h1>
         </div> -->
 
-        <div class="border bg-yellow-50 border-yellow-500 text-yellow-700 rounded-md px-4 py-2">
+        <div v-if="user === null" class="border bg-yellow-50 border-yellow-500 text-yellow-700 rounded-md px-4 py-2">
             <span class="text-sm">
                 Sign up or log in now for order history
             </span>
         </div>
 
         <h1 class="font-semibold text-lg">Order Summary</h1>
+        <hr>
 
-        <div class="px-1 space-y-4">
-            <div class="flex justify-between">
-                <iconed-label label-class="font-semibold" icon-class="text-gray-500" icon="iconoir:shop" :label="`${ store?.name }`"></iconed-label>
-                <span class="text-sm font-semibold text-gray-500"># {{ orderNumber }}</span>
+        <template v-if="useCartStore().cart.length === 0">
+            <div class="flex flex-col justify-center items-center space-y-4 py-8 bg-gray-100 rounded-md">
+                <Icon name="solar:cart-large-2-bold-duotone" class="h-6 w-6 rouned-full text-gray-600 group-hover:text-primary"/>
+                <span class="text-gray-500 font-semibold">Your cart is empty</span>
             </div>
-
-            <iconed-label
-                label-class="font-semibold"
-                icon-class="text-gray-500"
-                icon="material-symbols:table-restaurant-rounded"
-                :label="table ? `Table ${ table }` : 'No table'"></iconed-label>
-
-            <iconed-label
-                label-class="font-semibold"
-                icon-class="text-gray-500"
-                icon="solar:calendar-date-line-duotone"
-                :label="`${ $todayDate }`"></iconed-label>
-        </div>
-
-        <div class="bg-gray-100 rounded-md p-4 space-y-2">
-            <div v-for="item in cart" :key="item" class="flex items-center space-x-2">
-                <span class="bg-white h-6 w-6 rounded-md flex items-center justify-center font-semibold text-sm">
-                    1
-                </span>
-
-                <div class="grow flex flex-row justify-between">
-                    <div class="flex flex-col text-left justify-between py-2">
-                        <h4 class="text-sm font-semibold">{{ item.name }}</h4>
-                        <span class="text-sm text-gray-500">{{ item.note }}</span>
-                        <!-- <span class="text-sm text-gray-500">{{ useCartStore().price(item.price) }}</span> -->
-                    </div>
+        </template>
+        <template v-else>
+            <div class="px-1 space-y-4">
+                <div class="flex justify-between">
+                    <iconed-label label-class="font-semibold" icon-class="text-gray-500" icon="iconoir:shop" :label="`${ store?.name }`"></iconed-label>
+                    <span class="text-sm font-semibold text-gray-500"># {{ orderNumber }}</span>
                 </div>
+
+                <iconed-label
+                    label-class="font-semibold"
+                    icon-class="text-gray-500"
+                    icon="material-symbols:table-restaurant-rounded"
+                    :label="table ? `Table ${ table }` : 'No table'"></iconed-label>
+
+                <iconed-label
+                    label-class="font-semibold"
+                    icon-class="text-gray-500"
+                    icon="solar:calendar-date-line-duotone"
+                    :label="`${ $todayDate }`"></iconed-label>
+            </div>
+
+            <div class="bg-gray-100 rounded-md p-4 space-y-2">
+                <div v-for="item in cart" :key="item" class="flex items-center space-x-2">
+                    <span class="bg-white h-6 w-6 rounded-md flex items-center justify-center font-semibold text-sm">
+                        1
+                    </span>
+
+                    <div class="grow flex flex-row justify-between">
+                        <div class="flex flex-col text-left justify-between py-2">
+                            <h4 class="text-sm font-semibold">{{ item.name }}</h4>
+                            <span class="text-sm text-gray-500">{{ item.note }}</span>
+                            <!-- <span class="text-sm text-gray-500">{{ useCartStore().price(item.price) }}</span> -->
+                        </div>
+                    </div>
+                    <span class="bg-white py-1 px-2 rounded-md flex items-center justify-center font-semibold text-sm">
+                        {{ useCartStore().price(item.price) }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="bg-gray-100 rounded-md p-4 flex justify-between items-center">
+                <span class="text-sm font-semibold">Total</span>
                 <span class="bg-white py-1 px-2 rounded-md flex items-center justify-center font-semibold text-sm">
-                    {{ useCartStore().price(item.price) }}
+                    {{ useCartStore().totalPrice() }}
                 </span>
             </div>
-        </div>
-
-        <div class="bg-gray-100 rounded-md p-4 flex justify-between items-center">
-            <span class="text-sm font-semibold">Total</span>
-            <span class="bg-white py-1 px-2 rounded-md flex items-center justify-center font-semibold text-sm">
-                {{ useCartStore().totalPrice() }}
-            </span>
-        </div>
+            <hr>
+            <h1 class="font-semibold text-md">How do you want to pay?</h1>
+            <div class="flex space-x-4">
+                <label :class="`${ paymentMethod === 'counter' ? 'bg-gray-700 text-white' : 'bg-gray-100' } rounded-md p-4 flex-1 font-semibold text-sm text-center`">
+                    Pay at the counter
+                    <input type="radio" name="paymentMethod" v-model="paymentMethod" value="counter" class="radio checked:bg-red-500 hidden" checked />
+                </label>
+                <label onclick="qr.showModal()" :class="`${ paymentMethod === 'duitnow' ? 'bg-gray-700 text-white' : 'bg-gray-100' } rounded-md p-4 flex-1 font-semibold text-sm text-center`">
+                    DuitNow QR
+                    <input type="radio" name="paymentMethod" v-model="paymentMethod" value="duitnow" class="radio checked:bg-red-500 hidden" checked />
+                </label>
+            </div>
+            <div v-if="paymentMethod === 'counter'" class="text-sm text-gray-500">*Please pay at the counter during order pickup</div>
+        </template>
 
         <hr>
-        <h1 class="font-semibold text-md">How do you want to pay?</h1>
-        <div class="flex space-x-4">
-            <label :class="`${ paymentMethod === 'counter' ? 'bg-gray-700 text-white' : 'bg-gray-100' } rounded-md p-4 flex-1 font-semibold text-sm text-center`">
-                Pay at the counter
-                <input type="radio" name="paymentMethod" v-model="paymentMethod" value="counter" class="radio checked:bg-red-500 hidden" checked />
-            </label>
-            <label onclick="qr.showModal()" :class="`${ paymentMethod === 'duitnow' ? 'bg-gray-700 text-white' : 'bg-gray-100' } rounded-md p-4 flex-1 font-semibold text-sm text-center`">
-                DuitNow QR
-                <input type="radio" name="paymentMethod" v-model="paymentMethod" value="duitnow" class="radio checked:bg-red-500 hidden" checked />
-            </label>
+        <h2 class="text-md font-semibold">Past Order</h2>
+        <div v-if="orderHistory.length !== 0" class="join join-vertical w-full">
+            <div v-for="order in orderHistory" :key="order.order_number" class="collapse collapse-arrow join-item border border-base-300 py-0">
+                <input type="checkbox" name="my-accordion-4" /> 
+                <div class="collapse-title font-semibold text-sm flex items-center">
+                    # {{ order.order_number }}
+                </div>
+                <div class="collapse-content">
+                    <span v-for="item in order.cart" :key="item.name">
+                        <p class="text-sm font-semibold">
+                            <span class="mr-4">1x</span> {{ item.name }}
+                        </p>
+                        <small class="text-gray-500 ml-8">{{ item.note }}</small>
+                    </span>
+                </div>
+            </div>
         </div>
-        <div v-if="paymentMethod === 'counter'" class="text-sm text-gray-500">*Please pay at the counter during order pickup</div>
 
         <!-- duitnow qr -->
         <dialog id="qr" class="modal">
@@ -84,15 +111,21 @@
             </form>
         </dialog>
 
-        <div class="px-4 fixed bottom-5 left-0 w-full">
+        <div class="px-4 fixed bottom-5 left-0 w-full z-20">
             <button class="bg-green-600 flex items-center rounded-md justify-center w-full text-white p-4 drop-shadow-md font-semibold space-x-2">
-                <Icon name="ic:baseline-whatsapp" color="white"/>
-                <a
-                    target="__blank"
-                    :href="`https://wa.me/60124441998?text=${ encodedOrder }`"
-                    @click="checkout">
-                    WhatsApp order
-                </a>
+                <span v-if="!orderSubmitted" class="flex items-center justify-center space-x-2">
+                    <Icon name="ic:baseline-whatsapp" color="white"/>
+                    <a
+                        target="__blank"
+                        :href="`https://wa.me/60124441998?text=${ encodedOrder }`"
+                        @click="checkout">
+                        WhatsApp order
+                    </a>
+                </span>
+                <span v-else class="flex items-center justify-center space-x-2 ">
+                    <Icon name="teenyicons:tick-circle-outline" color="white"/>
+                    <span>Order Submitted</span>
+                </span>
             </button>
         </div>
     </div>
@@ -100,14 +133,14 @@
 
 <script setup>
     import { useCartStore } from '~/store/cart'
+    import { useUserStore } from '~/store/user'
+
     const store = ref()
     const loading = ref(true)
     const route = useRoute()
     const urlBase = inject('urlBase')
     const vendor_id = route.params.id
     const { $todayDate } = useNuxtApp()
-
-    // const table = ref(useCartStore().table ? useCartStore().table : null)
 
     const paymentMethod = ref('counter')
     watch(paymentMethod, (data) => {
@@ -135,6 +168,11 @@
         return useCartStore().order_number ? useCartStore().order_number : null
     })
 
+    let orderHistory = ref([])
+    orderHistory = computed(() => {
+        return useCartStore().orderHistory
+    })
+
     async function fetchVendor() {
         try {
             const result = await $fetch(`${ urlBase }vendors/${ vendor_id }/show`)
@@ -145,15 +183,35 @@
         }
     }
 
-    async function checkout() {
-        // useCartStore().clearCart()
+    const user = computed(() => {
+        return useUserStore().user
+    })
 
+    const encodedOrder = computed(() => {
+        return useCartStore().encodedOrder(useUserStore().user)
+    })
+
+    const orderSubmitted = ref(false)
+    async function checkout() {
         try {
-            const result = await $fetch(`${ urlBase }vendors/${ vendor_id }/order`, {
+            let payload = useCartStore().getPayload()
+
+            payload['user_id'] = useUserStore().user ? useUserStore().user.id : null
+
+            await $fetch(`${ urlBase }vendors/${ vendor_id }/order`, {
                 method: 'POST',
-                body: useCartStore().getPayload()
+                body: payload
             })
-            console.log('result: ', result)
+
+            // set previous order
+            useCartStore().setPastOrder(payload)
+
+            // reset new order number
+            useCartStore().setOrderNumber()
+
+            orderSubmitted.value = true
+            // reset cart
+            useCartStore().clearCart()
         } catch (error) {
             console.error(error)
         }

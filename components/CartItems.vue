@@ -73,10 +73,6 @@
         cartStore.removeOne(index)
     }
 
-    const encodedOrder = computed(() => {
-        return cartStore.encodedOrder()
-    })
-
     function checkout() {
         console.log('clicked')
         // send to mastanah api

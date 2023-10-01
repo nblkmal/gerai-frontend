@@ -1,5 +1,5 @@
 <template>
-    <div class="space-y-4 flex flex-col items-center justify-center" style="height: 40rem;">
+    <div class="space-y-4 flex flex-col items-center justify-center" style="height: 30rem;">
         
         <h1 class="text-sm text-gray-500">You are visitting gerai</h1>
         <div class="flex items-center space-x-4">
