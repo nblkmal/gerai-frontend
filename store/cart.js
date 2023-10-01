@@ -14,6 +14,7 @@ export const useCartStore = defineStore('cart', {
         checkCart() {
             this.cart = JSON.parse(localStorage.getItem('cart'))
             this.vendor_id = localStorage.getItem('vendor_id')
+            this.table = localStorage.getItem('table')
         },
 
         setVendor(id) {
@@ -27,6 +28,7 @@ export const useCartStore = defineStore('cart', {
 
         setTable(table) {
             this.table = table
+            localStorage.setItem('table', this.table)
         },
 
         add(item) {

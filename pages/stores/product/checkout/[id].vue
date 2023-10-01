@@ -105,8 +105,9 @@
     const route = useRoute()
     const urlBase = inject('urlBase')
     const vendor_id = route.params.id
-    const table = route.query.table ?? null
     const { $todayDate } = useNuxtApp()
+
+    // const table = ref(useCartStore().table ? useCartStore().table : null)
 
     const paymentMethod = ref('counter')
     watch(paymentMethod, (data) => {
@@ -114,12 +115,18 @@
     })
 
     onMounted(() => {
+        useCartStore().checkCart()
         fetchVendor()
     })
 
     let cart = ref([])
     cart = computed(() => {
         return useCartStore().cart ? useCartStore().cart : []
+    })
+
+    let table = ref(null)
+    table = computed(() => {
+        return useCartStore().table ? useCartStore().table : null
     })
 
     async function fetchVendor() {

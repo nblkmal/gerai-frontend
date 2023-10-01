@@ -17,7 +17,7 @@
         </div>
         <div class="px-8 w-full">
             <NuxtLink :to="`/stores/product/${ store?.id }`">
-                <button class="btn btn-block">Start Ordering</button>
+                <button @click="setTable" class="btn btn-block">Start Ordering</button>
             </NuxtLink>
         </div>
 
@@ -34,6 +34,8 @@
 </template>
 
 <script setup>
+    import { useCartStore } from '~/store/cart'
+
     const route = useRoute()
     const vendor_id = route.params.id
     const urlBase = inject('urlBase')
@@ -53,5 +55,9 @@
         } catch (error) {
             console.error('error: ', error)
         }
+    }
+
+    function setTable() {
+        useCartStore().setTable(table)
     }
 </script>
