@@ -42,7 +42,15 @@
                     </div> -->
                 </div>
             </div>
-            <Badge name="200m"></Badge>
+            <div class="flex space-x-2">
+                <a :href="store?.mapsUrl" target="__blank" class="border rounded-full flex items-center justify-center p-2">
+                    <Icon name="ion:navigate" color="gray"/>
+                </a>
+
+                <div onclick="share.showModal()" class="border rounded-full flex items-center justify-center p-2">
+                    <Icon name="majesticons:share" color="gray"/>
+                </div>
+            </div>
         </div>
 
         <h6 class="text-justify text-sm text-gray-500">
@@ -57,38 +65,45 @@
 
         <reviews :reviews="store?.reviews"></reviews>
 
-        <div class="px-4 fixed bottom-5 left-0 w-full flex space-x-2">
-            <a :href="store?.mapsUrl" target="__blank" class="flex-1 rounded-md bg-blue-600 text-white font-semibold flex items-center justify-center py-2">
+        <!-- <div class="px-4 fixed bottom-5 left-0 w-full flex space-x-2"> -->
+            <!-- <a :href="store?.mapsUrl" target="__blank" class="flex-1 rounded-md bg-blue-600 text-white font-semibold flex items-center justify-center py-2">
                 View in Google Maps
-                <!-- <Icon name="logos:google-maps"/> -->
-            </a>
-            <div class="w-16 h-auto">
+            </a> -->
+            <!-- <div class="w-16 h-auto">
                 <button onclick="share.showModal()" class="bg-white border border-blue-600 p-2 rounded-full w-full flex items-center justify-center h-auto">
                     <Icon name="icon-park-solid:share-one" color="blue"/>
                 </button>
-                <!-- <button class="btn" onclick="my_modal_2.showModal()">open modal</button> -->
-                <dialog id="share" class="modal">
-                    <div class="modal-box space-y-4">
-                        <h3 class="font-bold text-lg">Share with friends!</h3>
-                        <p class="py-4">Tell your friends about this hidden gems that you want to recommend!</p>
-                        <div class="border rounded-md p-2 font-semibold">
-                            Facebook
-                        </div>
-                        <div class="border rounded-md p-2 font-semibold">
-                            Twitter
-                        </div>
-                        <div class="border rounded-md p-2 font-semibold">
-                            WhatsApp
-                        </div>
-                    </div>
-                    <form method="dialog" class="modal-backdrop">
-                        <button>close</button>
-                    </form>
-                </dialog>
-            </div>
-            <!-- <button class="bg-blue-600 hover:bg-blue-700 flex rounded-md justify-center w-full text-white py-3 px-4 drop-shadow-md">Navigate</button> -->
-        </div>
+            </div> -->
+        <!-- </div> -->
     </div>
+
+    <dialog id="share" class="modal">
+        <div class="modal-box space-y-4">
+            <h3 class="font-bold text-lg">Share with your friends!</h3>
+            <p class="py-4 text-gray-500">Tell your friends about this hidden gems that you want to recommend!</p>
+
+            <span class="text-sm text-gray-500">Share on social media :</span>
+            <div class="bg-blue-100 rounded-md p-2 font-semibold flex items-center justify-center space-x-2">
+                <Icon name="simple-icons:facebook"/>
+                <span>Facebook</span>
+            </div>
+            <a :href="`https://twitter.com/intent/tweet?text=${ encodedShare }`" target="__blank" class="bg-blue-50 rounded-md p-2 font-semibold flex items-center justify-center space-x-2">
+                <Icon name="codicon:twitter"/>
+                <span>Twitter</span>
+            </a>
+            <!-- <div class=" bg-purple-100 rounded-md p-2 font-semibold flex items-center justify-center space-x-2">
+                <Icon name="ri:instagram-fill"/>
+                <span>Instagram</span>
+            </div> -->
+            <div class=" bg-green-100 rounded-md p-2 font-semibold flex items-center justify-center space-x-2">
+                <Icon name="mingcute:whatsapp-fill"/>
+                <span>WhatApp</span>
+            </div>
+        </div>
+        <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+        </form>
+    </dialog>
 </template>
 
 <style lang="scss">
@@ -103,7 +118,9 @@
 
 <script setup lang="js">
     const route = useRoute()
+    const router = useRouter()
     const id = route.params.id
+    const { currentRoute } = router
 
     const store = ref()
     const urlBase = inject('urlBase')
@@ -111,6 +128,10 @@
 
     onMounted(() => {
         fetchVendor()
+    })
+
+    const encodedShare = computed(() => {
+        return `Checkout https://gerai.store/stores/${ id }`
     })
 
     async function fetchVendor() {
@@ -129,16 +150,16 @@
     })
 
     // this is for seo
-    // const { data: currentStore } = await useAsyncData(id, () => {
-    //     return findStore(id)
-    // })
+    const { data: currentStore } = await useAsyncData(id, () => {
+        return fetchVendor()
+    })
 
-    // useSeoMeta({
-    //     title: () => currentStore.value?.name,
-    //     ogTitle: () => currentStore.value?.name,
-    //     description: () => currentStore.value?.description,
-    //     ogDescription: () => currentStore.value?.description,
-    //     ogImage: 'https://example.com/image.png',
-    //     twitterCard: 'summary_large_image',
-    // })
+    useSeoMeta({
+        title: () => currentStore.value?.name,
+        ogTitle: () => currentStore.value?.name,
+        description: () => currentStore.value?.description,
+        ogDescription: () => currentStore.value?.description,
+        ogImage: 'https://example.com/image.png',
+        twitterCard: 'summary_large_image',
+    })
 </script>
