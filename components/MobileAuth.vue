@@ -24,7 +24,19 @@
                     <Icon name="solar:verified-check-bold-duotone" color="green" height="30" width="30"/>
                     <span class="font-semibold">Logged in as {{ user?.name }}</span>
                 </div>
-                <small class="text-gray-500 mt-4">Click outside to close or <button @click="logout" class="bg-red-100 px-2 py-1 rounded text-red-700">Log me out</button></small>
+                <form method="dialog" class="flex w-full space-x-4 mt-4">
+                        <NuxtLink :to="`/user/show/${ user?.id }`" class="flex-1 border p-2 rounded-md text-center" onclick="mobile_auth.close()">
+                            <Icon name="mingcute:user-4-line"/>
+                        </NuxtLink>
+
+                        <NuxtLink to="/help" class="flex-1 border border-blue-200 bg-blue-50 p-2 rounded-md text-center" onclick="mobile_auth.close()">
+                            <Icon name="solar:help-line-duotone"/>
+                        </NuxtLink>
+                        <button @click="logout" class="flex-1 border border-red-200 bg-red-50 p-2 rounded-md text-center">
+                            <Icon name="solar:logout-line-duotone"/>
+                        </button>
+                </form>
+                <small class="text-gray-500 mt-4">Click outside to close</small>
             </template>
 
             <!-- <div class="border border-red-400 bg-red-400 rounded mt-4 w-full text-white px-2 py-1">
