@@ -1,15 +1,15 @@
 <template>
-    <span class="text-sm">
+    <!-- <span class="text-sm">
         {{ user?.name }}
-    </span>
-    <label tabindex="0" class="block md:hidden btn btn-ghost btn-circle avatar" onclick="mobile_auth.showModal()">
+    </span> -->
+    <label tabindex="0" :class="`md:hidden btn btn-ghost btn-circle avatar flex ${ user ? 'outline outline-2 outline-neutral-500' : '' }`" onclick="mobile_auth.showModal()">
         <div v-if="!loading" class="w-10 rounded-full">
-            <Avatar 
-                :size="80" 
+            <svg class="h-full w-full" viewBox="0 0 36 36" fill="none" role="img" xmlns="http://www.w3.org/2000/svg"><mask id=":r22:" maskUnits="userSpaceOnUse" x="0" y="0" width="36" height="36"><rect width="36" height="36" rx="72" fill="#FFFFFF"></rect></mask><g mask="url(#:r22:)"><rect width="36" height="36" fill="#ff005b"></rect><rect x="0" y="0" width="36" height="36" transform="translate(-5 -5) rotate(89 18 18) scale(1.2)" fill="#ffb238" rx="36"></rect><g transform="translate(-1 -1) rotate(-9 18 18)"><path d="M15 21c2 1 4 1 6 0" fill="none" stroke="#000000" stroke-linecap="round"></path><rect x="10" y="14" width="1.5" height="2" rx="1" stroke="none" fill="#000000"></rect><rect x="24" y="14" width="1.5" height="2" rx="1" stroke="none" fill="#000000"></rect></g></g></svg>
+            <!-- <Avatar 
                 variant="bauhaus"
-                name="Mujahid Anuar" 
+                name="Frances Willard" 
                 :colors="colors" 
-            />
+            /> -->
         </div>
         <i v-else class='bx bx-loader-alt bx-spin bx-md' ></i>
     </label>
