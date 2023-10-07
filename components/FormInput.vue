@@ -13,6 +13,6 @@
 </template>
 
 <script setup>
-    defineProps(['modelValue', 'label'])
+    defineProps(['modelValue', 'label', 'placeholder'])
     defineEmits(['update:modelValue'])
 </script>

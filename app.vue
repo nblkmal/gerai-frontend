@@ -77,7 +77,8 @@ export default {
                 'stores-product-order',
                 'stores-product-id',
                 'stores-id',
-                'stores-product-checkout-id'
+                'stores-product-checkout-id',
+                'user-show-id'
             ]
             return hide.includes(current)
         }
