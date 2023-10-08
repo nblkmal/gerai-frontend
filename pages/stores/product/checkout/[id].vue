@@ -117,7 +117,7 @@
                     <Icon name="ic:baseline-whatsapp" color="white"/>
                     <a
                         target="__blank"
-                        :href="`https://wa.me/60124441998?text=${ encodedOrder }`"
+                        :href="`https://wa.me/60173998638?text=${ encodedOrder }`"
                         @click="checkout">
                         WhatsApp order
                     </a>
