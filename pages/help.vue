@@ -3,13 +3,13 @@
 
     <div class="text-left">
         <h2 class="text-md font-semibold">Frequently Asked Questions</h2>
-        <div class="collapse collapse-arrow rounded-none">
+        <div v-for="item in contents" :key="item.question" class="collapse collapse-arrow rounded-none">
             <input type="checkbox" /> 
             <div class="collapse-title text-md font-medium">
-                Click me to show/hide content
+                {{ item.question }}
             </div>
             <div class="collapse-content"> 
-                <p>hello</p>
+                <p class="text-sm text-gray-500">{{ item.answer }}</p>
             </div>
         </div>
 
@@ -22,3 +22,18 @@
 
 
 </template>
+
+<script setup>
+    const contents = ref(
+        [
+            {
+                question: 'How to be one of the vendors?',
+                answer: 'You can email your enquiry at managegerai@gmail.com'
+            },
+            {
+                question: 'How to',
+                answer: 'Macamni'
+            }
+        ]
+    )
+</script>

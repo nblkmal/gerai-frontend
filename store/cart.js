@@ -10,7 +10,8 @@ export const useCartStore = defineStore('cart', {
         payment_method: 'counter',
         table: null,
         order_number: null,
-        orderHistory: []
+        orderHistory: [],
+        points: null
     }),
     actions: {
         checkCart() {
@@ -26,7 +27,8 @@ export const useCartStore = defineStore('cart', {
                 'vendor_id': this.vendor_id,
                 'payment_method': this.payment_method,
                 'table': this.table,
-                'order_number': this.order_number
+                'order_number': this.order_number,
+                'points': this.points
             }
         },
 
@@ -111,6 +113,7 @@ export const useCartStore = defineStore('cart', {
                 this.cart.forEach(data => {
                     total = total + parseFloat(data.price)
                 })
+                this.points = Math.round(total.toFixed(2))
                 return 'RM ' + total.toFixed(2)
             }
         },

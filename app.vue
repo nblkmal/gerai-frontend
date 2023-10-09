@@ -65,12 +65,15 @@ export default {
         return {
             theme: '',
             urlBase: useRuntimeConfig().public.mode === 'development' ? useRuntimeConfig().public.devApi : useRuntimeConfig().public.stagingApi,
-            loader: useGlobalLoader().loader,
             vendor: null
         }
     },
 
     computed: {
+        loader() {
+            return useGlobalLoader().loader
+        },
+
         hideHelp() {
             let current = useRoute().name
             let hide = [
@@ -78,7 +81,8 @@ export default {
                 'stores-product-id',
                 'stores-id',
                 'stores-product-checkout-id',
-                'user-show-id'
+                'user-show-id',
+                'user-store-id'
             ]
             return hide.includes(current)
         }
