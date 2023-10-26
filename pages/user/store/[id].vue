@@ -75,6 +75,14 @@
             <FormInput v-model="form.mapsUrl" no-border label="Google Maps URL" placeholder="Paste link here"></FormInput>
         </div>
 
+        <hr>
+        <NuxtLink :to="`/user/store/product/${ store?.id }`">
+            <div class="flex flex-col items-center space-y-2 bg-gray-100 rounded-md py-4">
+                <Icon name="ic:twotone-inventory" color="orange" class="h-10 w-10"/>
+                <h2 class="font-semibold text-sm">Configure your product here</h2>
+            </div>
+        </NuxtLink>
+
         <button class="px-4 fixed bottom-5 left-0 w-full" type="submit">
             <button class="btn btn-neutral btn-block mt-8">
                 <span v-if="loading" class="loading loading-dots loading-xs"></span>

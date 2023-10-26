@@ -19,7 +19,10 @@
             <!-- <img class="rounded-md h-40 w-full object-cover" :src="store?.media[0].original_url ?? store?.media[0]" alt=""> -->
         <!-- </div> -->
         <div class="carousel w-full h-80 rounded-lg">
-            <div v-for="(img, index) in store?.media" :key="index" :id="`slide${ index }`" class="carousel-item relative w-full">
+            <div v-if="store?.media.length === 0" class="border rounded-lg w-full h-full">
+                <!-- <Icon name="iconamoon:star-duotone" color="orange"/> -->
+            </div>
+            <div v-else v-for="(img, index) in store?.media" :key="index" :id="`slide${ index }`" class="carousel-item relative w-full">
                 <img :src="img.original_url ?? img" class="w-full object-cover" />
                 <!-- <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                     <a :href="`#slide${ index == 0 ? index.length - 1 : index - 1 }`" class="btn btn-circle bg-gray-50 opacity-30">❮</a> 
@@ -58,10 +61,9 @@
         </h6>
 
         <div class="flex flex-col space-y-2">
-            <iconed-label icon="basil:calendar-outline" :label="`Except ${ store?.dayClose.toString() }`"></iconed-label>
+            <iconed-label icon="basil:calendar-outline" :label="`Except ${ store?.dayClose?.toString() }`"></iconed-label>
             <iconed-label icon="basil:clock-outline" :label="`${ $time(store?.timeOpen, 'HH.mm') } - ${ $time(store?.timeClose, 'HH.mm') }`"></iconed-label>
         </div>
-
 
         <reviews :reviews="store?.reviews"></reviews>
 
@@ -137,6 +139,7 @@
     async function fetchVendor() {
         try {
             const result = await $fetch(`${ urlBase }vendors/${ id }/show`)
+            console.log('result: ', result)
             store.value = result.data
             loading.value = false
         } catch (error) {

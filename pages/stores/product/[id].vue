@@ -1,27 +1,20 @@
 <template>
     <span v-if="loading" id="loader" class="loading loading-dots loading-lg"></span>
     <div v-else class="space-y-4 text-left">
-        <div v-if="useCartStore().table === null" class="flex flex-col bg-yellow-50 border border-yellow-500 rounded-md px-4 py-2">
+        <!-- <div v-if="useCartStore().table === null" class="flex flex-col bg-yellow-50 border border-yellow-500 rounded-md px-4 py-2">
             <p class="font-semibold text-sm text-yellow-700">Please scan a qr code for table number</p>
             <p class="text-sm text-gray-500">Seems like you do not have a table yet. Please scan the QR code for table</p>
-            <!-- <Icon name="iconamoon:star-duotone" color="orange" /> -->
-            <!-- <span class="font-semibold text-yellow-700">Be a gerai owner to post here</span>
-            <Icon name="iconamoon:arrow-right-2-duotone" class="text-yellow-700" /> -->
-        </div>
-        <div class="flex items-center space-x-4">
-            <!-- <div class="rounded-full border h-16 w-16 flex items-center justify-center">
-                <Icon name="basil:image-outline" color="black" height="40%" width="40%"/>
-            </div> -->
-            
-            <div class="flex flex-col text-left space-y-1">
-                <h4 class="font-bold">{{ store?.name }}</h4>
-                <p class="text-sm text-left">Nilai, Negeri Sembilan</p>
-                <div class="flex space-x-1">
-                    <Icon name="basil:star-solid" color="orange" />
-                    <Icon name="basil:star-solid" color="orange" />
-                    <Icon name="basil:star-solid" color="orange" />
-                </div>
-            </div>
+        </div> -->
+        <div class="flex items-center space-x-2">
+            <Icon name="bx:store"/>
+            <p class="text-sm font-semibold">{{ store?.name }} -</p>
+            <NuxtLink v-if="useCartStore().table === null" :to="`/stores/table/${ store?.id }`">
+                <p class="text-sm font-semibold text-blue-700 flex items-center space-x-1">
+                    <Icon name="jam:alert"/>
+                    <span>Click for table number</span>
+                </p>
+            </NuxtLink>
+            <p v-else class="text-sm font-semibold text-gray-500">Table {{ useCartStore().table }}</p>
         </div>
         
         <!-- <div class="tabs flex justify-items-stretch">
@@ -139,7 +132,7 @@
             name: item.name,
             quantity: 1,
             price: item.price,
-            category: item.product_category.name,
+            // category: item.product_category.name,
             note: notes.value[item.id]
         }
 
@@ -180,6 +173,7 @@
     async function fetchProducts() {
         try {
             const result = await $fetch(`${ urlBase }vendors/${ id }/products`)
+            console.log('result: ', result)
             products.value = result.data
             loading.value = false
         } catch (error) {

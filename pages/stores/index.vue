@@ -20,21 +20,26 @@
             </div>
         </div>
 
-        <Blank v-if="stores.length === 0 && !loading"
-        icon="basil:location-question-outline"
-        text="Opps, no search found. Try to search with another keyword."></Blank>
+        <Blank
+            v-if="stores.length === 0 && !loading"
+            icon="basil:location-question-outline"
+            text="Opps, no search found. Try to search with another keyword.">
+        </Blank>
 
         <NuxtLink :to="`/stores/${store.id}`" class="h-24 flex" v-for="store in stores" :key="store.id">
-            <img v-if="store.media && store.media.length !== 0" class="border-l border-y rounded-l-md w-20 h-full object-cover" :src="store.media[0].original_url ?? store.media[0]" alt="">
+            <div class="border-l border-y rounded-l-md w-28 h-full">
+                <img v-if="store.media && store.media.length !== 0" class="object-cover" :src="store.media[0].original_url ?? store.media[0]" alt="">
+                <div v-else>takde</div>
+            </div>
             <div class="border w-full rounded-r-md p-3 text-left truncate">
                 <div class="flex justify-between items-center">
                     <h4 class="font-semibold">{{ store.name }}</h4>
                     <small>200m</small>
                 </div>
-                <small class="truncate">{{ store.description }}</small>
-                <p class="text-xs text-left">Tags:
+                <small class="truncate">{{ store.address }}</small>
+                <!-- <p class="text-xs text-left">Tags:
                     <span class="font-semibold" v-for="(key, index) in store.keywords" :key="key">{{ key }}{{ store.keywords.length - index === 1 ? '' : ', ' }}</span>
-                </p>
+                </p> -->
             </div>
         </NuxtLink>
     </div>
@@ -98,7 +103,9 @@
 
             async fetchVendors() {
                 const result = await $fetch(`${ this.urlBase }vendors`)
-                this.stores = result.data
+                console.log('result: ', result)
+                this.stores = result.data.data
+                // need to check pagination
                 this.storesModel = result.data
                 this.loading = false
             },
