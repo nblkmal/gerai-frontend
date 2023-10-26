@@ -58,9 +58,11 @@
                 <!-- <div v-else class="skeleton h-2 w-2"></div> -->
             </template>
 
-            <NuxtLink v-if="user" :to="`/user/store/${ user?.id }`">
-                <Icon name="bx:store" class="h-6 w-6 rouned-full text-gray-500 group-hover:text-primary"/>
+            <NuxtLink v-if="user?.vendor" :to="`/user/store/${ user?.id }`">
+                <Icon name="bx:store" :class="`h-6 w-6 rouned-full group-hover:text-primary text-gray-500`"/>
             </NuxtLink>
+            <!-- put modal here -->
+            <Icon v-else name="bx:store" :class="`h-6 w-6 rouned-full group-hover:text-primary text-gray-300`"/>
 
             <!-- add to cart -->
             <Cart></Cart>
