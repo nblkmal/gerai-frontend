@@ -12,7 +12,8 @@ export default defineNuxtConfig({
         '@nuxtjs/robots',
         'nuxt-vue3-google-signin',
         '@sidebase/nuxt-auth',
-        'nuxt-simple-sitemap'
+        'nuxt-simple-sitemap',
+        'nuxt-scheduler'
     ],
     sitemap: {
         urls: async () => {
@@ -54,9 +55,9 @@ export default defineNuxtConfig({
     runtimeConfig: {
         public: {
             mode: process.env.APP_ENV,
-            devApi: 'http://localhost:8001/api/',
-            stagingApi: 'https://manage.api.gerai.store/api/',
-            prodApi: 'https://manage.api.gerai.store/api/'
+            devApi: 'http://localhost:8000/api/gerai/',
+            stagingApi: 'https://manage.api.gerai.store/api/gerai/',
+            prodApi: 'https://manage.api.gerai.store/api/gerai/'
         },
         passport: {
             mastanahBaseUrl: process.env.MASTANAH_PASSPORT_BASE_URL,
