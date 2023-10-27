@@ -25,3 +25,26 @@
         @apply bg-gray-300
     }
 }
+
+@media only screen and (max-width: 600px) {
+    .Vue-Toastification__container {
+        padding: 29px !important;
+    }
+
+    .Vue-Toastification__toast {
+        border-radius: 14px !important;
+    }
+
+    .Vue-Toastification__container .Vue-Toastification__toast {
+        width: 70% !important;
+        z-index: 99999;
+    }
+
+    .Vue-Toastification__container.bottom-left, .Vue-Toastification__container.bottom-right, .Vue-Toastification__container.bottom-center {
+        align-items: center !important;
+    }
+}
+
+.Vue-Toastification__toast {
+    min-width: 240px !important;
+}
