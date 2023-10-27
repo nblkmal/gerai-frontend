@@ -12,8 +12,8 @@ export default defineNuxtConfig({
         '@nuxtjs/robots',
         'nuxt-vue3-google-signin',
         '@sidebase/nuxt-auth',
-        'nuxt-simple-sitemap',
-        'nuxt-scheduler'
+        'nuxt-simple-sitemap'
+        // 'nuxt-scheduler'
     ],
     sitemap: {
         urls: async () => {
