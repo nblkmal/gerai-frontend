@@ -132,7 +132,8 @@ export const useCartStore = defineStore('cart', {
             let total = `*Total Amount: ${ this.totalPrice() }*%0D%0A%0D%0A`
             let paymentMethod = `*Payment: ${ this.payment_method === 'counter' ? 'At the counter' : 'By DuitNow QR' }*%0D%0A%0D%0A`
             let footer = '_Auto generated from Gerai platform._%0D%0A%0D%0A'
-            let visit = '_Visit https://gerai.store for more info._'
+            // let visit = '_Visit https://gerai.store for more info._'
+            let visit = 'Click here https://gerai.store/stores/product/checkout/pay to proceed with your payment._'
             message = message.concat(total + paymentMethod + footer + visit)
             return message
         }
