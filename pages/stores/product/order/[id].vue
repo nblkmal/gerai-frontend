@@ -17,19 +17,18 @@
         </div> -->
         <p class="text-sm text-gray-500">Start your experience by choosing any table</p>
         <div class="flex overflow-auto space-x-4 bg-gray-100 p-4 rounded-md">
-            <label v-for="number in 12" :key="number" :class="`flex items-center justify-center border rounded-full h-8 w-8 p-6 ${ table === number ? 'bg-neutral text-white' : 'bg-white' }`">
-                {{ number }}
-                <input v-model="table" :value="number" type="radio" class="hidden" />
+            <label v-for="item in tableList" :key="item.id" :class="`flex items-center justify-center border border-dotted rounded-full h-8 w-8 p-6 ${ table === item.number ? 'bg-neutral text-white' : 'bg-white' }`">
+                {{ item.number }}
+                <input v-model="table" :value="item.number" type="radio" class="hidden" />
             </label>
         </div>
 
         <div class="px-4 fixed bottom-5 left-0 w-full z-20">
-            <NuxtLink :to="`/stores/product/${ store?.id }`">
-                <button @click="setTable" class="bg-neutral flex items-center rounded-md justify-center w-full text-white p-4 drop-shadow-md font-semibold space-x-2">
+            <button @click="setTable" :disabled="table === '' ? 'disabled' : ''" :class="`${ table === '' ? 'opacity-80' : '' } bg-neutral flex items-center rounded-md justify-center w-full text-white p-4 drop-shadow-md font-semibold`">
+                <NuxtLink :to="`/stores/product/${ store?.id }`" class="w-full space-x-2">
                     <span>Start Ordering</span>
-                    <!-- <Icon name="icon-park-outline:right-c" color="white"/> -->
-                </button>
-            </NuxtLink>
+                </NuxtLink>
+            </button>
         </div>
 
         <!-- <div class="flex overflow-auto space-x-2 no-scrollbar">
@@ -52,9 +51,11 @@
     const urlBase = inject('urlBase')
     const loading = ref(true)
     const store = ref()
+    const tableList = ref()
     const table = ref('')
 
     onMounted(() => {
+        fetchTables()
         fetchVendor()
     })
 
@@ -68,7 +69,18 @@
         }
     }
 
+    async function fetchTables() {
+        try {
+            const result = await $fetch(`${ urlBase }vendors/${ vendor_id }/station/`)
+            tableList.value = result.data
+            loading.value = false
+        } catch (error) {
+            console.error('error: ', error)
+        }
+    }
+
     function setTable() {
+        console.log('hit: ')
         useCartStore().setTable(table)
     }
 </script>
