@@ -18,7 +18,7 @@
 
         <GoogleSSO class="mt-4" @loading="emitLoading"></GoogleSSO>
 
-        <button @click="signIn('mastanah')" class="btn btn-primary text-white btn-sm capitalize w-full">
+        <button @click="signIn('mastanah')" class="btn btn-primary text-white btn-md capitalize w-full">
             <span v-if="!loading" class="flex">
                 <span>Sign in with Mastanah</span>
                 <!-- <img src="/mastanah-logo.svg" alt="" height="40" width="40" class="border border-black"> -->

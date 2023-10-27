@@ -17,7 +17,7 @@
         <form method="dialog" class="modal-box flex flex-col justify-center items-center">
             <template v-if="user === null">
                 <LoginForm></LoginForm>
-                <button @click="ping" class="border rounded-md py-1 px-2 mt-4">Ping</button>
+                <!-- <button @click="ping" class="border rounded-md py-1 px-2 mt-4">Ping</button> -->
             </template>
             <template v-else>
                 <div class="bg-green-100 p-4 w-full rounded text-center flex items-center justify-center space-x-2">
