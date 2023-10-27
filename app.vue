@@ -78,11 +78,14 @@ export default {
             let current = useRoute().name
             let hide = [
                 'stores-product-order',
+                'stores-product-order-id',
                 'stores-product-id',
+                'stores-station-id',
                 'stores-id',
                 'stores-product-checkout-id',
                 'user-show-id',
-                'user-store-id'
+                'user-store-id',
+                'user-store-product-id'
             ]
             return hide.includes(current)
         }
