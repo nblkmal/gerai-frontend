@@ -1,7 +1,7 @@
 <template>
     <ul tabindex="0" :class="className">
         <li><NuxtLink to="/">Home</NuxtLink></li>
-        <li><NuxtLink to="/contributor">Be a contributor</NuxtLink></li>
+        <!-- <li><NuxtLink to="/contributor">Be a contributor</NuxtLink></li> -->
         <!-- <li>
             <NuxtLink
                 @click="withSubdomain('hanfix')"
@@ -10,7 +10,7 @@
                 <a>Products</a>
             </NuxtLink>
         </li> -->
-        <li><NuxtLink to="/stores">Stores</NuxtLink></li>
+        <!-- <li><NuxtLink to="/stores">Stores</NuxtLink></li> -->
         <!-- <li><NuxtLink to="/order">Order</NuxtLink></li> -->
         <!-- <li><NuxtLink to="/coupon">Coupon</NuxtLink></li> -->
         <!-- <li><NuxtLink to="/pasar">Pasarhub</NuxtLink></li> -->
