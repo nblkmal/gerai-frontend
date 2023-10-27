@@ -14,12 +14,10 @@
             </NuxtLink>
             <p v-else class="text-sm font-semibold text-gray-500">Table {{ useCartStore().table }}</p>
         </div>
-        <div class="flex space-x-2">
-            <div v-for="category in categories" :key="category" class="overflow-auto no-scrollbar">
-                <a :href="`#${category}`">
-                    <Badge :name="category"></Badge>
-                </a>
-            </div>
+        <div class="flex space-x-2 overflow-auto no-scrollbar">
+            <a v-for="category in categories" :key="category" :href="`#${category}`">
+                <Badge :name="category"></Badge>
+            </a>
         </div>
     </div>
     <!-- <div v-if="!loading" class="flex items-center space-x-2 fixed bg-white w-2/3 p-4 border rounded-md">
