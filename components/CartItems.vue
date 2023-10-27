@@ -12,7 +12,8 @@
                         <Icon @click="removeOne(index)" class="mr-4 text-red-500" name="bi:dash-circle-dotted"/>
                         <div class="flex-1 flex flex-col">
                             <span class="font-semibold">{{ item.name }}</span>
-                            <span class="text-gray-500">{{ item.note }}</span>
+                            <span v-if="item.signature" class="text-gray-700">for {{ item.signature }}</span>
+                            <span v-if="item.note" class="text-gray-500">{{ item.note }}</span>
                         </div>
                         <span class="bg-gray-50 h-8 w-8 rounded-md flex items-center justify-center font-semibold">1</span>
                     </a>
@@ -30,18 +31,12 @@
             </div>
             <div class="modal-action mt-0">
                 <form method="dialog">
-                    <!-- <NuxtLink :to="`/stores/product/checkout/${ vendor_id }`"> -->
-                    <button @click="navigateCheckout" class="btn btn-primary capitalize text-white py-4 flex items-center justify-center align-baseline">
+                    <!-- <button @click="navigateCheckout" class="btn btn-primary capitalize text-white py-4 flex items-center justify-center align-baseline">
                         Checkout
+                    </button> -->
+                    <button disabled class="btn btn-primary capitalize text-white py-4 flex items-center justify-center align-baseline">
+                        Coming Soon!
                     </button>
-                    <!-- </NuxtLink> -->
-                    <!-- <a
-                        target="__blank"
-                        :href="`https://wa.me/60124441998?text=${ encodedOrder }`"
-                        @click="checkout"
-                        class="btn btn-primary capitalize text-white py-4 flex items-center justify-center align-baseline">
-                        Checkout
-                    </a> -->
                 </form>
             </div>
         </div>
