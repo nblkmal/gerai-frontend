@@ -1,13 +1,11 @@
 <template>
     <span v-if="loading" id="loader" class="loading loading-dots loading-lg"></span>
-    <div v-else class="space-y-4 text-left">
-        <!-- <div v-if="useCartStore().table === null" class="flex flex-col bg-yellow-50 border border-yellow-500 rounded-md px-4 py-2">
-            <p class="font-semibold text-sm text-yellow-700">Please scan a qr code for table number</p>
-            <p class="text-sm text-gray-500">Seems like you do not have a table yet. Please scan the QR code for table</p>
-        </div> -->
+    <div v-if="!loading" class="fixed flex flex-col space-y-4 bg-white w-full py-2">
         <div class="flex items-center space-x-2">
-            <Icon name="bx:store"/>
-            <p class="text-sm font-semibold">{{ store?.name }} -</p>
+            <Icon name="bx:store" class="text-primary"/>
+            <NuxtLink :to="`/stores/${ store?.id }`">
+                <p class="text-sm font-semibold text-primary">{{ store?.name }} -</p>
+            </NuxtLink>
             <NuxtLink v-if="useCartStore().table === null" :to="`/stores/station/${ store?.id }`">
                 <p class="text-sm font-semibold text-blue-700 flex items-center space-x-1">
                     <Icon name="jam:alert"/>
@@ -16,30 +14,31 @@
             </NuxtLink>
             <p v-else class="text-sm font-semibold text-gray-500">Table {{ useCartStore().table }}</p>
         </div>
-        
-        <!-- <div class="tabs flex justify-items-stretch">
-            <a v-for="(product, index) in products" :key="index" class="tab tab-bordered tab-active flex-1 font-semibold">{{ index }}</a> 
-        </div> -->
-
-        <!-- customer details -->
-        <!-- <div class="collapse collapse-arrow border text-left rounded-md">
-            <input type="checkbox" name="my-accordion-2" /> 
-            <div class="collapse-title font-medium">
-                Customer Details
+        <div class="flex space-x-2">
+            <div v-for="category in categories" :key="category" class="overflow-auto no-scrollbar">
+                <a :href="`#${category}`">
+                    <Badge :name="category"></Badge>
+                </a>
             </div>
-            <div class="collapse-content"> 
-                <FormInput label="Name" v-model="form.name" :value="user?.name"></FormInput>
-                <FormGroup placeholder="12 - 345 6789" left-append="+60" label="Phone Number"></FormGroup>
-            </div>
-        </div> -->
-
-        <!-- <div class="flex overflow-auto space-x-2 no-scrollbar">
-            <Badge name="Phone Repair"></Badge>
-            <Badge name="Phone Repair"></Badge>
-            <Badge name="Phone Repair"></Badge>
-            <Badge name="Phone Repair"></Badge>
-            <Badge name="Phone Repair"></Badge>
-            <Badge name="Phone Repair"></Badge>
+        </div>
+    </div>
+    <!-- <div v-if="!loading" class="flex items-center space-x-2 fixed bg-white w-2/3 p-4 border rounded-md">
+        <Icon name="bx:store" class="text-primary"/>
+        <NuxtLink :to="`/stores/${ store?.id }`">
+            <p class="text-sm font-semibold text-primary">{{ store?.name }} -</p>
+        </NuxtLink>
+        <NuxtLink v-if="useCartStore().table === null" :to="`/stores/station/${ store?.id }`">
+            <p class="text-sm font-semibold text-blue-700 flex items-center space-x-1">
+                <Icon name="jam:alert"/>
+                <span>Click for table number</span>
+            </p>
+        </NuxtLink>
+        <p v-else class="text-sm font-semibold text-gray-500">Table {{ useCartStore().table }}</p>
+    </div> -->
+    <div v-if="!loading" class="space-y-4 text-left pt-20">
+        <!-- <div v-if="useCartStore().table === null" class="flex flex-col bg-yellow-50 border border-yellow-500 rounded-md px-4 py-2">
+            <p class="font-semibold text-sm text-yellow-700">Please scan a qr code for table number</p>
+            <p class="text-sm text-gray-500">Seems like you do not have a table yet. Please scan the QR code for table</p>
         </div> -->
 
         <!-- product card -->
@@ -51,7 +50,7 @@
                         <Icon name="basil:image-outline" class="text-gray-200" height="70%" width="70%"/>
                     </div>
                     <div class="text-left space-y-2">
-                        <h4 class="font-semibold text-sm truncate">{{ item.name }}</h4>
+                        <h4 :id="index" class="font-semibold text-sm truncate">{{ item.name }}</h4>
                         <!-- <p class="text-sm text-gray-500">{{ item.description }}</p> -->
                         <div class="border rounded-full w-fit px-4 text-sm">
                             <span class="text-xs text-gray-500">from</span>
@@ -76,26 +75,37 @@
                             </div>
                             <p class="text-sm text-gray-500">{{ item.description }}</p>
 
-                            <p class="text-sm text-gray-500 font-semibold">Choose options :-</p>
-                            <div v-for="entry in item.variations" :key="entry.id" class="flex justify-between items-center border-b">
-                                <div class="collapse">
-                                    <input type="checkbox" /> 
-                                    <div class="collapse-title p-0">
-                                        <p class="text-sm text-gray-500 collapse-title mt-1 font-semibold pl-0">
-                                            {{ entry.name }} (RM {{ entry.price }})
-                                        </p>
-                                    </div>
-                                    <div class="collapse-content pl-0"> 
-                                        <FormInput v-model="signature[entry.id]" placeholder="Who is this for?" small class="ml-2 mb-2" no-border></FormInput>
-                                        <div class="form-control">
-                                            <textarea class="textarea textarea-xs textarea-bordered h-24 ml-2 pl-1" v-model="notes[entry.id]" placeholder="Add some notes here ..."></textarea>
+                            <template v-if="item.variations.length !== 0">
+                                <p class="text-sm text-gray-500 font-semibold">Choose options :-</p>
+                                <div v-for="entry in item.variations" :key="entry.id" class="flex justify-between items-center border-b">
+                                    <div class="collapse">
+                                        <input type="checkbox" /> 
+                                        <div class="collapse-title p-0">
+                                            <p class="text-sm text-gray-500 collapse-title mt-1 font-semibold pl-0">
+                                                {{ entry.name }} (RM {{ entry.price }})
+                                            </p>
+                                        </div>
+                                        <div class="collapse-content pl-0"> 
+                                            <FormInput v-model="signature[entry.id]" placeholder="Who is this for?" small class="ml-2 mb-2" no-border></FormInput>
+                                            <div class="form-control">
+                                                <textarea class="textarea textarea-xs textarea-bordered h-24 ml-2 pl-1" v-model="notes[entry.id]" placeholder="Add some notes here ..."></textarea>
+                                            </div>
                                         </div>
                                     </div>
+                                    <button @click="addToCart(entry, 'variation')" class="bg-neutral rounded-md text-white h-8 w-8 flex items-center justify-center">
+                                        <Icon name="typcn:plus" color="white"/>
+                                    </button>
                                 </div>
-                                <button @click="addToCart(entry)" class="bg-neutral rounded-md text-white h-8 w-8 flex items-center justify-center">
-                                    <Icon name="typcn:plus" color="white"/>
-                                </button>
-                            </div>
+                            </template>
+
+                            <template v-else>
+                                <FormInput v-model="signature[item.id]" placeholder="Who is this for?" small class="mb-2" no-border></FormInput>
+                                <div class="form-control">
+                                    <textarea class="textarea textarea-xs textarea-bordered h-24" v-model="notes[item.id]" placeholder="Add some notes here ..."></textarea>
+                                </div>
+                                <button @click="addToCart(item, 'main')" class="bg-neutral text-white p-2 w-full rounded-md font-semibold">Add product</button>
+                            </template>
+
                         </div>
                         <form method="dialog" class="modal-backdrop">
                             <button>close</button>
@@ -141,8 +151,9 @@
     const id = route.params.id
     const vendor_id = id
 
-    const addToCart = (item) => {
+    const addToCart = (item, type) => {
         let payload = {
+            type: type,
             name: item.name,
             signature: signature.value[item.id],
             quantity: 1,
@@ -163,6 +174,10 @@
 
     const user = computed(() => {
         return useUserStore().user
+    })
+
+    const categories = computed(() => {
+        return Object.keys(products.value) ?? []
     })
 
     const store = ref()

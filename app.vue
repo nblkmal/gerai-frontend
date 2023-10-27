@@ -1,5 +1,5 @@
 <template>
-    <div ref="el" data-theme="light" class="min-h-screen">
+    <div id="body" ref="el" data-theme="light" class="min-h-screen">
         <div v-if="loader" class="h-full w-full justify-center z-20 backdrop-blur-sm bg-white/30 fixed">
             <span class="absolute loading loading-dots loading-lg bottom-0 top-0 right-0 left-0 m-auto"></span>
         </div>

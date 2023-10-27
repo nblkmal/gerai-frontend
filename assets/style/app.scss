@@ -8,6 +8,10 @@
 //     max-width: 400px !important;
 // }
 
+#body {
+    scroll-behavior: smooth;
+}
+
 .skeleton {
     animation: skeleton-loading 1s linear infinite alternate;
 }
