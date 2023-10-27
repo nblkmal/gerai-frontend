@@ -8,7 +8,7 @@
         <div class="flex items-center space-x-2">
             <Icon name="bx:store"/>
             <p class="text-sm font-semibold">{{ store?.name }} -</p>
-            <NuxtLink v-if="useCartStore().table === null" :to="`/stores/table/${ store?.id }`">
+            <NuxtLink v-if="useCartStore().table === null" :to="`/stores/station/${ store?.id }`">
                 <p class="text-sm font-semibold text-blue-700 flex items-center space-x-1">
                     <Icon name="jam:alert"/>
                     <span>Click for table number</span>
@@ -54,6 +54,7 @@
                         <h4 class="font-semibold text-sm truncate">{{ item.name }}</h4>
                         <!-- <p class="text-sm text-gray-500">{{ item.description }}</p> -->
                         <div class="border rounded-full w-fit px-4 text-sm">
+                            <span class="text-xs text-gray-500">from</span>
                             {{ useCartStore().price(item.price) }}
                         </div>
                     </div>
@@ -75,14 +76,26 @@
                             </div>
                             <p class="text-sm text-gray-500">{{ item.description }}</p>
 
-                            <div class="form-control">
-                                <textarea class="textarea textarea-bordered h-24" v-model="notes[item.id]" placeholder="Add some notes here ..."></textarea>
+                            <p class="text-sm text-gray-500 font-semibold">Choose options :-</p>
+                            <div v-for="entry in item.variations" :key="entry.id" class="flex justify-between items-center border-b">
+                                <div class="collapse">
+                                    <input type="checkbox" /> 
+                                    <div class="collapse-title p-0">
+                                        <p class="text-sm text-gray-500 collapse-title mt-1 font-semibold pl-0">
+                                            {{ entry.name }} (RM {{ entry.price }})
+                                        </p>
+                                    </div>
+                                    <div class="collapse-content pl-0"> 
+                                        <FormInput v-model="signature[entry.id]" placeholder="Who is this for?" small class="ml-2 mb-2" no-border></FormInput>
+                                        <div class="form-control">
+                                            <textarea class="textarea textarea-xs textarea-bordered h-24 ml-2 pl-1" v-model="notes[entry.id]" placeholder="Add some notes here ..."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button @click="addToCart(entry)" class="bg-neutral rounded-md text-white h-8 w-8 flex items-center justify-center">
+                                    <Icon name="typcn:plus" color="white"/>
+                                </button>
                             </div>
-
-                            <form method="dialog" class="flex space-x-2">
-                                <!-- <button @click="removeFromCart(item)" class="btn">-</button> -->
-                                <button @click="addToCart(item)" class="btn flex-1">Add to cart</button>
-                            </form>
                         </div>
                         <form method="dialog" class="modal-backdrop">
                             <button>close</button>
@@ -106,6 +119,7 @@
     import { useCartStore } from "~/store/cart"
 
     const cartStore = useCartStore();
+    const signature = ref({})
     const notes = ref({})
 
     const alreadyInCart = (item) => {
@@ -130,11 +144,15 @@
     const addToCart = (item) => {
         let payload = {
             name: item.name,
+            signature: signature.value[item.id],
             quantity: 1,
             price: item.price,
             // category: item.product_category.name,
             note: notes.value[item.id]
         }
+        console.log('payload: ', payload)
+        notes.value = {}
+        signature.value = {}
 
         // reset notes
         notes.value = {}
