@@ -8,10 +8,10 @@
     </div>
     <div v-else class="space-y-4">
         <div class="flex justify-between">
-            <NuxtLink :to="`/stores/product/${store?.id}`">
+            <NuxtLink :to="`/stores/product/${store?.slug}`">
                 <Badge :type="shopOpen ? 'success' : 'error'" :name="shopOpen ? 'Open' : 'Currently Closed'" :text="shopOpen ? 'text-green-700' : 'text-red-700'" bold></Badge>
             </NuxtLink>
-            <NuxtLink :to="`/stores/product/${store?.id}`">
+            <NuxtLink :to="`/stores/product/${store?.slug}`">
                 <Badge redirect name="See products" icon="basil:shopping-bag-solid"></Badge>
             </NuxtLink>
         </div>
