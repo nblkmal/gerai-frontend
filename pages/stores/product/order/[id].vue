@@ -72,7 +72,7 @@
 
     async function fetchTables() {
         try {
-            const result = await $fetch(`${ urlBase }vendors/${ vendor_id }/station/`)
+            const result = await $fetch(`${ urlBase }vendors/${ vendor_id }/station`)
             tableList.value = result.data
             loading.value = false
         } catch (error) {
