@@ -215,4 +215,17 @@
             console.log('error: ', error)
         }
     }
+
+    const { data: currentStore } = await useAsyncData(id, () => {
+        return fetchVendor()
+    })
+
+    useSeoMeta({
+        title: () => currentStore.value?.name,
+        ogTitle: () => currentStore.value?.name,
+        description: () => currentStore.value?.description,
+        ogDescription: () => currentStore.value?.description,
+        ogImage: 'https://example.com/image.png',
+        twitterCard: 'summary_large_image',
+    })
 </script>
