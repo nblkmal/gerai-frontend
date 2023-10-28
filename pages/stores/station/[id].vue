@@ -12,7 +12,7 @@
     <p v-if="table" class="text-md font-semibold pt-8">{{ toast }}</p>
     
     <div class="px-4 fixed bottom-5 left-0 w-full z-20">
-        <button @click="setTable" :disabled="table === '' ? 'disabled' : ''" :class="`${ table === '' ? 'opacity-80' : '' } bg-neutral flex items-center rounded-md justify-center w-full text-white p-4 drop-shadow-md font-semibold`">
+        <button @click="setTable" :disabled="table === ''" :class="`${ table === '' ? 'opacity-80' : '' } bg-neutral flex items-center rounded-md justify-center w-full text-white p-4 drop-shadow-md font-semibold`">
             <NuxtLink :to="`/stores/product/${ useRoute().params.id }`" class="w-full space-x-2">
                 <span>Continue Ordering</span>
                 <Icon name="icon-park-outline:right-c" color="white"/>
