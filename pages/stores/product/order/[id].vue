@@ -25,7 +25,7 @@
 
         <div class="px-4 fixed bottom-5 left-0 w-full z-20">
             <button @click="setTable" :disabled="table === '' ? 'disabled' : ''" :class="`${ table === '' ? 'opacity-80' : '' } bg-neutral flex items-center rounded-md justify-center w-full text-white p-4 drop-shadow-md font-semibold`">
-                <NuxtLink :to="`/stores/product/${ store?.id }`" class="w-full space-x-2">
+                <NuxtLink :to="`/stores/product/${ store?.slug }`" class="w-full space-x-2">
                     <span>Start Ordering</span>
                 </NuxtLink>
             </button>
@@ -60,6 +60,7 @@
     })
 
     async function fetchVendor() {
+        console.log('vendor_id: ', vendor_id)
         try {
             const result = await $fetch(`${ urlBase }vendors/${ vendor_id }/show`)
             store.value = result.data

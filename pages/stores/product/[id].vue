@@ -3,10 +3,10 @@
     <div v-if="!loading" class="fixed flex flex-col space-y-4 bg-white w-full py-2">
         <div class="flex items-center space-x-2">
             <Icon name="bx:store" class="text-primary"/>
-            <NuxtLink :to="`/stores/${ store?.id }`">
+            <NuxtLink :to="`/stores/${ store?.slug }`">
                 <p class="text-sm font-semibold text-primary">{{ store?.name }} -</p>
             </NuxtLink>
-            <NuxtLink v-if="useCartStore().table === null" :to="`/stores/station/${ store?.id }`">
+            <NuxtLink v-if="useCartStore().table === null" :to="`/stores/station/${ store?.slug }`">
                 <p class="text-sm font-semibold text-blue-700 flex items-center space-x-1">
                     <Icon name="jam:alert"/>
                     <span>Click for table number</span>
@@ -60,7 +60,7 @@
                     <dialog :id="`card${ item.id }`" class="modal">
                         <div class="modal-box space-y-4">
                             <div class="border rounded-lg text-center bg-yellow-50 border-yellow-500 px-4 py-1">
-                                <span class="text-yellow-700 font-semibold">Recommended!</span>
+                                <span class="text-yellow-700 font-semibold">Order feature is coming soon!</span>
                             </div>
 
                             <div class="border p-4 rounded-md text-center">
@@ -74,8 +74,9 @@
                             <p class="text-sm text-gray-500">{{ item.description }}</p>
 
                             <template v-if="item.variations.length !== 0">
-                                <p class="text-sm text-gray-500 font-semibold">Choose options :-</p>
-                                <div v-for="entry in item.variations" :key="entry.id" class="flex justify-between items-center border-b">
+                                <p class="text-sm text-neutral font-semibold">Choose options :-</p>
+                                <small class="text-gray-500">Click item for more options</small>
+                                <div v-for="entry in item.variations" :key="entry.id" class="flex justify-between items-center border-b items-stretch">
                                     <div class="collapse">
                                         <input type="checkbox" /> 
                                         <div class="collapse-title p-0">
@@ -86,20 +87,22 @@
                                         <div class="collapse-content pl-0"> 
                                             <FormInput v-model="signature[entry.id]" placeholder="Who is this for?" small class="ml-2 mb-2" no-border></FormInput>
                                             <div class="form-control">
-                                                <textarea class="textarea textarea-xs textarea-bordered h-24 ml-2 pl-1" v-model="notes[entry.id]" placeholder="Add some notes here ..."></textarea>
+                                                <textarea class="textarea textarea-xs h-24 ml-2 pl-1" v-model="notes[entry.id]" placeholder="Add some notes here ..."></textarea>
                                             </div>
                                         </div>
                                     </div>
-                                    <button @click="addToCart(entry, 'variation')" class="bg-neutral rounded-md text-white h-8 w-8 flex items-center justify-center">
-                                        <Icon name="typcn:plus" color="white"/>
-                                    </button>
+                                    <div class="pt-4 self-start">
+                                        <button @click="addToCart(entry, 'variation')" class="bg-neutral rounded-md text-white h-8 w-8 flex items-center justify-center">
+                                            <Icon name="typcn:plus" color="white"/>
+                                        </button>
+                                    </div>
                                 </div>
                             </template>
 
                             <template v-else>
                                 <FormInput v-model="signature[item.id]" placeholder="Who is this for?" small class="mb-2" no-border></FormInput>
                                 <div class="form-control">
-                                    <textarea class="textarea textarea-xs textarea-bordered h-24" v-model="notes[item.id]" placeholder="Add some notes here ..."></textarea>
+                                    <textarea class="textarea textarea-xs h-24" v-model="notes[item.id]" placeholder="Add some notes here ..."></textarea>
                                 </div>
                                 <button @click="addToCart(item, 'main')" class="bg-neutral text-white p-2 w-full rounded-md font-semibold">Add product</button>
                             </template>
