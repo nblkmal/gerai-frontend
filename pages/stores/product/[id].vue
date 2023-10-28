@@ -45,7 +45,8 @@
             <div class="grid grid-cols-2 gap-4">
                 <div :onclick="`card${ item.id }.showModal()`" class="border rounded-md p-4" v-for="item in product" :key="item.id">
                     <div class="h-20 text-center">
-                        <Icon name="basil:image-outline" class="text-gray-200" height="70%" width="70%"/>
+                        <img v-if="item.media.length !== 0" :src="item.media[0].original_url" alt="">
+                        <Icon v-else name="basil:image-outline" class="text-gray-200" height="70%" width="70%"/>
                     </div>
                     <div class="text-left space-y-2">
                         <h4 :id="index" class="font-semibold text-sm truncate">{{ item.name }}</h4>
@@ -207,7 +208,7 @@
     async function fetchProducts() {
         try {
             const result = await $fetch(`${ urlBase }vendors/${ id }/products`)
-            console.log('result: ', result)
+            console.log('result: ', result.data['Coffee'][0].media[0].id)
             products.value = result.data
             loading.value = false
         } catch (error) {
