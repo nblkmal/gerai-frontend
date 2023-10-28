@@ -208,7 +208,6 @@
     async function fetchProducts() {
         try {
             const result = await $fetch(`${ urlBase }vendors/${ id }/products`)
-            console.log('result: ', result.data['Coffee'][0].media[0].id)
             products.value = result.data
             loading.value = false
         } catch (error) {
