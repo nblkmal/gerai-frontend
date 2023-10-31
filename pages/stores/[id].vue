@@ -11,7 +11,7 @@
             <NuxtLink :to="`/stores/product/${store?.slug}`">
                 <Badge :type="shopOpen ? 'success' : 'error'" :name="shopOpen ? 'Open' : 'Currently Closed'" :text="shopOpen ? 'text-green-700' : 'text-red-700'" bold></Badge>
             </NuxtLink>
-            <NuxtLink :to="`/stores/product/${store?.slug}`">
+            <NuxtLink :to="`/stores/product/${store?.slug}/order`">
                 <Badge redirect name="See products" icon="basil:shopping-bag-solid"></Badge>
             </NuxtLink>
         </div>
