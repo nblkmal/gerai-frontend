@@ -50,7 +50,6 @@
                     </div>
                     <div class="text-left space-y-2">
                         <h4 :id="index" class="font-semibold text-sm truncate">{{ item.name }}</h4>
-                        <!-- <p class="text-sm text-gray-500">{{ item.description }}</p> -->
                         <div class="border rounded-full w-fit px-4 text-sm">
                             <span class="text-xs text-gray-500">from</span>
                             {{ useCartStore().price(item.price) }}
@@ -134,6 +133,8 @@
     const signature = ref({})
     const notes = ref({})
 
+    const subdomain = getSubdomain()
+
     const alreadyInCart = (item) => {
         const x = cartStore.cart?.find(el => el.id === item.id)
         if (x?.id) {
@@ -198,7 +199,7 @@
 
     async function fetchVendor() {
         try {
-            const result = await $fetch(`${ urlBase }vendors/${ vendor_id }/show`)
+            const result = await $fetch(`${ urlBase }vendors/${ subdomain }/show`)
             store.value = result.data
         } catch (error) {
             console.error('error: ', error)
@@ -207,24 +208,25 @@
 
     async function fetchProducts() {
         try {
-            const result = await $fetch(`${ urlBase }vendors/${ id }/products`)
-            products.value = result.data
+            const result = await $fetch(`${ urlBase }vendors/${ subdomain }/products?groupby=categories`)
+            products.value = result.data.data
+            console.log('result.data: ', result.data.data)
             loading.value = false
         } catch (error) {
             console.log('error: ', error)
         }
     }
 
-    const { data: currentStore } = await useAsyncData(id, () => {
-        return fetchVendor()
-    })
+    // const { data: currentStore } = await useAsyncData(id, () => {
+    //     return fetchVendor()
+    // })
 
-    useSeoMeta({
-        title: () => currentStore.value?.name,
-        ogTitle: () => currentStore.value?.name,
-        description: () => currentStore.value?.description,
-        ogDescription: () => currentStore.value?.description,
-        ogImage: 'https://example.com/image.png',
-        twitterCard: 'summary_large_image',
-    })
+    // useSeoMeta({
+    //     title: () => currentStore.value?.name,
+    //     ogTitle: () => currentStore.value?.name,
+    //     description: () => currentStore.value?.description,
+    //     ogDescription: () => currentStore.value?.description,
+    //     ogImage: 'https://example.com/image.png',
+    //     twitterCard: 'summary_large_image',
+    // })
 </script>
