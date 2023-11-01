@@ -133,8 +133,6 @@
     const signature = ref({})
     const notes = ref({})
 
-    const subdomain = getSubdomain()
-
     const alreadyInCart = (item) => {
         const x = cartStore.cart?.find(el => el.id === item.id)
         if (x?.id) {
@@ -199,7 +197,7 @@
 
     async function fetchVendor() {
         try {
-            const result = await $fetch(`${ urlBase }vendors/${ subdomain }/show`)
+            const result = await $fetch(`${ urlBase }vendors/${ vendor_id }/show`)
             store.value = result.data
         } catch (error) {
             console.error('error: ', error)
@@ -208,7 +206,7 @@
 
     async function fetchProducts() {
         try {
-            const result = await $fetch(`${ urlBase }vendors/${ subdomain }/products?groupby=categories`)
+            const result = await $fetch(`${ urlBase }vendors/${ vendor_id }/products?groupby=categories`)
             products.value = result.data.data
             console.log('result.data: ', result.data.data)
             loading.value = false

@@ -8,10 +8,10 @@
     </div>
     <div v-else class="space-y-4">
         <div class="flex justify-between">
-            <NuxtLink :to="`/stores/product/${store?.slug}`">
-                <Badge :type="shopOpen ? 'success' : 'error'" :name="shopOpen ? 'Open' : 'Currently Closed'" :text="shopOpen ? 'text-green-700' : 'text-red-700'" bold></Badge>
-            </NuxtLink>
-            <NuxtLink :to="`/stores/product/show`">
+            <!-- <NuxtLink :to="`/stores/product/${store?.slug}`"> -->
+            <Badge :type="shopOpen ? 'success' : 'error'" :name="shopOpen ? 'Open' : 'Currently Closed'" :text="shopOpen ? 'text-green-700' : 'text-red-700'" bold></Badge>
+            <!-- </NuxtLink> -->
+            <NuxtLink :to="`/stores/product/${ store?.slug }`">
                 <Badge redirect name="See products" icon="basil:shopping-bag-solid"></Badge>
             </NuxtLink>
         </div>
@@ -23,7 +23,8 @@
                 <!-- <Icon name="iconamoon:star-duotone" color="orange"/> -->
             </div>
             <div v-else v-for="(img, index) in store?.media" :key="index" :id="`slide${ index }`" class="carousel-item relative w-full">
-                <img :src="img.original_url ?? img" class="w-full object-cover" />
+                <!-- {{ img.original_url }} -->
+                <img :src="img.original_url" class="w-full object-cover" />
                 <!-- <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                     <a :href="`#slide${ index == 0 ? index.length - 1 : index - 1 }`" class="btn btn-circle bg-gray-50 opacity-30">❮</a> 
                     <a :href="`#slide${ index + 1 }`" class="btn btn-circle bg-gray-50 opacity-30">❯</a>

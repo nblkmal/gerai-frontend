@@ -42,7 +42,7 @@
             </div>
         </template>
 
-        <template v-if="type === 'qr-code'">
+        <template v-if="type === 'duitnow-qr'">
             <div class="flex flex-col w-full">
                 <h2 class="font-semibold text-md text-left">Please follow the guide</h2>
                 <ul class="steps steps-vertical text-sm">

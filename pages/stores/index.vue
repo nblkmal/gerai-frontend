@@ -26,9 +26,9 @@
             text="Opps, no search found. Try to search with another keyword.">
         </Blank>
 
-        <NuxtLink :to="`/stores/${store.id}`" class="h-24 flex" v-for="store in stores" :key="store.id">
+        <NuxtLink :to="`/stores/${store.slug}`" class="h-24 flex" v-for="store in stores" :key="store.id">
             <div class="border-l border-y rounded-l-md w-28 h-full">
-                <img v-if="store.media && store.media.length !== 0" class="object-cover" :src="store.media[0].original_url ?? store.media[0]" alt="">
+                <img v-if="store.media && store.media.length !== 0" class="object-cover rounded-l-md h-full" :src="store.media[0].original_url" alt="">
                 <div v-else>takde</div>
             </div>
             <div class="border w-full rounded-r-md p-3 text-left truncate">
