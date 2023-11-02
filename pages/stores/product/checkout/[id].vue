@@ -63,13 +63,13 @@
             <div class="bg-gray-100 rounded-md p-4 flex justify-between items-center">
                 <span class="text-sm font-semibold">Total</span>
                 <span class="bg-white py-1 px-2 rounded-md flex items-center justify-center font-semibold text-sm">
-                    {{ useCartStore().totalPrice() }}
+                    RM{{ useCartStore().totalPrice() }}
                 </span>
             </div>
 
         </template>
 
-        <hr>
+        <!-- <hr>
         <h2 class="text-md font-semibold">Past Order</h2>
         <div v-if="orderHistory.length !== 0" class="join join-vertical w-full">
             <div v-for="order in orderHistory" :key="order.order_number" class="collapse collapse-arrow join-item border border-base-300 py-0">
@@ -86,7 +86,7 @@
                     </span>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!-- duitnow qr -->
         <dialog id="qr" class="modal">
@@ -105,7 +105,6 @@
                     <Icon name="ic:baseline-whatsapp" color="white"/>
                     <a
                         target="__blank"
-                        :href="`https://wa.me/6${ store?.phone_number }?text=${ encodedOrder }`"
                         @click="checkout">
                         WhatsApp order
                     </a>
@@ -187,10 +186,20 @@
             payload['user_id'] = useUserStore().user ? useUserStore().user.id : null
 
             console.log('payload: ', payload)
-            // await $fetch(`${ urlBase }vendors/${ vendor_id }/order`, {
-            //     method: 'POST',
-            //     body: payload
-            // })
+            await $fetch(`${ urlBase }vendors/${ vendor_id }/order`, {
+                method: 'POST',
+                body: payload
+            }).then((res) => {
+                console.log('res: ', res)
+                if (res.status === 'success') {
+                    // set order reference id
+                    useCartStore().setOrderRef(res.data.order_uuid)
+                    // redirect to whatsapp
+                    window.location.href = `https://wa.me/6${ store?.value.phone }?text=${ encodedOrder.value }`
+                }
+            }).catch(error => {
+                console.error(error)
+            })
 
             // set previous order
             useCartStore().setPastOrder(payload)
@@ -201,6 +210,7 @@
             orderSubmitted.value = true
             // reset cart
             useCartStore().clearCart()
+
         } catch (error) {
             console.error(error)
         }

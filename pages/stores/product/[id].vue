@@ -155,20 +155,21 @@
     const addToCart = (item, type) => {
         let payload = {
             type: type,
+            product_id: item.id,
             name: item.name,
-            signature: signature.value[item.id],
+            signature: signature.value[item.id] ?? '',
             quantity: 1,
             price: item.price,
             // category: item.product_category.name,
-            note: notes.value[item.id]
+            note: notes.value[item.id] ?? ''
         }
-        console.log('payload: ', payload)
         notes.value = {}
         signature.value = {}
 
         // reset notes
         notes.value = {}
         cartStore.setVendor(vendor_id)
+        console.log('payload: ', payload)
         cartStore.add(payload)
     }
 

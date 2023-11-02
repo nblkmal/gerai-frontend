@@ -11,7 +11,8 @@ export const useCartStore = defineStore('cart', {
         table: null,
         order_number: null,
         orderHistory: [],
-        points: null
+        points: null,
+        order_uuid: null
     }),
     actions: {
         checkCart() {
@@ -28,7 +29,8 @@ export const useCartStore = defineStore('cart', {
                 'payment_method': this.payment_method,
                 'table': this.table,
                 'order_number': this.order_number,
-                'points': this.points
+                'points': this.points,
+                'amount': this.totalPrice()
             }
         },
 
@@ -61,6 +63,10 @@ export const useCartStore = defineStore('cart', {
         setTable(table) {
             this.table = table
             localStorage.setItem('table', this.table)
+        },
+
+        setOrderRef(id) {
+            this.order_uuid = id
         },
 
         setPastOrder(order) {
@@ -114,7 +120,7 @@ export const useCartStore = defineStore('cart', {
                     total = total + parseFloat(data.price)
                 })
                 this.points = Math.round(total.toFixed(2))
-                return 'RM ' + total.toFixed(2)
+                return total.toFixed(2)
             }
         },
 
@@ -129,11 +135,11 @@ export const useCartStore = defineStore('cart', {
                 let itemSub = '** ' + (data.note ? data.note : '') + '%0D%0A%0D%0A'
                 message = message.concat(itemTitle + itemSub)
             })
-            let total = `*Total Amount: ${ this.totalPrice() }*%0D%0A%0D%0A`
+            let total = `*Total Amount: RM${ this.totalPrice() }*%0D%0A%0D%0A`
             let paymentMethod = `*Payment: ${ this.payment_method === 'counter' ? 'At the counter' : 'By DuitNow QR' }*%0D%0A%0D%0A`
             let footer = '_Auto generated from Gerai platform._%0D%0A%0D%0A'
             // let visit = '_Visit https://gerai.store for more info._'
-            let visit = 'Click here https://gerai.store/stores/product/checkout/pay to proceed with your payment._'
+            let visit = `Click here https://gerai.store/payment?ref=${ this.order_uuid } to proceed with your payment._`
             message = message.concat(total + paymentMethod + footer + visit)
             return message
         }

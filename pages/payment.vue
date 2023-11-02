@@ -1,5 +1,33 @@
 <template>
-    <h1 class="font-semibold text-lg text-left pt-8">How do you want to pay?</h1>
+    <div class="flex justify-between bg-gray-100 p-4 rounded-md items-center">
+        <div class="flex flex-col">
+            <h1 class="text-left font-semibold text-xs text-gray-500">#{{ order?.order_number }}</h1>
+            <p class="text-md text-left font-semibold text-neutral">RM{{ order?.amount }}</p>
+        </div>
+        <p onclick="orderSummary.showModal()" class="font-semibold text-sm">View Order</p>
+        <dialog id="orderSummary" class="modal">
+            <div class="modal-box">
+                <form method="dialog">
+                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                </form>
+                <h3 class="font-bold text-lg mb-2">Order Summary</h3>
+                <div v-for="item in order?.meta?.cart" :key="item.product_id">
+                    <a class="flex justify-between py-2">
+                        <div class="flex-1 flex flex-col text-left">
+                            <span class="font-semibold">{{ item.name }}</span>
+                            <span v-if="item.signature" class="text-gray-700">for {{ item.signature }}</span>
+                            <span v-if="item.note" class="text-gray-500">{{ item.note }}</span>
+                        </div>
+                        <span class="bg-gray-50 h-8 w-8 rounded-md flex items-center justify-center font-semibold">1</span>
+                    </a>
+                </div>
+                <div class="bg-gray-100 rounded-md py-2 mt-2">
+                    <span class="font-semibold">Total : RM{{ order?.amount }}</span>
+                </div>
+            </div>
+        </dialog>
+    </div>
+    <h1 class="font-semibold text-lg text-left">How do you want to pay?</h1>
     <div class="flex space-x-4 pb-8 overflow-x-auto">
         <label :class="`${ paymentMethod === 'counter' ? 'bg-gray-700 text-white' : 'bg-gray-100' } rounded-md p-4 text-center flex flex-col items-center justify-center flex-1`">
             <Icon name="bi:cash" class="h-8 w-8 pb-2"/>
@@ -26,8 +54,8 @@
                 <ul class="steps steps-vertical text-sm">
                     <li class="step">Copy the bank details below</li>
                     <li class="step">Make payment</li>
-                    <li class="step step-warning" data-content="★">Share the receipt in WhatsApp</li>
-                    <li class="step step-success" data-content="✓">Order confirmed!</li>
+                    <li class="step" data-content="★">Share the receipt in WhatsApp</li>
+                    <li class="step step-success font-semibold" data-content="✓">Order confirmed!</li>
                 </ul>
             </div>
             <div class="flex flex-col w-full">
@@ -50,8 +78,8 @@
                         Scan or download the QR Code below
                     </li>
                     <li class="step">Make payment</li>
-                    <li class="step step-warning" data-content="★">Share the receipt in WhatsApp</li>
-                    <li class="step step-success" data-content="✓">Order confirmed!</li>
+                    <li class="step" data-content="★">Share the receipt in WhatsApp</li>
+                    <li class="step step-success font-semibold" data-content="✓">Order confirmed!</li>
                 </ul>
                 <div v-if="selectedMethod.media.length !== 0" class="border w-full p-8 rounded-md">
                     <img :src="selectedMethod.media[0].original_url" alt="">
@@ -71,10 +99,15 @@
     const loading = ref(true)
     const { $toast } = useNuxtApp()
 
+    const route = useRoute()
+    const order_uuid = 'ref' in route.query ? route.query.ref : null
+    const order = ref({})
+
     const subdomain = getSubdomain()
 
     onMounted(() => {
         fetchPaymentMethods()
+        fetchOrder()
     })
 
     const type = computed(() => {
@@ -96,7 +129,17 @@
         try {
             const result = await $fetch(`${ urlBase }vendors/${ subdomain }/payment-method`)
             paymentMethods.value = result.data
-            // store.value = result.data
+            // loading.value = false
+        } catch (error) {
+            console.error('error: ', error)
+        }
+    }
+
+    async function fetchOrder() {
+        try {
+            const result = await $fetch(`${ urlBase }vendors/${ subdomain }/order/${ order_uuid }`)
+            order.value = result.data
+            console.log('result.data: ', result.data)
             // loading.value = false
         } catch (error) {
             console.error('error: ', error)

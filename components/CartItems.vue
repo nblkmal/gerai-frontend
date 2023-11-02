@@ -27,16 +27,16 @@
             </div> -->
             <div class="flex-1 flex flex-col">
                 <span class="text-sm">Subtotal ({{ cart.length }} item{{ cart.length > 1 ? 's' : ''}})</span>
-                <span class="text-primary font-semibold">{{ cartStore.totalPrice() }}</span>
+                <span class="text-primary font-semibold">RM{{ cartStore.totalPrice() }}</span>
             </div>
             <div class="modal-action mt-0">
                 <form method="dialog">
-                    <!-- <button @click="navigateCheckout" class="btn btn-primary capitalize text-white py-4 flex items-center justify-center align-baseline">
+                    <button @click="navigateCheckout" class="btn btn-primary capitalize text-white py-4 flex items-center justify-center align-baseline">
                         Checkout
-                    </button> -->
-                    <button disabled class="btn btn-primary capitalize text-white py-4 flex items-center justify-center align-baseline">
-                        Coming Soon!
                     </button>
+                    <!-- <button disabled class="btn btn-primary capitalize text-white py-4 flex items-center justify-center align-baseline">
+                        Coming Soon!
+                    </button> -->
                 </form>
             </div>
         </div>
