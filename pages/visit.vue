@@ -52,15 +52,6 @@
 
     const subdomain = getSubdomain()
 
-    useSeoMeta({
-        title: () => store?.value?.name,
-        ogTitle: () => store?.value?.name,
-        description: () => store?.value?.description,
-        ogDescription: () => store?.value?.description,
-        // ogImage: 'https://example.com/image.png',
-        // twitterCard: 'summary_large_image',
-    })
-
     // useHead({
     //     titleTemplate: (store) => {
     //         return store
@@ -71,13 +62,22 @@
     //         { name: 'description', content: store ? store.description : '' + 'Powered by gerai' }
     //     ]
     // })
-    // const { data: current, pending } = await useAsyncData('currentStore',
-    //     () => {
-    //         return $fetch(`${ urlBase }vendors/${ subdomain }/show`).then(res => {
-    //             return res.data
-    //         })
-    //     }
-    // )
+    const { data: current, pending } = await useAsyncData('currentStore',
+        () => {
+            return $fetch(`${ urlBase }vendors/${ subdomain }/show`).then(res => {
+                return res.data
+            })
+        }
+    )
+
+    useSeoMeta({
+        title: () => current?.value?.name,
+        ogTitle: () => current?.value?.name,
+        description: () => current?.value?.description,
+        ogDescription: () => current?.value?.description,
+        // ogImage: 'https://example.com/image.png',
+        // twitterCard: 'summary_large_image',
+    })
     // if (current.value === null) {
     //     console.log('current: ', current)
     //     refreshNuxtData('currentStore')
