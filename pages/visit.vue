@@ -1,8 +1,8 @@
 <template>
-    <Head>
+    <!-- <Head>
         <Title>{{ store?.name }}</Title>
         <Meta name="description" :content="store?.description ?? '' + 'Powered by gerai'" />
-    </Head>
+    </Head> -->
     <img class="w-full h-28 mt-14" src="/shopping.svg" alt="">
     <h1 class="text-sm text-gray-500">You are visitting</h1>
     <div class="flex items-center justify-center space-x-4">
@@ -52,21 +52,23 @@
 
     const subdomain = getSubdomain()
 
-    useHead({
-        titleTemplate: (store) => {
-            return store
-            ? `${store?.name} - Site Title`
-            : 'Site Title'
-        },
-        meta: [
-            { name: 'description', content: store ? store.description : '' + 'Powered by gerai' }
-        ]
-    })
-    // const { data: current, pending } = await useAsyncData('currentStore',
-    //     () => {
-    //         return $fetch(`${ urlBase }vendors/${ subdomain }/show`)
-    //     }
-    // )
+    // useHead({
+    //     titleTemplate: (store) => {
+    //         return store
+    //         ? `${store?.name} - Site Title`
+    //         : 'Site Title'
+    //     },
+    //     meta: [
+    //         { name: 'description', content: store ? store.description : '' + 'Powered by gerai' }
+    //     ]
+    // })
+    const { data: current, pending } = await useAsyncData('currentStore',
+        () => {
+            return $fetch(`${ urlBase }vendors/${ subdomain }/show`).then(res => {
+                return res.data
+            })
+        }
+    )
     // if (current.value === null) {
     //     console.log('current: ', current)
     //     refreshNuxtData('currentStore')
@@ -75,15 +77,16 @@
     //     console.log('current: ', current)
     // }
 
-    // console.log('currentStore: ', current)
-    // useSeoMeta({
-    //     title: () => 'current.value?.name',
-    //     ogTitle: () => 'current.value?.name',
-    //     description: () => 'current.value?.description',
-    //     ogDescription: () => 'current.value?.description',
-    //     ogImage: 'https://example.com/image.png',
-    //     twitterCard: 'summary_large_image',
-    // })
+    console.log('current: ', current)
+    
+    useSeoMeta({
+        title: () => current.value?.name,
+        ogTitle: () => current.value?.name,
+        description: () => current.value?.description,
+        ogDescription: () => current.value?.description,
+        ogImage: 'https://example.com/image.png',
+        twitterCard: 'summary_large_image',
+    })
 
     onMounted(() => {
         fetchTables()
@@ -93,7 +96,6 @@
     async function fetchVendor() {
         try {
             const result = await $fetch(`${ urlBase }vendors/${ subdomain }/show`)
-            console.log('result: ', result)
             store.value = result.data
             loading.value = false
         } catch (error) {

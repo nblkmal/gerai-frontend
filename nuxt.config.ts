@@ -2,9 +2,10 @@
 import storesJson from './content/stores.json'
 
 export default defineNuxtConfig({
-    vite: { // @ts-ignore
-        ssr: { noExternal: ["moment"] }
-    },
+    // vite: { // @ts-ignore
+    //     ssr: { noExternal: ["moment"] }
+    // },
+    ssr: false,
     modules: [
         '@nuxtjs/tailwindcss',
         '@pinia/nuxt',
@@ -55,7 +56,7 @@ export default defineNuxtConfig({
     runtimeConfig: {
         public: {
             mode: process.env.APP_ENV,
-            devApi: 'http://localhost:8000/api/gerai/',
+            devApi: 'https://mastanah-portal-laravel.test/api/gerai/',
             stagingApi: 'https://manage.api.gerai.store/api/gerai/',
             prodApi: 'https://manage.api.gerai.store/api/gerai/'
         },
