@@ -20,7 +20,7 @@
         <Icon name="ph:question-duotone" class=" h-4 w-4"/>
     </p>
     <FormInput v-model="email" label="Email" placeholder="Who is this for?"></FormInput>
-    <FormGroup placeholder="012345678" v-model="phone" left-append="+60" label="Phone Number"></FormGroup>
+    <FormGroup placeholder="012345678" v-model="phone" type="integer" left-append="+60" label="Phone Number"></FormGroup>
 
     <div class="px-4 fixed bottom-5 left-0 w-full z-20">
         <NuxtLink :to="`/stores/product/${ store?.slug }`" class="w-full space-x-2">
