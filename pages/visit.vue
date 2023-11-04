@@ -81,9 +81,9 @@
     
     useSeoMeta({
         title: () => current.value?.name,
-        ogTitle: () => current.value?.name,
+        ogTitle: () => 'current.value?.name',
         description: () => current.value?.description,
-        ogDescription: () => current.value?.description,
+        ogDescription: () => 'current.value?.description',
         ogImage: 'https://example.com/image.png',
         twitterCard: 'summary_large_image',
     })
