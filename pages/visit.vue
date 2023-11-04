@@ -1,4 +1,8 @@
 <template>
+    <Head>
+        <Title>{{ store?.name }}</Title>
+        <Meta name="description" :content="store?.description ?? '' + 'Powered by gerai'" />
+    </Head>
     <img class="w-full h-28 mt-14" src="/shopping.svg" alt="">
     <h1 class="text-sm text-gray-500">You are visitting</h1>
     <div class="flex items-center justify-center space-x-4">
@@ -48,6 +52,29 @@
 
     const subdomain = getSubdomain()
 
+    // const { data: current, pending } = await useAsyncData('currentStore',
+    //     () => {
+    //         return $fetch(`${ urlBase }vendors/${ subdomain }/show`)
+    //     }
+    // )
+    // if (current.value === null) {
+    //     console.log('current: ', current)
+    //     refreshNuxtData('currentStore')
+    // } else {
+    //     console.log('dah tak null')
+    //     console.log('current: ', current)
+    // }
+
+    // console.log('currentStore: ', current)
+    // useSeoMeta({
+    //     title: () => 'current.value?.name',
+    //     ogTitle: () => current.value?.name,
+    //     description: () => current.value?.description,
+    //     ogDescription: () => current.value?.description,
+    //     ogImage: 'https://example.com/image.png',
+    //     twitterCard: 'summary_large_image',
+    // })
+
     onMounted(() => {
         fetchTables()
         fetchVendor()
@@ -56,6 +83,7 @@
     async function fetchVendor() {
         try {
             const result = await $fetch(`${ urlBase }vendors/${ subdomain }/show`)
+            console.log('result: ', result)
             store.value = result.data
             loading.value = false
         } catch (error) {
