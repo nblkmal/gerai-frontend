@@ -63,7 +63,7 @@
                 <Icon name="bx:store" :class="`h-6 w-6 rouned-full group-hover:text-primary text-gray-500`"/>
             </NuxtLink> -->
             <!-- put modal here -->
-            <Icon v-else name="bx:store" :class="`h-6 w-6 rouned-full group-hover:text-primary text-gray-300`"/>
+            <!-- <Icon v-else name="bx:store" :class="`h-6 w-6 rouned-full group-hover:text-primary text-gray-300`"/> -->
 
             <!-- add to cart -->
             <Cart></Cart>
