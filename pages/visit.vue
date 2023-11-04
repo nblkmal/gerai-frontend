@@ -52,6 +52,16 @@
 
     const subdomain = getSubdomain()
 
+    useHead({
+        titleTemplate: (store) => {
+            return store
+            ? `${store?.name} - Site Title`
+            : 'Site Title'
+        },
+        meta: [
+            { name: 'description', content: store ? store.description : '' + 'Powered by gerai' }
+        ]
+    })
     // const { data: current, pending } = await useAsyncData('currentStore',
     //     () => {
     //         return $fetch(`${ urlBase }vendors/${ subdomain }/show`)
@@ -66,14 +76,14 @@
     // }
 
     // console.log('currentStore: ', current)
-    useSeoMeta({
-        title: () => 'current.value?.name',
-        ogTitle: () => 'current.value?.name',
-        description: () => 'current.value?.description',
-        ogDescription: () => 'current.value?.description',
-        ogImage: 'https://example.com/image.png',
-        twitterCard: 'summary_large_image',
-    })
+    // useSeoMeta({
+    //     title: () => 'current.value?.name',
+    //     ogTitle: () => 'current.value?.name',
+    //     description: () => 'current.value?.description',
+    //     ogDescription: () => 'current.value?.description',
+    //     ogImage: 'https://example.com/image.png',
+    //     twitterCard: 'summary_large_image',
+    // })
 
     onMounted(() => {
         fetchTables()
