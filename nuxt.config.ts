@@ -5,7 +5,8 @@ export default defineNuxtConfig({
     // vite: { // @ts-ignore
     //     ssr: { noExternal: ["moment"] }
     // },
-    ssr: false,
+    ssr: true,
+    target: 'static',
     modules: [
         '@nuxtjs/tailwindcss',
         '@pinia/nuxt',
