@@ -1,18 +1,12 @@
 <template>
-    <h1 class="text-sm text-gray-500 pt-20">You are visitting gerai</h1>
+    <img class="w-full h-28 mt-14" src="/shopping.svg" alt="">
+    <h1 class="text-sm text-gray-500">You are visitting</h1>
     <div class="flex items-center justify-center space-x-4">
-        <div class="bg-gray-100 h-8 w-8 rounded-full"></div>
+        <!-- <div class="bg-gray-100 h-8 w-8 rounded-full"></div> -->
         <div v-if="loading" class="animate-pulse bg-gray-100 h-6 w-32 rounded-full"></div>
         <h1 v-else class="font-semibold">{{ store?.name }}</h1>
     </div>
-    <!-- <div class="flex">
-        <Badge
-            icon="mingcute:tag-fill"
-            class="h-fit"
-            :name="table ? 'Table ' + table : 'No table ? Ask for vendor\'s help'"
-            :type="table ? '' : 'warning'"
-            ></Badge>
-    </div> -->
+
     <p class="text-sm text-gray-500">Start your experience by choosing any table</p>
     <div class="flex overflow-auto space-x-4 bg-gray-100 p-4 rounded-md">
         <label v-for="item in tableList" :key="item.id" :class="`flex items-center justify-center border border-dotted rounded-full h-8 w-8 p-6 ${ table === item.number ? 'bg-neutral text-white' : 'bg-white' }`">
@@ -20,6 +14,13 @@
             <input v-model="table" :value="item.number" type="radio" class="hidden" />
         </label>
     </div>
+
+    <p class="text-sm text-gray-500 pt-2 flex items-center justify-center space-x-1">
+        <span>Let us serve you better</span>
+        <Icon name="ph:question-duotone" class=" h-4 w-4"/>
+    </p>
+    <FormInput v-model="email" label="Email" placeholder="Who is this for?"></FormInput>
+    <FormGroup placeholder="012345678" v-model="phone" left-append="+60" label="Phone Number"></FormGroup>
 
     <div class="px-4 fixed bottom-5 left-0 w-full z-20">
         <NuxtLink :to="`/stores/product/${ store?.slug }`" class="w-full space-x-2">
@@ -40,6 +41,10 @@
     const store = ref()
     const tableList = ref()
     const table = ref('')
+
+    const name = ref('')
+    const email = ref('')
+    const phone = ref('')
 
     const subdomain = getSubdomain()
 
@@ -69,6 +74,11 @@
     }
 
     function setTable() {
+        let detail = {
+            email: email,
+            phone: phone
+        }
+        useCartStore().setCustomer(detail)
         useCartStore().setTable(table)
     }
 </script>

@@ -12,13 +12,17 @@ export const useCartStore = defineStore('cart', {
         order_number: null,
         orderHistory: [],
         points: null,
-        order_uuid: null
+        order_uuid: null,
+        customer_email: '',
+        customer_phone: ''
     }),
     actions: {
         checkCart() {
             this.cart = JSON.parse(localStorage.getItem('cart')) ?? []
             this.vendor_id = localStorage.getItem('vendor_id')
             this.table = localStorage.getItem('table')
+            this.customer_email = localStorage.getItem('customer_email')
+            this.customer_phone = localStorage.getItem('customer_phone')
             this.orderHistory = JSON.parse(localStorage.getItem('orderHistory')) ?? []
         },
 
@@ -30,7 +34,9 @@ export const useCartStore = defineStore('cart', {
                 'table': this.table,
                 'order_number': this.order_number,
                 'points': this.points,
-                'amount': this.totalPrice()
+                'amount': this.totalPrice(),
+                'customer_email': this.customer_email,
+                'customer_phone': this.customer_phone
             }
         },
 
@@ -63,6 +69,13 @@ export const useCartStore = defineStore('cart', {
         setTable(table) {
             this.table = table
             localStorage.setItem('table', this.table)
+        },
+
+        setCustomer(detail) {
+            this.customer_email = detail.email
+            this.customer_phone = detail.phone
+            localStorage.setItem('customer_email', this.customer_email)
+            localStorage.setItem('customer_phone', this.customer_phone)
         },
 
         setOrderRef(id) {

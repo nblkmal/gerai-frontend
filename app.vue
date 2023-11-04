@@ -77,6 +77,7 @@ export default {
         hideHelp() {
             let current = useRoute().name
             let hide = [
+                'visit',
                 'stores-product-order',
                 'stores-product-order-id',
                 'stores-product-id',
