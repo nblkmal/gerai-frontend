@@ -3,7 +3,7 @@
         <div v-if="loader" class="h-full w-full justify-center z-20 backdrop-blur-sm bg-white/30 fixed">
             <span class="absolute loading loading-dots loading-lg bottom-0 top-0 right-0 left-0 m-auto"></span>
         </div>
-        <Navbar :theme="theme"/>
+        <Navbar v-if="!hideNavbar" :theme="theme"/>
 
         <!-- breadcrumbs -->
         <!-- <div class="text-xs breadcrumbs">
@@ -74,9 +74,18 @@ export default {
             return useGlobalLoader().loader
         },
 
+        hideNavbar() {
+            let current = useRoute().name
+            let hide = [
+                'queue'
+            ]
+            return hide.includes(current)
+        },
+
         hideHelp() {
             let current = useRoute().name
             let hide = [
+                'queue',
                 'visit',
                 'stores-product-order',
                 'stores-product-order-id',
