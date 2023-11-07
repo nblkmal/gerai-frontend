@@ -1,5 +1,12 @@
 <template>
     <div class="space-y-6">
+        <div class="flex justify-center ">
+            <div class="flex items-center space-x-2 text-gray-400 border rounded-full w-auto pl-2 pr-3 py-1 text-sm">
+                <Icon name="material-symbols:electric-bolt-rounded"/>
+                <p>Powered by <a href="https://gerai.store" class="font-semibold">gerai</a></p>
+            </div>
+        </div>
+
         <h1 class="text-lg font-semibold flex items-center space-x-2 text-neutral">
             <Icon name="mdi:ticket-account"/>
             <span>Get in queue by filling up the form</span>
@@ -18,13 +25,6 @@
         </div>
 
         <button class="btn btn-neutral w-full">Submit</button>
-
-        <div class="flex justify-center ">
-            <div class="flex items-center space-x-2 text-gray-400 border rounded-full w-auto pl-2 pr-3 py-1 text-sm">
-                <Icon name="material-symbols:electric-bolt-rounded"/>
-                <p>Powered by <a href="https://gerai.store" class="font-semibold">gerai</a></p>
-            </div>
-        </div>
 
     </div>
 </template>

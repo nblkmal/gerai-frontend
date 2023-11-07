@@ -28,7 +28,7 @@
                 <NavbarMenus tabindex="0" class-name="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 space-y-4"></NavbarMenus>
             </div>
             <NuxtLink class="navbar-start flex items-center" to="/">
-                <a class="btn btn-ghost normal-case text-xl">gerai.io</a>
+                <a class="btn btn-ghost normal-case text-xl">gerai</a>
                 <div class="hidden md:block badge badge-accent badge-outline">beta</div>
             </NuxtLink>
         </div>
