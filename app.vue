@@ -1,5 +1,5 @@
 <template>
-    <div id="body" ref="el" data-theme="light" class="min-h-screen">
+    <div id="body" ref="el" data-theme="light" class="min-h-screen custom-bg">
         <div v-if="loader" class="h-full w-full justify-center z-20 backdrop-blur-sm bg-white/30 fixed">
             <span class="absolute loading loading-dots loading-lg bottom-0 top-0 right-0 left-0 m-auto"></span>
         </div>
@@ -17,7 +17,7 @@
         <!-- <Navbar :theme="theme" @toggleTheme="toggleTheme"/> -->
         
         <div class="pt-20 px-4 md:px-64 text-center md:text-left space-y-4 min-h-screen relative pb-28">
-            <!-- <div class="bg-gray-100 rounded-md flex text-left py-3 px-2 space-x-2">
+            <!-- <div class="bg-gray-100 rounded-lg flex text-left py-3 px-2 space-x-2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 <span>This is unreleased beta version of gerai.io</span>
             </div> -->
@@ -26,7 +26,7 @@
             <Help v-if="!hideHelp"/>
         </div>
 
-        <!-- <Footer /> -->
+        <Footer />
     </div>
 </template>
 
@@ -40,6 +40,10 @@
     .no-scrollbar {
         -ms-overflow-style: none;  /* IE and Edge */
         scrollbar-width: none;  /* Firefox */
+    }
+
+    .custom-bg {
+        background-image: linear-gradient(to right top, #ffe8f5, #fdedf9, #fcf1fc, #fbf6fe, #fcfaff, #fbfcff, #fcfdff, #fdfeff, #fafeff, #f5feff, #f1ffff, #edfffe);
     }
 </style>
 

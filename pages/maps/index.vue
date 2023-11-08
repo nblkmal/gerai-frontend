@@ -2,7 +2,7 @@
     <MapboxMap
         ref="global-map"
         :center="mapCenter"
-        class="rounded-md"
+        class="rounded-lg"
         style="height: 41rem;"
         map-style="mapbox://styles/mapbox/streets-v11"
         access-token="pk.eyJ1IjoibmJsa21hbCIsImEiOiJjbGxyZ293aHkwcm1zM2R0aGR3YzU1cGtrIn0.vwZx-2Sq_JKYUcdX5-5qIQ">

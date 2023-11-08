@@ -4,7 +4,7 @@
         <div class="border rounded-full h-12 w-14"></div>
         <FormInput placeholder="What's on your mind?" class="ml-4"></FormInput>
     </div>
-    <div class="flex bg-yellow-50 border border-yellow-500 rounded-md px-4 py-2 items-center space-x-2">
+    <div class="flex bg-yellow-50 border border-yellow-500 rounded-lg px-4 py-2 items-center space-x-2">
         <Icon name="iconamoon:star-duotone" color="orange" />
         <span class="font-semibold text-yellow-700">Be a gerai owner to post here</span>
         <Icon name="iconamoon:arrow-right-2-duotone" class="text-yellow-700" />

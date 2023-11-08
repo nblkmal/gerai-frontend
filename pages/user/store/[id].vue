@@ -1,5 +1,5 @@
 <template>
-    <div class="flex bg-yellow-50 border border-yellow-500 rounded-md px-4 py-2 items-center space-x-2">
+    <div class="flex bg-yellow-50 border border-yellow-500 rounded-lg px-4 py-2 items-center space-x-2">
         <Icon name="iconamoon:star-duotone" color="orange" />
         <span class="font-semibold text-yellow-700">Configure your gerai as owner</span>
     </div>
@@ -77,7 +77,7 @@
 
         <hr>
         <NuxtLink :to="`/user/store/product/${ store?.id }`">
-            <div class="flex flex-col items-center space-y-2 bg-gray-100 rounded-md py-4">
+            <div class="flex flex-col items-center space-y-2 bg-gray-100 rounded-lg py-4">
                 <Icon name="ic:twotone-inventory" color="orange" class="h-10 w-10"/>
                 <h2 class="font-semibold text-sm">Configure your product here</h2>
             </div>

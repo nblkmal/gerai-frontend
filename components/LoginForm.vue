@@ -32,11 +32,11 @@
 
         <!-- for digit verification -->
         <!-- <div class="flex justify-center space-x-2">
-            <input id="firstDigit" v-model="verifyForm.first" type="text" maxlength="1" class="border rounded-md h-8 w-8 digit-custom"/>
-            <input id="secondDigit" v-model="verifyForm.second" type="text" maxlength="1" class="border rounded-md h-8 w-8 digit-custom"/>
-            <input id="thirdDigit" v-model="verifyForm.third" type="text" maxlength="1" class="border rounded-md h-8 w-8 digit-custom"/>
-            <input id="forthDigit" v-model="verifyForm.forth" type="text" maxlength="1" class="border rounded-md h-8 w-8 digit-custom"/>
-            <input id="fifthDigit" v-model="verifyForm.fifth" type="text" maxlength="1" class="border rounded-md h-8 w-8 digit-custom" autofocus/>
+            <input id="firstDigit" v-model="verifyForm.first" type="text" maxlength="1" class="border rounded-lg h-8 w-8 digit-custom"/>
+            <input id="secondDigit" v-model="verifyForm.second" type="text" maxlength="1" class="border rounded-lg h-8 w-8 digit-custom"/>
+            <input id="thirdDigit" v-model="verifyForm.third" type="text" maxlength="1" class="border rounded-lg h-8 w-8 digit-custom"/>
+            <input id="forthDigit" v-model="verifyForm.forth" type="text" maxlength="1" class="border rounded-lg h-8 w-8 digit-custom"/>
+            <input id="fifthDigit" v-model="verifyForm.fifth" type="text" maxlength="1" class="border rounded-lg h-8 w-8 digit-custom" autofocus/>
         </div> -->
     </div>
 </template>

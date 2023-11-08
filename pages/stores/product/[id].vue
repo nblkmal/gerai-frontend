@@ -20,7 +20,7 @@
             </a>
         </div>
     </div>
-    <!-- <div v-if="!loading" class="flex items-center space-x-2 fixed bg-white w-2/3 p-4 border rounded-md">
+    <!-- <div v-if="!loading" class="flex items-center space-x-2 fixed bg-white w-2/3 p-4 border rounded-lg">
         <Icon name="bx:store" class="text-primary"/>
         <NuxtLink :to="`/stores/${ store?.id }`">
             <p class="text-sm font-semibold text-primary">{{ store?.name }} -</p>
@@ -34,7 +34,7 @@
         <p v-else class="text-sm font-semibold text-gray-500">Table {{ useCartStore().table }}</p>
     </div> -->
     <div v-if="!loading" class="space-y-4 text-left pt-20">
-        <!-- <div v-if="useCartStore().table === null" class="flex flex-col bg-yellow-50 border border-yellow-500 rounded-md px-4 py-2">
+        <!-- <div v-if="useCartStore().table === null" class="flex flex-col bg-yellow-50 border border-yellow-500 rounded-lg px-4 py-2">
             <p class="font-semibold text-sm text-yellow-700">Please scan a qr code for table number</p>
             <p class="text-sm text-gray-500">Seems like you do not have a table yet. Please scan the QR code for table</p>
         </div> -->
@@ -43,7 +43,7 @@
         <template v-for="(product, index) in products" :key="index">
             <h1 class="text-lg font-semibold">{{ index }}</h1>
             <div class="grid grid-cols-2 gap-4">
-                <div :onclick="`card${ item.id }.showModal()`" class="border rounded-md p-4" v-for="item in product" :key="item.id">
+                <div :onclick="`card${ item.id }.showModal()`" class="border rounded-lg p-4" v-for="item in product" :key="item.id">
                     <div class="h-20 text-center">
                         <img v-if="item.media.length !== 0" :src="item.media[0].original_url" alt="">
                         <Icon v-else name="basil:image-outline" class="text-gray-200" height="70%" width="70%"/>
@@ -63,7 +63,7 @@
                                 <span class="text-yellow-700 font-semibold">Order feature is coming soon!</span>
                             </div>
 
-                            <div class="border p-4 rounded-md text-center">
+                            <div class="border p-4 rounded-lg text-center">
                                 <Icon name="basil:image-outline" class="text-gray-200" height="30%" width="30%"/>
                             </div>
 
@@ -92,7 +92,7 @@
                                         </div>
                                     </div>
                                     <div class="pt-4 self-start">
-                                        <button @click="addToCart(entry, 'variation')" class="bg-neutral rounded-md text-white h-8 w-8 flex items-center justify-center">
+                                        <button @click="addToCart(entry, 'variation')" class="bg-neutral rounded-lg text-white h-8 w-8 flex items-center justify-center">
                                             <Icon name="typcn:plus" color="white"/>
                                         </button>
                                     </div>
@@ -104,7 +104,7 @@
                                 <div class="form-control">
                                     <textarea class="textarea textarea-xs h-24" v-model="notes[item.id]" placeholder="Add some notes here ..."></textarea>
                                 </div>
-                                <button @click="addToCart(item, 'main')" class="bg-neutral text-white p-2 w-full rounded-md font-semibold">Add product</button>
+                                <button @click="addToCart(item, 'main')" class="bg-neutral text-white p-2 w-full rounded-lg font-semibold">Add product</button>
                             </template>
 
                         </div>
@@ -117,7 +117,7 @@
         </template>
 
         <!-- <div class="px-4 fixed bottom-5 left-0 w-full">
-            <button class="bg-blue-600 hover:bg-blue-700 flex items-center rounded-md justify-center w-full text-white py-3 px-4 drop-shadow-md font-bold">
+            <button class="bg-blue-600 hover:bg-blue-700 flex items-center rounded-lg justify-center w-full text-white py-3 px-4 drop-shadow-md font-bold">
                 Checkout
                 <Icon name="basil:caret-right-outline" color="white" height="10%" width="10%"/>
             </button>

@@ -1,5 +1,5 @@
 <template>
-    <div class="border rounded-md w-full flex indicator">
+    <div class="border rounded-lg w-full flex indicator">
         <span class="indicator-item flex justify-end">
             <span class="badge badge-primary hidden"></span>
             <span class="badge badge-error hidden"></span>

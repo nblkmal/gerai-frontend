@@ -32,11 +32,12 @@
         </div>
     </div>
 
-    <div class="flex justify-center">
-        <div class="flex items-center border group border-yellow-500 hover:bg-yellow-500 rounded-full py-2 px-4 space-x-2 animate-bounce">
-            <Icon class="text-yellow-500 group-hover:text-white" name="iconoir:star-solid"/>
-            <span class="font-semibold text-yellow-500 group-hover:text-white">Book a demo</span>
+    <div class="flex justify-center space-x-2">
+        <div class="flex items-center border group border-yellow-500 hover:bg-yellow-500 rounded-full py-2 px-4 space-x-2 animate-bounce transition ease-in-out delay-150 cursor-pointer">
+            <Icon class="text-yellow-500 group-hover:text-white transition ease-in-out delay-150" name="iconoir:star-solid"/>
+            <span class="font-semibold text-yellow-500 group-hover:text-white transition ease-in-out delay-150">Book a demo</span>
         </div>
+        <img src="/screen-pointer.svg" class="h-8 mt-4" alt="">
     </div>
 
     <div class="pb-16">
@@ -87,30 +88,44 @@
         </div>
     </div>
 
-    <div class="flex justify-center">
+    <h2 class="flex justify-center items-center font-semibold space-x-2">
+        <img src="/note.svg" class="h-8" alt="">
+        <span class="text-2xl text-gray-500">And many more!</span>
+    </h2>
+
+    <div class="flex justify-center py-8">
         <h1 class="text-3xl font-bold flex items-center space-x-2">
             <span>Whats the catch for joining us</span>
             <img src="/question-mark.svg" class="h-8" alt="">
             <img src="/question-mark.svg" class="h-6" alt="">
         </h1>
     </div>
-    <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 justify-center">
+    <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 justify-center pb-8">
         <div class="card w-auto glass">
             <div class="card-body">
-                <h2 class="font-bold text-lg text-center">Points for every review</h2>
-                <p>Food hunters! Get rewarded for sharing your restaurant reviews! Help others discover great eats and earn points towards your next meal.</p>
+                <h2 class="font-bold text-lg text-center flex items-center space-x-4 pb-4">
+                    <img src="/star.svg" class="h-8" alt="">
+                    <span>Points for every review</span>
+                </h2>
+                <p class="text-justify">Food hunters! Get rewarded for sharing your restaurant reviews! Help others discover great eats and earn points towards your next meal.</p>
             </div>
         </div>
         <div class="card w-auto glass">
             <div class="card-body">
-                <h2 class="font-bold text-lg text-center">Be recognize!</h2>
-                <p>Be recognized as a top reviewer in the community! Share your insights, build your reputation, and inspire others to discover new and exciting dining experiences.</p>
+                <h2 class="font-bold text-lg text-center flex items-center space-x-4 pb-4">
+                    <img src="/person.svg" class="h-8" alt="">
+                    <span>Be recognize!</span>
+                </h2>
+                <p class="text-justify">Be recognized as a top reviewer in the community! Share your insights, build your reputation, and inspire others to discover new and exciting dining experiences.</p>
             </div>
         </div>
         <div class="card w-auto glass">
             <div class="card-body">
-                <h2 class="font-bold text-lg text-center">Join the community</h2>
-                <p>Join our community of foodies! Discover new restaurants, share your favorite spots, and earn rewards along the way.</p>
+                <h2 class="font-bold text-lg text-center flex items-center space-x-4 pb-4">
+                    <img src="/rocket.svg" class="h-8" alt="">
+                    <span>Join the community</span>
+                </h2>
+                <p class="text-justify">Join our community of foodies! Discover new restaurants, share your favorite spots, and earn rewards along the way.</p>
             </div>
         </div>
     </div>

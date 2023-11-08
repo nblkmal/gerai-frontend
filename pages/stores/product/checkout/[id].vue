@@ -6,7 +6,7 @@
             <h1 class="font-semibold text-lg pt-1 ml-2 text-amber-800">Barista is preparing your order</h1>
         </div> -->
 
-        <div v-if="user === null" class="border bg-yellow-50 border-yellow-500 text-yellow-700 rounded-md px-4 py-2">
+        <div v-if="user === null" class="border bg-yellow-50 border-yellow-500 text-yellow-700 rounded-lg px-4 py-2">
             <span class="text-sm">
                 Sign up or log in now for order history
             </span>
@@ -16,7 +16,7 @@
         <hr>
 
         <template v-if="useCartStore().cart.length === 0">
-            <div class="flex flex-col justify-center items-center space-y-4 py-8 bg-gray-100 rounded-md">
+            <div class="flex flex-col justify-center items-center space-y-4 py-8 bg-gray-100 rounded-lg">
                 <Icon name="solar:cart-large-2-bold-duotone" class="h-6 w-6 rouned-full text-gray-600 group-hover:text-primary"/>
                 <span class="text-gray-500 font-semibold">Your cart is empty</span>
             </div>
@@ -41,9 +41,9 @@
                     :label="`${ $todayDate }`"></iconed-label>
             </div>
 
-            <div class="bg-gray-100 rounded-md p-4 space-y-2">
+            <div class="bg-gray-100 rounded-lg p-4 space-y-2">
                 <div v-for="item in cart" :key="item" class="flex items-center space-x-2">
-                    <span class="bg-white h-6 w-6 rounded-md flex items-center justify-center font-semibold text-sm">
+                    <span class="bg-white h-6 w-6 rounded-lg flex items-center justify-center font-semibold text-sm">
                         1
                     </span>
 
@@ -54,15 +54,15 @@
                             <!-- <span class="text-sm text-gray-500">{{ useCartStore().price(item.price) }}</span> -->
                         </div>
                     </div>
-                    <span class="bg-white py-1 px-2 rounded-md flex items-center justify-center font-semibold text-sm">
+                    <span class="bg-white py-1 px-2 rounded-lg flex items-center justify-center font-semibold text-sm">
                         {{ useCartStore().price(item.price) }}
                     </span>
                 </div>
             </div>
 
-            <div class="bg-gray-100 rounded-md p-4 flex justify-between items-center">
+            <div class="bg-gray-100 rounded-lg p-4 flex justify-between items-center">
                 <span class="text-sm font-semibold">Total</span>
-                <span class="bg-white py-1 px-2 rounded-md flex items-center justify-center font-semibold text-sm">
+                <span class="bg-white py-1 px-2 rounded-lg flex items-center justify-center font-semibold text-sm">
                     RM{{ useCartStore().totalPrice() }}
                 </span>
             </div>
@@ -100,7 +100,7 @@
         </dialog>
 
         <div class="px-4 fixed bottom-5 left-0 w-full z-20">
-            <button class="bg-green-600 flex items-center rounded-md justify-center w-full text-white p-4 drop-shadow-md font-semibold space-x-2">
+            <button class="bg-green-600 flex items-center rounded-lg justify-center w-full text-white p-4 drop-shadow-md font-semibold space-x-2">
                 <span v-if="!orderSubmitted" class="flex items-center justify-center space-x-2">
                     <Icon name="ic:baseline-whatsapp" color="white"/>
                     <a

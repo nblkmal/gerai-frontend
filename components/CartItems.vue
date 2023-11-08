@@ -15,7 +15,7 @@
                             <span v-if="item.signature" class="text-gray-700">for {{ item.signature }}</span>
                             <span v-if="item.note" class="text-gray-500">{{ item.note }}</span>
                         </div>
-                        <span class="bg-gray-50 h-8 w-8 rounded-md flex items-center justify-center font-semibold">1</span>
+                        <span class="bg-gray-50 h-8 w-8 rounded-lg flex items-center justify-center font-semibold">1</span>
                     </a>
                 </li>
             </ul>

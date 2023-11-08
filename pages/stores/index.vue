@@ -12,11 +12,11 @@
             <Badge v-for="cat in keywords" :key="cat" :name="cat" :model="filters" :input="cat"></Badge>
         </div>
 
-        <div v-if="stores.length === 0 && loading" class="animate-pulse border w-full p-4 rounded-md flex flex-row space-x-2">
-            <div class="flex-1 bg-gray-100 rounded-md"></div>
+        <div v-if="stores.length === 0 && loading" class="animate-pulse border w-full p-4 rounded-lg flex flex-row space-x-2">
+            <div class="flex-1 bg-gray-100 rounded-lg"></div>
             <div class="w-2/3 flex flex-col space-y-2">
-                <div class="bg-gray-100 rounded-md w-2/4 p-3"></div>
-                <div class="bg-gray-100 rounded-md w-full p-3"></div>
+                <div class="bg-gray-100 rounded-lg w-2/4 p-3"></div>
+                <div class="bg-gray-100 rounded-lg w-full p-3"></div>
             </div>
         </div>
 

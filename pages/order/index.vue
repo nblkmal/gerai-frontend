@@ -11,7 +11,7 @@
     </div>
 
     <template v-if="selection === 'gerai'">
-        <div class="py-2 rounded-md flex space-x-5 overflow-auto	">
+        <div class="py-2 rounded-lg flex space-x-5 overflow-auto	">
             <OrderItem></OrderItem>
             <OrderItem></OrderItem>
             <OrderItem></OrderItem>
@@ -70,7 +70,7 @@
 
     #qr-code-stream {
         video {
-            @apply rounded-md flex justify-center;
+            @apply rounded-lg flex justify-center;
             // border-radius: 10px !important;
         }
     }

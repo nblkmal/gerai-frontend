@@ -1,5 +1,5 @@
 <template>
-    <div class="flex bg-yellow-50 border border-yellow-500 rounded-md px-4 py-2 items-center space-x-2">
+    <div class="flex bg-yellow-50 border border-yellow-500 rounded-lg px-4 py-2 items-center space-x-2">
         <Icon name="iconamoon:star-duotone" color="orange" />
         <span class="font-semibold text-yellow-700">Configure your gerai's product</span>
     </div>
@@ -20,8 +20,8 @@
         <div v-for="category in categories" :key="category">
             <div v-if="selectedCategory === category">
                 <div class="space-y-4">
-                    <div v-for="product in products[category]" :key="product" class="border rounded-md p-4 flex space-x-2">
-                        <!-- <div class="border rounded-md p-4 w-4">
+                    <div v-for="product in products[category]" :key="product" class="border rounded-lg p-4 flex space-x-2">
+                        <!-- <div class="border rounded-lg p-4 w-4">
 
                         </div> -->
                         <div class="flex-1 flex-col space-y-3 text-left">
@@ -42,7 +42,7 @@
                             <Icon :class="`${ product.available === 1 || product.available ? 'swap-off' : 'swap-on' } text-red-500`" name="subway:error" />
                         </label>
                     </div>
-                    <div class="border rounded-md p-4">
+                    <div class="border rounded-lg p-4">
                         Add new product
                     </div>
                 </div>

@@ -17,7 +17,7 @@
         <form method="dialog" class="modal-box flex flex-col justify-center items-center">
             <template v-if="user === null">
                 <LoginForm></LoginForm>
-                <!-- <button @click="ping" class="border rounded-md py-1 px-2 mt-4">Ping</button> -->
+                <!-- <button @click="ping" class="border rounded-lg py-1 px-2 mt-4">Ping</button> -->
             </template>
             <template v-else>
                 <div class="bg-green-100 p-4 w-full rounded text-center flex items-center justify-center space-x-2">
@@ -25,14 +25,14 @@
                     <span class="font-semibold">Logged in as {{ user?.name }}</span>
                 </div>
                 <form method="dialog" class="flex w-full space-x-4 mt-4">
-                        <NuxtLink :to="`/user/show/${ user?.id }`" class="flex-1 border p-2 rounded-md text-center" onclick="mobile_auth.close()">
+                        <NuxtLink :to="`/user/show/${ user?.id }`" class="flex-1 border p-2 rounded-lg text-center" onclick="mobile_auth.close()">
                             <Icon name="mingcute:user-4-line"/>
                         </NuxtLink>
 
-                        <NuxtLink to="/help" class="flex-1 border border-blue-200 bg-blue-50 p-2 rounded-md text-center" onclick="mobile_auth.close()">
+                        <NuxtLink to="/help" class="flex-1 border border-blue-200 bg-blue-50 p-2 rounded-lg text-center" onclick="mobile_auth.close()">
                             <Icon name="solar:help-line-duotone"/>
                         </NuxtLink>
-                        <button @click="logout" class="flex-1 border border-red-200 bg-red-50 p-2 rounded-md text-center">
+                        <button @click="logout" class="flex-1 border border-red-200 bg-red-50 p-2 rounded-lg text-center">
                             <Icon name="solar:logout-line-duotone"/>
                         </button>
                 </form>

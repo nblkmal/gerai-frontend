@@ -4,7 +4,7 @@
             <div class="w-2/4 bg-gray-100 rounded-full p-4"></div>
             <div class="w-1/4 bg-gray-100 rounded-full p-4"></div>
         </div>
-        <div class="bg-gray-100 h-60 rounded-md"></div>
+        <div class="bg-gray-100 h-60 rounded-lg"></div>
     </div>
     <div v-else class="space-y-4">
         <div class="flex justify-between">
@@ -16,7 +16,7 @@
             </NuxtLink>
         </div>
         <!-- <div> -->
-            <!-- <img class="rounded-md h-40 w-full object-cover" :src="store?.media[0].original_url ?? store?.media[0]" alt=""> -->
+            <!-- <img class="rounded-lg h-40 w-full object-cover" :src="store?.media[0].original_url ?? store?.media[0]" alt=""> -->
         <!-- </div> -->
         <div class="carousel w-full h-80 rounded-lg">
             <div v-if="store?.media.length === 0" class="border rounded-lg w-full h-full">
@@ -69,7 +69,7 @@
         <reviews :reviews="store?.reviews"></reviews>
 
         <!-- <div class="px-4 fixed bottom-5 left-0 w-full flex space-x-2"> -->
-            <!-- <a :href="store?.mapsUrl" target="__blank" class="flex-1 rounded-md bg-blue-600 text-white font-semibold flex items-center justify-center py-2">
+            <!-- <a :href="store?.mapsUrl" target="__blank" class="flex-1 rounded-lg bg-blue-600 text-white font-semibold flex items-center justify-center py-2">
                 View in Google Maps
             </a> -->
             <!-- <div class="w-16 h-auto">
@@ -86,19 +86,19 @@
             <p class="py-4 text-gray-500">Tell your friends about this hidden gems that you want to recommend!</p>
 
             <span class="text-sm text-gray-500">Share on social media :</span>
-            <div class="bg-blue-100 rounded-md p-2 font-semibold flex items-center justify-center space-x-2">
+            <div class="bg-blue-100 rounded-lg p-2 font-semibold flex items-center justify-center space-x-2">
                 <Icon name="simple-icons:facebook"/>
                 <span>Facebook</span>
             </div>
-            <a :href="`https://twitter.com/intent/tweet?text=${ encodedShare }`" target="__blank" class="bg-blue-50 rounded-md p-2 font-semibold flex items-center justify-center space-x-2">
+            <a :href="`https://twitter.com/intent/tweet?text=${ encodedShare }`" target="__blank" class="bg-blue-50 rounded-lg p-2 font-semibold flex items-center justify-center space-x-2">
                 <Icon name="codicon:twitter"/>
                 <span>Twitter</span>
             </a>
-            <!-- <div class=" bg-purple-100 rounded-md p-2 font-semibold flex items-center justify-center space-x-2">
+            <!-- <div class=" bg-purple-100 rounded-lg p-2 font-semibold flex items-center justify-center space-x-2">
                 <Icon name="ri:instagram-fill"/>
                 <span>Instagram</span>
             </div> -->
-            <div class=" bg-green-100 rounded-md p-2 font-semibold flex items-center justify-center space-x-2">
+            <div class=" bg-green-100 rounded-lg p-2 font-semibold flex items-center justify-center space-x-2">
                 <Icon name="mingcute:whatsapp-fill"/>
                 <span>WhatApp</span>
             </div>
