@@ -1,5 +1,5 @@
 <template>
-    <div class="navbar backdrop-blur-sm bg-white/30 fixed z-10">
+    <div id="navbar" class="navbar backdrop-blur-sm bg-white/30 fixed z-10">
         <div class="md:hidden collapse" id="navbar-collapse">
             <input type="checkbox" name="my-accordion-1" id="navbar-collapse-btn"/> 
             <div class="collapse-title flex items-center">
@@ -66,7 +66,7 @@
             <!-- <Icon v-else name="bx:store" :class="`h-6 w-6 rouned-full group-hover:text-primary text-gray-300`"/> -->
 
             <!-- add to cart -->
-            <Cart></Cart>
+            <Cart v-if="!hideCart"></Cart>
 
             <!-- auth mobile -->
             <MobileAuth class="block md:hidden"></MobileAuth>
@@ -105,6 +105,15 @@ export default {
     computed: {
         ...mapState(useUserStore, ['user']),
         ...mapState(useCartStore, ['cart']),
+
+        hideCart() {
+            const route = useRoute()
+            let hide = [
+                'menu'
+            ]
+            console.log('hide.includes(route.name): ', hide.includes(route.name))
+            return hide.includes(route.name)
+        }
     },
 
     props: {
@@ -166,6 +175,7 @@ export default {
         withSubdomain(subdomain) {
             // check if subdomain exists and same, dont proceed
             const route = useRoute()
+            console.log('route: ', route)
             const domain = 'gerai.io'
             const path = route.fullPath
             if (process.client) window.location.href = 'https://' + subdomain + '.' + domain + path;

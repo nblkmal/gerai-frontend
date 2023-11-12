@@ -11,32 +11,46 @@
         <h1 v-else class="font-semibold">{{ store?.name }}</h1>
     </div>
 
-    <p class="text-sm text-gray-500">Start your experience by choosing any table</p>
-    <div class="flex overflow-auto space-x-4 bg-gray-100 p-4 rounded-lg">
-        <label v-for="item in tableList" :key="item.id" :class="`flex items-center justify-center border border-dotted rounded-full h-8 w-8 p-6 ${ table === item.number ? 'bg-neutral text-white' : 'bg-white' }`">
-            {{ item.number }}
-            <input v-model="table" :value="item.number" type="radio" class="hidden" />
-        </label>
-    </div>
+    <template v-if="!visitPublic">
+        <p class="text-sm text-gray-500">Start your experience by choosing any table</p>
+        <div class="flex overflow-auto space-x-4 bg-gray-100 p-4 rounded-lg">
+            <label v-for="item in tableList" :key="item.id" :class="`flex items-center justify-center border border-dotted rounded-full h-8 w-8 p-6 ${ table === item.number ? 'bg-neutral text-white' : 'bg-white' }`">
+                {{ item.number }}
+                <input v-model="table" :value="item.number" type="radio" class="hidden" />
+            </label>
+        </div>
+        <p class="text-sm text-gray-500 pt-2 flex items-center justify-center space-x-1">
+            <span>Let us serve you better</span>
+            <Icon name="ph:question-duotone" class=" h-4 w-4"/>
+        </p>
+        <FormInput v-model="email" label="Email" placeholder="Who is this for?"></FormInput>
+        <FormGroup placeholder="012345678" v-model="phone" type="integer" left-append="+60" label="Phone Number"></FormGroup>
 
-    <p class="text-sm text-gray-500 pt-2 flex items-center justify-center space-x-1">
-        <span>Let us serve you better</span>
-        <Icon name="ph:question-duotone" class=" h-4 w-4"/>
-    </p>
-    <FormInput v-model="email" label="Email" placeholder="Who is this for?"></FormInput>
-    <FormGroup placeholder="012345678" v-model="phone" type="integer" left-append="+60" label="Phone Number"></FormGroup>
+        <div class="px-4 fixed bottom-5 left-0 w-full z-20">
+            <NuxtLink :to="`/stores/product/${ store?.slug }`" class="w-full space-x-2">
+                <button @click="setTable" :disabled="table === ''" :class="`${ table === '' ? 'opacity-80' : '' } bg-neutral flex items-center rounded-lg justify-center w-full text-white p-4 drop-shadow-md font-semibold`">
+                    <span>Start Ordering</span>
+                </button>
+            </NuxtLink>
+        </div>
+    </template>
 
-    <div class="px-4 fixed bottom-5 left-0 w-full z-20">
-        <NuxtLink :to="`/stores/product/${ store?.slug }`" class="w-full space-x-2">
-            <button @click="setTable" :disabled="table === ''" :class="`${ table === '' ? 'opacity-80' : '' } bg-neutral flex items-center rounded-lg justify-center w-full text-white p-4 drop-shadow-md font-semibold`">
-                <span>Start Ordering</span>
+    <template v-if="visitPublic">
+        <NuxtLink :to="`/menu`" class="flex justify-center space-x-2">
+            <button class="bg-neutral flex items-center rounded-full justify-center text-white px-8 py-2">
+                <span>View Menu</span>
             </button>
         </NuxtLink>
-    </div>
+    </template>
+
 </template>
 
 <script setup>
     import { useCartStore } from '~/store/cart'
+
+    const props = defineProps({
+        visitPublic: Boolean
+    })
 
     const route = useRoute()
     const vendor_id = route.params.id
