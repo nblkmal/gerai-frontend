@@ -13,15 +13,16 @@
             </NuxtLink>
             <p v-else class="text-sm font-semibold text-gray-500">Table {{ useCartStore().table }}</p>
         </div>
-        <div class="dropdown dropdown-bottom flex">
-            <label tabindex="0" class="border rounded-full flex items-center justify-between space-x-12 px-4 py-1 bg-neutral text-white">
+        <details ref="categoryButtonRef" class="dropdown dropdown-bottom flex">
+            <summary tabindex="0" class="w-48 border rounded-full flex items-center justify-between space-x-12 px-4 py-1 bg-neutral text-white">
                 <span class="text-sm">{{ selectedCategory === '' ? categories[0] : selectedCategory }}</span>
                 <Icon name="ep:arrow-down-bold" class="w-3 h-3"/>
-            </label>
+            </summary>
             <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                 <li v-for="(category, index) in categories" :key="category" @click="scrollTo(index)"><a :href="`#${category}`">{{ category }}</a></li>
             </ul>
-        </div>
+        </details>
+        
         <!-- <div class="flex space-x-2 overflow-auto no-scrollbar">
             <a v-for="category in categories" :key="category" :href="`#${category}`">
                 <Badge :name="category"></Badge>
@@ -137,6 +138,7 @@
     })
 
     const categoryRefs = ref([])
+    const categoryButtonRef = ref('')
 
     const alreadyInCart = (item) => {
         const x = cartStore.cart?.find(el => el.id === item.id)
@@ -224,6 +226,7 @@
     const selectedCategory = ref('')
     
     function scrollTo(item) {
+        categoryButtonRef.value.open = false
         selectedCategory.value = categories.value[item]
         categoryRefs.value[item]?.scrollIntoView({behavior: "smooth", block: "center"})
     }
