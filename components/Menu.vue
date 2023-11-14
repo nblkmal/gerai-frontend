@@ -213,7 +213,7 @@
     async function fetchProducts() {
         try {
             const result = await $fetch(`${ urlBase }vendors/${ vendor_id ?? getSubdomain() }/products?groupby=categories`)
-            products.value = result.data.data
+            products.value = result.data
             loading.value = false
             emit('loading', false)
         } catch (error) {
