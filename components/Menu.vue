@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!loading" class="fixed flex flex-col space-y-4 bg-white w-full py-2">
+    <div v-if="!loading" class="fixed flex flex-col space-y-4 backdrop-blur-sm bg-white/30 w-full py-2">
         <div v-if="!visitPublic" class="flex items-center space-x-2">
             <Icon name="bx:store" class="text-primary"/>
             <NuxtLink :to="`/stores/${ store?.slug }`">
@@ -14,7 +14,7 @@
             <p v-else class="text-sm font-semibold text-gray-500">Table {{ useCartStore().table }}</p>
         </div>
         <div class="dropdown dropdown-bottom flex">
-            <label tabindex="0" class="border rounded-full flex items-center justify-between space-x-12 px-4 py-1">
+            <label tabindex="0" class="border rounded-full flex items-center justify-between space-x-12 px-4 py-1 bg-neutral text-white">
                 <span class="text-sm">{{ selectedCategory === '' ? categories[0] : selectedCategory }}</span>
                 <Icon name="ep:arrow-down-bold" class="w-3 h-3"/>
             </label>
@@ -39,9 +39,9 @@
             <h1 ref="categoryRefs" class="text-lg font-semibold">{{ index }}</h1>
             <div class="grid grid-cols-2 gap-4">
                 <div :onclick="`card${ item.id }.showModal()`" class="border rounded-lg p-4" v-for="item in product" :key="item.id">
-                    <div class="h-20 text-center">
-                        <img v-if="item.media.length !== 0" :src="item.media[0].original_url" alt="">
-                        <Icon v-else name="basil:image-outline" class="text-gray-200" height="70%" width="70%"/>
+                    <div class="text-center mb-1">
+                        <img v-if="item.media.length !== 0" :src="item.media[0].original_url" alt="" class="object-cover h-20 w-full border rounded-md">
+                        <Icon v-else name="basil:image-outline" class="text-gray-200 h-20" height="70%" width="70%"/>
                     </div>
                     <div class="text-left space-y-2">
                         <h4 class="font-semibold text-sm truncate">{{ item.name }}</h4>
@@ -214,7 +214,6 @@
         try {
             const result = await $fetch(`${ urlBase }vendors/${ vendor_id ?? getSubdomain() }/products?groupby=categories`)
             products.value = result.data.data
-            console.log('result.data: ', result.data.data)
             loading.value = false
             emit('loading', false)
         } catch (error) {
@@ -225,6 +224,7 @@
     const selectedCategory = ref('')
     
     function scrollTo(item) {
+        selectedCategory.value = categories.value[item]
         categoryRefs.value[item]?.scrollIntoView({behavior: "smooth", block: "center"})
     }
 

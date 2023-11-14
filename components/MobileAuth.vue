@@ -39,6 +39,8 @@
                 <small class="text-gray-500 mt-4">Click outside to close</small>
             </template>
 
+            <small class="mt-4 text-gray-500">gerai v1.0</small>
+
             <!-- <div class="border border-red-400 bg-red-400 rounded mt-4 w-full text-white px-2 py-1">
                 {{ errors?.name[0] }}
             </div> -->
