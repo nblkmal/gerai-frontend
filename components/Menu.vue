@@ -39,12 +39,12 @@
         <template v-for="(product, index) in products" :key="index">
             <h1 ref="categoryRefs" class="text-lg font-semibold">{{ index }}</h1>
             <div class="grid grid-cols-2 gap-4">
-                <div :onclick="`card${ item.id }.showModal()`" class="border rounded-lg p-4" v-for="item in product" :key="item.id">
+                <div :onclick="`card${ item.id }.showModal()`" class="border rounded-lg" v-for="item in product" :key="item.id">
                     <div class="text-center mb-1">
-                        <img v-if="item.media.length !== 0" :src="item.media[0].original_url" alt="" class="object-cover h-20 w-full border rounded-md">
+                        <img v-if="item.media.length !== 0" :src="item.media[0].original_url" alt="" class="object-cover h-20 w-full border-b rounded-t-lg">
                         <Icon v-else name="basil:image-outline" class="text-gray-200 h-20" height="70%" width="70%"/>
                     </div>
-                    <div class="text-left space-y-2">
+                    <div class="text-left space-y-2 px-4 pb-4">
                         <h4 class="font-semibold text-sm truncate">{{ item.name }}</h4>
                         <div class="border rounded-full w-fit px-4 text-sm">
                             <span class="text-xs text-gray-500">from</span>
