@@ -55,6 +55,9 @@
                     <!-- item modal -->
                     <dialog :id="`card${ item.id }`" class="modal">
                         <div class="modal-box space-y-4">
+                            <form method="dialog">
+                                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                            </form>
                             <div class="border rounded-lg text-center bg-yellow-50 border-yellow-500 px-4 py-1">
                                 <span v-if="!visitPublic" class="text-yellow-700 font-semibold">Order feature is coming soon!</span>
                                 <span v-else class="text-yellow-700 font-semibold">Order available on premise</span>
@@ -73,27 +76,38 @@
                             <template v-if="item.variations.length !== 0">
                                 <p class="text-sm text-neutral font-semibold">See options :-</p>
                                 <small v-if="!visitPublic" class="text-gray-500">Click item for more options</small>
-                                <div v-for="(entry, index) in item.variations" :key="entry.id" :class="`flex justify-between ${ index === item.variations.length - 1 ? '' : 'border-b' } items-stretch`">
-                                    <div class="collapse">
-                                        <input type="checkbox" /> 
-                                        <div class="collapse-title p-0">
-                                            <p class="text-sm text-gray-500 collapse-title mt-1 font-semibold pl-0">
-                                                {{ entry.name }} (RM {{ entry.price }})
-                                            </p>
-                                        </div>
-                                        <div class="collapse-content pl-0"> 
-                                            <FormInput v-model="signature[entry.id]" placeholder="Who is this for?" small class="ml-2 mb-2" no-border></FormInput>
-                                            <div class="form-control">
-                                                <textarea class="textarea textarea-xs h-24 ml-2 pl-1" v-model="notes[entry.id]" placeholder="Add some notes here ..."></textarea>
+
+                                <template v-if="!visitPublic">
+                                    <div v-for="(entry, index) in item.variations" :key="entry.id" :class="`flex justify-between ${ index === item.variations.length - 1 ? '' : 'border-b' } items-stretch`">
+                                        <div class="collapse">
+                                            <input type="checkbox" /> 
+                                            <div class="collapse-title p-0">
+                                                <p class="text-sm text-gray-500 collapse-title mt-1 font-semibold pl-0">
+                                                    {{ entry.name }} + {{ useCartStore().price(entry.price - item.price) }}
+                                                </p>
+                                            </div>
+                                            <div class="collapse-content pl-0"> 
+                                                <FormInput v-model="signature[entry.id]" placeholder="Who is this for?" small class="ml-2 mb-2" no-border></FormInput>
+                                                <div class="form-control">
+                                                    <textarea class="textarea textarea-xs h-24 ml-2 pl-1" v-model="notes[entry.id]" placeholder="Add some notes here ..."></textarea>
+                                                </div>
                                             </div>
                                         </div>
+                                        <div v-if="!visitPublic" class="pt-4 self-start">
+                                            <button @click="addToCart(entry, 'variation')" class="bg-neutral rounded-lg text-white h-8 w-8 flex items-center justify-center">
+                                                <Icon name="typcn:plus" color="white"/>
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div v-if="!visitPublic" class="pt-4 self-start">
-                                        <button @click="addToCart(entry, 'variation')" class="bg-neutral rounded-lg text-white h-8 w-8 flex items-center justify-center">
-                                            <Icon name="typcn:plus" color="white"/>
-                                        </button>
+                                </template>
+                                <template v-else>
+                                    <div v-for="(entry, index) in item.variations" :key="entry.id" :class="`flex justify-between ${ index === item.variations.length - 1 ? '' : 'border-b pb-4' } items-stretch`">
+                                        <p class="text-sm flex justify-between items-center text-gray-500 w-full mt-1">
+                                            <span>{{ entry.name }}</span>
+                                            <Badge :name="`+ ${ populatePrice(entry.price, item.price) }`"></Badge>
+                                        </p>
                                     </div>
-                                </div>
+                                </template>
                             </template>
 
                             <template v-else>
@@ -152,6 +166,15 @@
     const removeFromCart = (item) => {
         if(alreadyInCart(item)) {
             cartStore.remove(item)
+        }
+    }
+
+    const populatePrice = (entryPrice, itemPrice) => {
+        let diff = entryPrice - itemPrice
+        if (diff < 0) {
+            return useCartStore().price(0)
+        } else {
+            return useCartStore().price(diff)
         }
     }
 
