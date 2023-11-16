@@ -104,7 +104,7 @@
                                     <div v-for="(entry, index) in item.variations" :key="entry.id" :class="`flex justify-between ${ index === item.variations.length - 1 ? '' : 'border-b pb-4' } items-stretch`">
                                         <p class="text-sm flex justify-between items-center text-gray-500 w-full mt-1">
                                             <span>{{ entry.name }}</span>
-                                            <Badge :name="`+ ${ populatePrice(entry.price, item.price) }`"></Badge>
+                                            <Badge :name="`+ ${ useCartStore().price(entry.price) }`"></Badge>
                                         </p>
                                     </div>
                                 </template>
