@@ -83,7 +83,7 @@
                                             <input type="checkbox" /> 
                                             <div class="collapse-title p-0">
                                                 <p class="text-sm text-gray-500 collapse-title mt-1 font-semibold pl-0">
-                                                    {{ entry.name }} + {{ useCartStore().price(entry.price - item.price) }}
+                                                    {{ entry.name }} + {{ useCartStore().price(entry.price) }}
                                                 </p>
                                             </div>
                                             <div class="collapse-content pl-0"> 
