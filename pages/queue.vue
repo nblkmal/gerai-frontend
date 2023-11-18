@@ -15,7 +15,7 @@
         <form action="POST" @submit.prevent="submitForm" class="space-y-4">
             <FormInput v-model="form.email" :errors="errors" name="email" label="Email" placeholder="E.g: name@gmail.com"></FormInput>
             <FormInput v-model="form.name" :errors="errors" name="name" label="Name" placeholder="So we can call you later"></FormInput>
-            <div class="flex space-x-4">
+            <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
                 <FormGroup placeholder="012345678" v-model="form.phone" :errors="errors" name="phone" type="integer" left-append="+60" label="Phone Number"></FormGroup>
                 <FormInput v-model="form.identification" :errors="errors" name="identification" label="Identification No." placeholder="Malaysian I/C"></FormInput>
             </div>
@@ -42,15 +42,18 @@
                     </div>
                 </template>
                 <template v-else>
-                    <h3 class="font-bold text-lg text-center">Queue Submitted!</h3>
-                    <div class="flex space-x-4 my-4">
+                    <div class="flex items-center space-x-2 justify-center">
+                        <Icon name="teenyicons:tick-circle-solid" class="text-neutral"/>
+                        <h3 class="font-bold text-lg text-center">Queue Submitted</h3>
+                    </div>
+                    <div class="flex flex-col md:flex-row md:space-x-4 my-4">
                         <div class="flex-1 flex border p-4 rounded-lg items-center justify-center">
                             <QrCode :value="`https://${ subdomain }.gerai.store/waiting?ref=${ queue?.uuid }`" size="200"/>
                             <!-- <NuxtLink :to="`/waiting?ref=${ queue?.uuid }`">
                                 <p class="text-sm font-semibold text-primary">View Queue</p>
                             </NuxtLink> -->
                         </div>
-                        <div class="flex-1 flex flex-col justify-center items-center">
+                        <div class="flex-1 md:flex flex-col justify-center items-center hidden">
                             <small class="text-gray-500">Your Number</small>
                             <p class="text-4xl font-bold my-4">{{ queue?.number }}</p>
                             <small class="text-gray-500">{{ vendor?.name }}</small>
@@ -58,7 +61,7 @@
                         </div>
                     </div>
                     <div class="border border-yellow-600 bg-yellow-50 rounded-lg py-2 px-4 text-center">
-                        <p class="text-yellow-600 font-semibold">Please scan the QR code to keep track of your queue</p>
+                        <p class="text-yellow-600 text-sm font-semibold">Please scan the QR code to keep track of your queue or click <a :href="`https://${ subdomain }.gerai.store/waiting?ref=${ queue?.uuid }`" class="text-neutral underline">here</a></p>
                     </div>
                 </template>
             </div>
