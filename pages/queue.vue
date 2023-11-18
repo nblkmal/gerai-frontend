@@ -61,7 +61,11 @@
                         </div>
                     </div>
                     <div class="border border-yellow-600 bg-yellow-50 rounded-lg py-2 px-4 text-center">
-                        <p class="text-yellow-600 text-sm font-semibold">Please scan the QR code to keep track of your queue or click <a :href="`https://${ subdomain }.gerai.store/waiting?ref=${ queue?.uuid }`" class="text-neutral underline">here</a></p>
+                        <p class="text-yellow-600 text-sm font-semibold">Please scan the QR code to keep track of your queue or click 
+                            <NuxtLink :to="`/waiting?ref=${ queue?.uuid }`">
+                                <p class="text-neutral">here</p>
+                            </NuxtLink>
+                        </p>
                     </div>
                 </template>
             </div>

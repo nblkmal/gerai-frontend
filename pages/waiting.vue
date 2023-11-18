@@ -14,7 +14,7 @@
         </div>
         <div v-if="waiting === 0 && queue.status === 'calling'" class="flex items-center space-x-2 border border-green-600 bg-green-50 rounded-lg py-2 px-4 mt-8">
             <Icon name="bxs:bell-ring" class="text-green-600"/>
-            <p class="text-green-600 font-semibold">Your turn!</p>
+            <p class="text-green-600 font-semibold">Your turn! Go to counter {{ counters?.[counters.length - 1].code }}</p>
         </div>
         <div v-if="waiting === 0 && queue.status === 'pending'" class="flex items-center space-x-2 border border-yellow-600 bg-yellow-50 rounded-lg py-2 px-4 mt-8">
             <span class="loading loading-dots loading-sm text-yellow-600"></span>
@@ -29,6 +29,7 @@
 
 <script setup>
     const queue = ref({})
+    const counters = ref({})
     const waiting = ref(0)
     const route = useRoute()
     const loading = ref(true)
@@ -46,6 +47,7 @@
             const result = await $fetch(`${ urlBase }queue/${ subdomain }/${ queue_uuid }/show`)
             queue.value = result.data.queue
             waiting.value = result.data.waiting
+            counters.value = result.data.counters
             loading.value = false
         } catch (error) {
             console.error('error: ', error)
