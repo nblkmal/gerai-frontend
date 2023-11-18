@@ -11,9 +11,13 @@
             <Icon name="icon-park-solid:time" class="text-gray-400"/>
             <p class="text-gray-600">{{ waiting }} more person before your turn</p>
         </div>
-        <div v-if="waiting === 0 && queue.status === 'pending'" class="flex items-center space-x-2 border border-green-600 bg-green-50 rounded-lg py-2 px-4 mt-8">
+        <div v-if="waiting === 0 && queue.status === 'calling'" class="flex items-center space-x-2 border border-green-600 bg-green-50 rounded-lg py-2 px-4 mt-8">
             <Icon name="bxs:bell-ring" class="text-green-600"/>
             <p class="text-green-600 font-semibold">Your turn!</p>
+        </div>
+        <div v-if="waiting === 0 && queue.status === 'pending'" class="flex items-center space-x-2 border border-yellow-600 bg-yellow-50 rounded-lg py-2 px-4 mt-8">
+            <span class="loading loading-dots loading-sm text-yellow-600"></span>
+            <p class="text-yellow-600 font-semibold">Waiting any counter to call</p>
         </div>
         <div v-if="queue.status !== 'pending'" class="flex items-center space-x-2 border border-green-600 bg-green-50 rounded-lg py-2 px-4 mt-8">
             <Icon name="teenyicons:tick-circle-solid" class="text-green-600"/>
