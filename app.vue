@@ -86,7 +86,8 @@ export default {
         hideNavbar() {
             let current = useRoute().name
             let hide = [
-                'queue'
+                'queue',
+                'waiting'
             ]
             return hide.includes(current)
         },
