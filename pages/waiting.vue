@@ -1,5 +1,6 @@
 <template>
-    <div class="flex flex-col justify-center items-center">
+    <span v-if="loading" id="loader" class="loading loading-dots loading-lg"></span>
+    <div v-else class="flex flex-col justify-center items-center">
         <div @click="fetchQueue" class="border rounded-full flex items-center space-x-2 bg-gray-50 py-1 px-4 mb-4">
             <Icon name="ic:outline-refresh" class="text-gray-400"/>
             <p class="text-gray-600 text-sm">Refresh</p>
@@ -19,7 +20,7 @@
             <span class="loading loading-dots loading-sm text-yellow-600"></span>
             <p class="text-yellow-600 font-semibold">Waiting any counter to call</p>
         </div>
-        <div v-if="queue.status !== 'pending'" class="flex items-center space-x-2 border border-green-600 bg-green-50 rounded-lg py-2 px-4 mt-8">
+        <div v-if="queue.status === 'completed'" class="flex items-center space-x-2 border border-green-600 bg-green-50 rounded-lg py-2 px-4 mt-8">
             <Icon name="teenyicons:tick-circle-solid" class="text-green-600"/>
             <p class="text-green-600 font-semibold">Thank you and come again</p>
         </div>
@@ -30,6 +31,7 @@
     const queue = ref({})
     const waiting = ref(0)
     const route = useRoute()
+    const loading = ref(true)
     const router = useRouter()
     const subdomain = getSubdomain()
     const urlBase = inject('urlBase')
@@ -44,7 +46,7 @@
             const result = await $fetch(`${ urlBase }queue/${ subdomain }/${ queue_uuid }/show`)
             queue.value = result.data.queue
             waiting.value = result.data.waiting
-            // loading.value = false
+            loading.value = false
         } catch (error) {
             console.error('error: ', error)
         }
