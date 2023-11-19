@@ -23,7 +23,7 @@
             </div> -->
 
             <NuxtPage />
-            <Help v-if="!hideHelp"/>
+            <!-- <Help v-if="!hideHelp"/> -->
         </div>
 
         <Footer v-if="hideFooter" />

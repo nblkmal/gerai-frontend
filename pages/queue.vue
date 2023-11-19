@@ -19,6 +19,9 @@
                 <FormGroup placeholder="12345678" v-model="form.phone" :errors="errors" name="phone" type="integer" left-append="+60" label="Phone Number"></FormGroup>
                 <FormInput v-model="form.identification" :errors="errors" name="identification" label="Identification No." placeholder="Malaysian I/C"></FormInput>
             </div>
+
+            <FormSelect v-model="form.service_id" label="Type" :placeholder="selectedType" :selections="typeSelections"/>
+
             <div class="form-control">
                 <label class="label">
                     <span class="label-text text-gray-500 font-semibold">Issues</span>
@@ -89,8 +92,22 @@
         email: '',
         phone: '',
         identification: '',
-        remark: ''
+        remark: '',
+        service_id: null
     })
+
+    onMounted(() => {
+        fetchQueueConfig()
+    })
+
+    async function fetchQueueConfig() {
+        try {
+            const result = await $fetch(`${ urlBase }queue/${ subdomain }/config`)
+            typeSelections.value = result.data.services
+        } catch (error) {
+            console.error('error: ', error)
+        }
+    }
     const errors = ref([])
 
     const queue = ref({})
@@ -98,6 +115,17 @@
     const loading = ref(false)
     const subdomain = getSubdomain()
     const urlBase = inject('urlBase')
+
+    const typeSelections = ref([])
+
+    const selectedType = ref('Select issue type')
+    watch(form.value, async (newType, oldType) => {
+        typeSelections.value.forEach(type => {
+            if (type.id === form.value.service_id) {
+                selectedType.value = type.name
+            }
+        })
+    })
 
     form.value['vendor'] = subdomain
 

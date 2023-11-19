@@ -46,9 +46,6 @@
 
                 <dialog id="stateModal" class="modal">
                     <div class="modal-box py-4">
-                            <!-- <form method="dialog">
-                                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                            </form> -->
                         <div class="modal-action h-40 w-full mt-0">
                             <form method="dialog" class="w-full">
                                 <button @click="selectState(item.id)" v-for="item in stateCity" :key="item.id" class="w-full py-2 px-4 font-semibold text-gray-500">
