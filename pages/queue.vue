@@ -16,7 +16,7 @@
             <FormInput v-model="form.email" :errors="errors" name="email" label="Email" placeholder="E.g: name@gmail.com"></FormInput>
             <FormInput v-model="form.name" :errors="errors" name="name" label="Name" placeholder="So we can call you later"></FormInput>
             <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-                <FormGroup placeholder="012345678" v-model="form.phone" :errors="errors" name="phone" type="integer" left-append="+60" label="Phone Number"></FormGroup>
+                <FormGroup placeholder="12345678" v-model="form.phone" :errors="errors" name="phone" type="integer" left-append="+60" label="Phone Number"></FormGroup>
                 <FormInput v-model="form.identification" :errors="errors" name="identification" label="Identification No." placeholder="Malaysian I/C"></FormInput>
             </div>
             <div class="form-control">
@@ -31,9 +31,9 @@
 
         <dialog id="submitQueue" class="modal">
             <div class="modal-box">
-                <form method="dialog">
+                <!-- <form method="dialog">
                     <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                </form>
+                </form> -->
 
                 <template v-if="loading">
                     <div class="flex flex-col items-center justify-center space-y-4">
@@ -49,9 +49,6 @@
                     <div class="flex flex-col md:flex-row md:space-x-4 my-4">
                         <div class="flex-1 flex border p-4 rounded-lg items-center justify-center">
                             <QrCode :value="`https://${ subdomain }.gerai.store/waiting?ref=${ queue?.uuid }`" size="200"/>
-                            <!-- <NuxtLink :to="`/waiting?ref=${ queue?.uuid }`">
-                                <p class="text-sm font-semibold text-primary">View Queue</p>
-                            </NuxtLink> -->
                         </div>
                         <div class="flex-1 md:flex flex-col justify-center items-center hidden">
                             <small class="text-gray-500">Your Number</small>
@@ -67,6 +64,9 @@
                             </NuxtLink>
                         </p>
                     </div>
+                    <form method="dialog">
+                        <button class="btn btn-block mt-4">Done</button>
+                    </form>
                 </template>
             </div>
         </dialog>
@@ -115,6 +115,10 @@
             }).then(res => {
                 queue.value = res.data.queue
                 vendor.value = res.data.vendor
+
+                for (const key in form.value) {
+                    form.value[key] = ''
+                }
             })
             setTimeout(() => {
                 loading.value = false
