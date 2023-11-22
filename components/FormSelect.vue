@@ -3,7 +3,10 @@
         <label class="label">
             <span class="label-text text-gray-500 font-semibold">{{ label }}</span>
         </label>
-        <input type="text" :placeholder="placeholder" class="input input-bordered w-full">
+        <input type="text" :placeholder="placeholder" :class="`input input-bordered w-full ${errors.length !== 0 && errors[name] ? 'input-error' : ''}`">
+        <label v-if="errors.length !== 0 && errors[name]" class="label">
+            <span class="label-text-alt text-red-700">{{ errors[name][0].replace(name.replace('_', ' '), label) }}</span>
+        </label>
     </div>
 
     <dialog id="stateModal" class="modal">
@@ -26,7 +29,9 @@
         label: String,
         placeholder: String,
         noBorder: Boolean,
-        selections: Array
+        selections: Array,
+        name: {type: String },
+        errors: { type: Object, default: [] }
     })
     defineEmits(['update:modelValue'])
 </script>

@@ -9,7 +9,7 @@
             <!-- <input class="input input-bordered join-item w-full" :placeholder="placeholder"/> -->
             <input type="text" :placeholder="placeholder" :class="`input input-bordered join-item w-full ${errors.length !== 0 && errors[name] ? 'input-error' : ''}`" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" />
         </div>
-        <label v-if="errors.length !== 0" class="label">
+        <label v-if="errors.length !== 0 && errors[name]" class="label">
             <span class="label-text-alt text-red-700">{{ errors[name][0] }}</span>
         </label>
     </div>

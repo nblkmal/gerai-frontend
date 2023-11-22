@@ -9,7 +9,7 @@
             <span class="label-text-alt" v-if="bottomLeftLabel !== ''">{{ bottomLeftLabel }}</span>
             <span class="label-text-alt" v-if="topLeftLabel !== ''">{{ topLeftLabel }}</span>
         </label> -->
-        <label v-if="errors.length !== 0" class="label">
+        <label v-if="errors.length !== 0 && errors[name]" class="label">
             <span class="label-text-alt text-red-700">{{ errors[name][0] }}</span>
         </label>
     </div>

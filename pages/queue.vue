@@ -20,7 +20,7 @@
                 <FormInput v-model="form.identification" :errors="errors" name="identification" label="Identification No." placeholder="Malaysian I/C"></FormInput>
             </div>
 
-            <FormSelect v-model="form.service_id" label="Type" :placeholder="selectedType" :selections="typeSelections"/>
+            <FormSelect v-model="form.service_id" label="Type" name="service_id" :errors="errors" :placeholder="selectedType" :selections="typeSelections"/>
 
             <div class="form-control">
                 <label class="label">
@@ -29,10 +29,11 @@
                 <textarea class="textarea textarea-bordered w-full" v-model="form.remark" placeholder="Add some notes here ..."></textarea>
             </div>
 
-            <button type="submit" onclick="submitQueue.showModal()" :disabled="disableSubmit" class="btn btn-neutral w-full">Submit</button>
+            <!-- <button type="submit" onclick="submitQueue.showModal()" :disabled="disableSubmit" class="btn btn-neutral w-full">Submit</button> -->
+            <button type="submit" :disabled="disableSubmit" class="btn btn-neutral w-full">Submit</button>
         </form>
 
-        <dialog id="submitQueue" class="modal">
+        <dialog id="submitQueue" ref="submitQueue" class="modal">
             <div class="modal-box">
                 <!-- <form method="dialog">
                     <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
@@ -68,7 +69,7 @@
                         </p>
                     </div>
                     <form method="dialog">
-                        <button class="btn btn-block mt-4">Done</button>
+                        <button ref="doneButton" class="btn btn-block mt-4">Done</button>
                     </form>
                 </template>
             </div>
@@ -133,6 +134,8 @@
         return form.value.name === '' || form.value.email === '' || form.value.phone === '' || form.value.identification === ''
     })
 
+    const doneButton = ref('')
+
     const submitForm = async() => {
         loading.value = true
         // useGlobalLoader().setLoader(true)
@@ -153,6 +156,7 @@
             }, 1500);
             // useGlobalLoader().setLoader(false)
         } catch(error) {
+            console.log('doneButton.value: ', doneButton.value)
             errors.value = error.response._data.errors
             loading.value = false
         }
