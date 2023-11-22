@@ -56,9 +56,13 @@
                         </div>
                         <div class="flex-1 md:flex flex-col justify-center items-center hidden">
                             <small class="text-gray-500">Your Number</small>
-                            <p class="text-4xl font-bold my-4">{{ queue?.number }}</p>
+                            <p class="text-4xl font-bold my-4">{{ queue?.queueNumber }}</p>
                             <small class="text-gray-500">{{ vendor?.name }}</small>
                             <small class="text-gray-500">{{ queue?.name }}</small>
+                        </div>
+                        <div class="flex flex-col justify-center my-2 md:hidden">
+                            <small class="text-gray-500">Your Number</small>
+                            <p class="text-4xl font-bold">{{ queue?.queueNumber }}</p>
                         </div>
                     </div>
                     <div class="border border-yellow-600 bg-yellow-50 rounded-lg py-2 px-4 text-center">
@@ -131,7 +135,7 @@
     form.value['vendor'] = subdomain
 
     const disableSubmit = computed(() => {
-        return form.value.name === '' || form.value.email === '' || form.value.phone === '' || form.value.identification === ''
+        return form.value.name === '' || form.value.email === '' || form.value.phone === '' || form.value.identification === '' || form.value.service_id === null
     })
 
     const doneButton = ref('')
@@ -147,10 +151,14 @@
                 queue.value = res.data.queue
                 vendor.value = res.data.vendor
 
+                // reset errors
+                errors.value = []
+
                 for (const key in form.value) {
                     form.value[key] = ''
                 }
             })
+            submitQueue.showModal()
             setTimeout(() => {
                 loading.value = false
             }, 1500);
