@@ -144,7 +144,7 @@
         loading.value = true
         // useGlobalLoader().setLoader(true)
         try {
-            await $fetch(urlBase + `queue`, {
+            await $fetch(urlBase + `queue/${ subdomain }`, {
                 method: 'POST',
                 body: form.value
             }).then(res => {
