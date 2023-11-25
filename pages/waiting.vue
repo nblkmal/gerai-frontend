@@ -14,7 +14,7 @@
 
         <small v-if="queue.status === 'pending'" class="text-gray-500">Please wait for your number to be called</small>
 
-        <div v-if="waiting !== 0" class="flex items-center space-x-2 border bg-gray-50 rounded-lg py-2 px-4 mt-8">
+        <div v-if="waiting !== 0 && queue.status !== 'calling'" class="flex items-center space-x-2 border bg-gray-50 rounded-lg py-2 px-4 mt-8">
             <Icon name="icon-park-solid:time" class="text-gray-400"/>
             <p class="text-gray-600">{{ waiting }} more person before your turn</p>
         </div>
