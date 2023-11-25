@@ -8,11 +8,11 @@
         <small class="text-gray-500">Your Number</small>
         <h1 class="font-bold text-5xl my-8">{{ queue?.queueNumber }}</h1>
         <small v-if="queue.status === 'pending'" class="text-gray-500">Please wait for your number to be called</small>
-        <div v-if="waiting !== 0" class="flex items-center space-x-2 border bg-gray-50 rounded-lg py-2 px-4 mt-8">
+        <div v-if="waiting !== 0 && (queue.status === 'pending' || queue.status === 'calling')" class="flex items-center space-x-2 border bg-gray-50 rounded-lg py-2 px-4 mt-8">
             <Icon name="icon-park-solid:time" class="text-gray-400"/>
             <p class="text-gray-600">{{ waiting }} more person before your turn</p>
         </div>
-        <div v-if="waiting === 0 && queue.status === 'calling'" class="flex items-center space-x-2 border border-green-600 bg-green-50 rounded-lg py-2 px-4 mt-8">
+        <div v-if="queue.status === 'calling'" class="flex items-center space-x-2 border border-green-600 bg-green-50 rounded-lg py-2 px-4 mt-8">
             <Icon name="bxs:bell-ring" class="text-green-600"/>
             <p class="text-green-600 font-semibold">Your turn! Go to counter {{ counters?.[counters.length - 1].code }}</p>
         </div>
