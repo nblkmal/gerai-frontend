@@ -6,12 +6,12 @@
             <FormInput :placeholder="user ? user.name : 'Your name'" label="Name" v-model="form.name" :value="user ? user.name : ''"></FormInput>
             <FormGroup :placeholder="user ? user.phone_number : 'xx xxxx'" v-model="form.phone" left-append="+60" label="Phone Number"></FormGroup>
 
-            <button class="px-4 fixed bottom-5 left-0 w-full" type="submit">
+            <!-- <button class="px-4 fixed bottom-5 left-0 w-full" type="submit">
                 <button class="btn btn-neutral btn-block mt-8">
                     <span v-if="loading" class="loading loading-dots loading-xs"></span>
                     <span v-else>Save</span>
                 </button>
-            </button>
+            </button> -->
         </form>
 
 
