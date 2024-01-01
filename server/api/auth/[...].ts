@@ -32,6 +32,7 @@ export default NuxtAuthHandler({
                     name: profile.data.name,
                     email: profile.data.email,
                     image: profile.data.avatar_url,
+                    role: profile.data.role
                 };
             },
             idToken: false,
