@@ -18,15 +18,15 @@
 
         <!-- <GoogleSSO class="mt-4" @loading="emitLoading"></GoogleSSO> -->
 
-        <button class="btn btn-primary text-white btn-md capitalize w-full">Sign in coming soon!</button>
+        <!-- <button class="btn btn-primary text-white btn-md capitalize w-full">Sign in coming soon!</button> -->
 
-        <!-- <button @click="signIn('mastanah')" class="btn btn-primary text-white btn-md capitalize w-full">
+        <button @click="signIn('mastanah')" class="btn btn-primary text-white btn-md capitalize w-full">
             <span v-if="!loading" class="flex">
-                <span>Sign in to dashboard</span>
-                <img src="/mastanah-logo.svg" alt="" height="40" width="40" class="border border-black">
+                <span>Login With Mastanah</span>
+                <!-- <img src="/mastanah-logo.svg" alt="" height="40" width="40" class="border border-black"> -->
             </span>
             <span v-else class="loading loading-dots loading-md"></span>
-        </button> -->
+        </button>
 
         <!-- hide sign up option -->
         <!-- <div class="divider my-1 text-sm">Or</div>
