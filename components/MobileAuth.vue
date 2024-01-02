@@ -24,7 +24,7 @@
                     <Icon name="solar:verified-check-bold-duotone" color="green" height="30" width="30"/>
                     <span class="font-semibold">Logged in as {{ user?.name }}</span>
                 </div>
-                {{ user ? user : 'takde' }}
+                {{ user?.role == 1 || user?.role == 2 ? 'Admin' : '' }}
                 <form method="dialog" class="flex w-full space-x-4 mt-4">
                         <NuxtLink :to="`/user/show/${ user?.id }`" class="flex-1 border p-2 rounded-lg text-center" onclick="mobile_auth.close()">
                             <Icon name="mingcute:user-4-line"/>
