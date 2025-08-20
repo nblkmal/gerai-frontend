@@ -13,42 +13,42 @@ export default defineNuxtConfig({
         '@nuxtjs/robots',
         'nuxt-vue3-google-signin',
         '@sidebase/nuxt-auth',
-        'nuxt-simple-sitemap'
+        // 'nuxt-simple-sitemap'
         // 'nuxt-scheduler'
     ],
-    sitemap: {
-        urls: async () => {
-            const blogPages = await storesJson
-            return blogPages.map(page => ({
-                loc: `/stores/${page.id}`,
-                // update the lastmod
-                lastmod: new Date().toISOString(),
-                changefreq: 'daily',
-                priority: 0.8,
-            }))
-        },
-    },
-    site: {
-        url: process.env.APP_ENV === 'development' ? process.env.AUTH_ORIGIN : process.env.PROD_URL
-    },
-    nitro: {
-        prerender: {
-            crawlLinks: true,
-            routes: ['/']
-        }
-    },
+    // sitemap: {
+    //     urls: async () => {
+    //         const blogPages = await storesJson
+    //         return blogPages.map(page => ({
+    //             loc: `/stores/${page.id}`,
+    //             // update the lastmod
+    //             lastmod: new Date().toISOString(),
+    //             changefreq: 'daily',
+    //             priority: 0.8,
+    //         }))
+    //     },
+    // },
+    // site: {
+    //     url: process.env.APP_ENV === 'development' ? process.env.AUTH_ORIGIN : process.env.PROD_URL
+    // },
+    // nitro: {
+    //     prerender: {
+    //         crawlLinks: true,
+    //         routes: ['/']
+    //     }
+    // },
     // auth: {
     //     basePath: '/api/auth'
     // },
     googleSignIn: {
         clientId: process.env.GOOGLE_CLIENT_ID,
     },
-    robots: {
-        rules: {
-            UserAgent: '*',
-            Disallow: '/user',
-        }
-    },
+    // robots: {
+    //     rules: {
+    //         UserAgent: '*',
+    //         Disallow: '/user',
+    //     }
+    // },
     // mapbox: {
     //     accessToken: 'pk.eyJ1IjoibmJsa21hbCIsImEiOiJjbGxyZ293aHkwcm1zM2R0aGR3YzU1cGtrIn0.vwZx-2Sq_JKYUcdX5-5qIQ'
     // },
