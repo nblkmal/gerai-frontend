@@ -28,8 +28,9 @@
 
         <NuxtLink :to="`/stores/${store.slug}`" class="h-24 flex" v-for="store in stores" :key="store.id">
             <div class="border-l border-y rounded-l-md w-28 h-full">
-                <img v-if="store.media && store.media.length !== 0" class="object-cover rounded-l-md h-full" :src="store.media[0].original_url" alt="">
-                <div v-else>takde</div>
+                <img v-if="store.media && store.media.length !== 0" class="object-cover rounded-l-md h-full" :src="store.media[0].original_url" :alt="store.name">
+                <div v-else class="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center rounded-l-md">
+                </div>
             </div>
             <div class="border w-full rounded-r-md p-3 text-left truncate">
                 <div class="flex justify-between items-center">
