@@ -6,7 +6,6 @@ export default defineNuxtConfig({
     //     ssr: { noExternal: ["moment"] }
     // },
     ssr: true,
-    target: 'static',
     modules: [
         '@nuxtjs/tailwindcss',
         '@pinia/nuxt',
@@ -23,7 +22,7 @@ export default defineNuxtConfig({
             return blogPages.map(page => ({
                 loc: `/stores/${page.id}`,
                 // update the lastmod
-                lastmod: Date.now(),
+                lastmod: new Date().toISOString(),
                 changefreq: 'daily',
                 priority: 0.8,
             }))
@@ -38,20 +37,21 @@ export default defineNuxtConfig({
             routes: ['/', '/sitemap.xml']
         }
     },
-    auth: {
-        origin: process.env.AUTH_ORIGIN,
-        basePath: '/api/auth'
-    },
+    // auth: {
+    //     basePath: '/api/auth'
+    // },
     googleSignIn: {
         clientId: process.env.GOOGLE_CLIENT_ID,
     },
     robots: {
-        UserAgent: '*',
-        Disallow: '/user',
+        rules: {
+            UserAgent: '*',
+            Disallow: '/user',
+        }
     },
-    mapbox: {
-        accessToken: 'pk.eyJ1IjoibmJsa21hbCIsImEiOiJjbGxyZ293aHkwcm1zM2R0aGR3YzU1cGtrIn0.vwZx-2Sq_JKYUcdX5-5qIQ'
-    },
+    // mapbox: {
+    //     accessToken: 'pk.eyJ1IjoibmJsa21hbCIsImEiOiJjbGxyZ293aHkwcm1zM2R0aGR3YzU1cGtrIn0.vwZx-2Sq_JKYUcdX5-5qIQ'
+    // },
     plugins: ['~/plugins/intercept.js', '~/plugins/toast.js', '~/plugins/api.js'],
     // @ts-ignore
     runtimeConfig: {
@@ -89,11 +89,6 @@ export default defineNuxtConfig({
     },
     css: ['~/assets/style/app.scss'],
     build:{
-        transpile: ['vue-toastification'],
-        postcss: {
-            plugins: {
-                "postcss-custom-properties": false
-            }
-        }
+        transpile: ['vue-toastification']
     }
 })

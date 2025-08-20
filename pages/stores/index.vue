@@ -102,11 +102,73 @@
             },
 
             async fetchVendors() {
-                const result = await $fetch(`${ this.urlBase }vendors`)
-                console.log('result: ', result)
-                this.stores = result.data.data
-                // need to check pagination
-                this.storesModel = result.data
+                // Dummy data for vendors
+                const dummyResult = {
+                    data: {
+                        data: [
+                            {
+                                id: 1,
+                                slug: 'tech-repair-center',
+                                name: 'Tech Repair Center',
+                                address: '123 Main Street, Kuala Lumpur',
+                                media: [
+                                    {
+                                        original_url: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=200&h=200&fit=crop'
+                                    }
+                                ],
+                                keywords: ['repair', 'screen']
+                            },
+                            {
+                                id: 2,
+                                slug: 'mobile-app-studio',
+                                name: 'Mobile App Studio',
+                                address: '456 Tech Avenue, Petaling Jaya',
+                                media: [
+                                    {
+                                        original_url: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=200&h=200&fit=crop'
+                                    }
+                                ],
+                                keywords: ['mobile app', 'web']
+                            },
+                            {
+                                id: 3,
+                                slug: 'beauty-nail-salon',
+                                name: 'Beauty Nail Salon',
+                                address: '789 Beauty Lane, Subang Jaya',
+                                media: [
+                                    {
+                                        original_url: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=200&h=200&fit=crop'
+                                    }
+                                ],
+                                keywords: ['pedicure', 'nails']
+                            },
+                            {
+                                id: 4,
+                                slug: 'screen-fix-pro',
+                                name: 'Screen Fix Pro',
+                                address: '321 Digital Road, Cyberjaya',
+                                media: [],
+                                keywords: ['repair', 'screen']
+                            },
+                            {
+                                id: 5,
+                                slug: 'web-development-hub',
+                                name: 'Web Development Hub',
+                                address: '654 Innovation Street, Putrajaya',
+                                media: [
+                                    {
+                                        original_url: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=200&h=200&fit=crop'
+                                    }
+                                ],
+                                keywords: ['web', 'mobile app']
+                            }
+                        ]
+                    }
+                }
+                
+                console.log('Dummy result: ', dummyResult)
+                this.stores = dummyResult.data.data
+                this.storesModel = dummyResult.data
                 this.loading = false
             },
 
